@@ -6,13 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 20:26:18 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/11/18 16:54:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/08 14:45:47 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	print_hexadecimal(int hexa)
+size_t	print_hexadecimal(unsigned int hexa)
 {
 	char			*letters;
 	static size_t	total;
@@ -23,7 +23,7 @@ size_t	print_hexadecimal(int hexa)
 	{
 		print_hexadecimal(hexa / 16);
 	}
-	if (hexa <= INT_MAX)
+	if (hexa <= INT_MAX && hexa >= 0)
 	{
 		write(1, &letters[hexa % 16], 1);
 		total++;
@@ -31,7 +31,7 @@ size_t	print_hexadecimal(int hexa)
 	return (total);
 }
 
-size_t	print_upp_hexadecimal(int hexa)
+size_t	print_upp_hexadecimal(unsigned int hexa)
 {
 	char			*letters;
 	static size_t	total;
@@ -42,7 +42,7 @@ size_t	print_upp_hexadecimal(int hexa)
 	{
 		print_upp_hexadecimal(hexa / 16);
 	}
-	if (hexa <= INT_MAX)
+	if (hexa <= INT_MAX && hexa >= 0)
 	{
 		write(1, &letters[hexa % 16], 1);
 		total++;

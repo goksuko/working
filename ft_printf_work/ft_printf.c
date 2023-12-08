@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 19:26:05 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/08 12:41:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/08 14:45:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static size_t	do_type(char t, va_list args)
 	else if (t == 'u')
 		total += print_unsign_decimal(va_arg(args, unsigned int));
 	else if (t == 'x')
-		total += print_hexadecimal(va_arg(args, int));
+		total += print_hexadecimal(va_arg(args, unsigned int));
 	else if (t == 'X')
-		total += print_upp_hexadecimal(va_arg(args, int));
+		total += print_upp_hexadecimal(va_arg(args, unsigned int));
 	else if (t == '%')
 		total += write(STDOUT_FD, "%", sizeof(char));
 	else if (t != '%')
@@ -81,9 +81,15 @@ int main(void)
 	int				f;
 	int				p;
 
-	f = ft_printf(" %u ", 101);
-	p = printf(" %u ", 101);
+	f = ft_printf(" %u \n", 101);
+	p = printf(" %u \n", 101);
 	printf(" my: %d\norg: %d\n-----\n", f, p);
+	f = ft_printf(" %x \n", -100);
+	p = printf(" %x \n", -100);
+	printf(" my: %d\norg: %d\n-----\n", f, p); 
+	f = ft_printf(" %X \n", -100);
+	p = printf(" %X \n", -100);
+	printf(" my: %d\norg: %d\n-----\n", f, p); 
 	f = ft_printf("char: %c\n", c);
 	p = printf("char: %c\n", c);
 	printf(" my: %d\norg: %d\n-----\n", f, p);
@@ -125,4 +131,3 @@ int main(void)
 	// // printf(" my: %d\norg: %d\n-----\n", f, p);	
 	return (0);
 }
-
