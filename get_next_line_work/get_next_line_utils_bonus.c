@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 12:22:17 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/02 12:22:23 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/10 12:18:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_strlen(const char *s)
 }
 
 // not in my Libft!!
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char	*gnl_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
 
@@ -52,7 +52,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 }
 
 // different from my Libft!!
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*full_s;
 	int		i;
@@ -76,7 +76,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (full_s);
 }
 
-char	*ft_strdup(const char *s)
+char	*gnl_strdup(const char *s)
 {
 	char	*temp;
 	size_t	i;

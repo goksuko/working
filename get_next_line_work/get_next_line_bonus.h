@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 12:21:18 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/02 12:21:43 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/10 12:18:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 char	*get_next_line(int fd);
 void	*free_there(char **line);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*gnl_strncpy(char *dest, char *src, unsigned int n);
 size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_strdup(const char *s);
 
 #endif

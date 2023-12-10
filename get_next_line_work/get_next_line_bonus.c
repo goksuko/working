@@ -6,13 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 12:16:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/02 12:20:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/10 12:18:11 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ char	*read_buffer(int fd, char *line)
 	ssize_t	bytes_read;
 
 	bytes_read = BUFFER_SIZE;
-	while (bytes_read == BUFFER_SIZE && !ft_strchr(line, '\n'))
+	while (bytes_read == BUFFER_SIZE && !gnl_strchr(line, '\n'))
 	{
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
@@ -51,15 +51,15 @@ char	*read_buffer(int fd, char *line)
 		}
 		buffer[bytes_read] = '\0';
 		if (!line && buffer)
-			line = ft_strdup(buffer);
+			line = gnl_strdup(buffer);
 		else if (line && buffer)
-			line = ft_strjoin(line, buffer);
+			line = gnl_strjoin(line, buffer);
 		free_there(&buffer);
 	}
 	return (line);
 }
 
-char	*trim_line_left(char *line)
+char	*take_line_left(char *line)
 {
 	size_t	i;
 	char	*string;
@@ -74,7 +74,7 @@ char	*trim_line_left(char *line)
 	string = (char *)malloc(sizeof(char) * (i + 1));
 	if (!string)
 		return (NULL);
-	ft_strncpy(string, line, i);
+	gnl_strncpy(string, line, i);
 	string[i] = '\0';
 	return (string);
 }
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	line[fd] = read_buffer(fd, line[fd]);
 	if (!line[fd])
 		return (NULL);
-	new_line = trim_line_left(line[fd]);
+	new_line = take_line_left(line[fd]);
 	line[fd] = trim_line_right(line[fd]);
 	if (!new_line)
 		free_there(&line[fd]);
