@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:58:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/12 14:14:17 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/13 23:33:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
+void	*free_there(char **line);
 
 #endif

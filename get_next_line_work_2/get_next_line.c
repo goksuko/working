@@ -6,11 +6,25 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 14:17:20 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/12 14:24:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/14 22:54:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static char	*read_to_buffer(int fd, char *buffer)
+{
+	int		bytes_read;
+
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read <= 0)
+		return (free_there(&buffer));
+	buffer[bytes_read] = '\0';
+	return (buffer);
+}
 
 static char	*trim_leftover(char *temp)
 {
@@ -20,65 +34,65 @@ static char	*trim_leftover(char *temp)
 
 	i = 0;
 	j = 0;
+	// printf("trim: temp: %s\n", temp);
 	while (temp[i] != '\n')
 		i++;
 	new_line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!new_line)
 		return (NULL);
-	while (temp[i] != '\0')
+	// printf("trim: i: %d\n", i);
+	while (i--)
 	{
-		new_line[j] = temp[i];
+		new_line[j] = temp[j];
 		j++;
-		i++;
 	}
 	new_line[j] = '\0';
+	// printf("trim: new_line: %s\n", new_line);
 	return (new_line);
 }
+
 
 char	*get_next_line(int fd)
 {
 	static char	*line;
 	char		*buffer;
 	char		*leftover;
-	char		*temp;
-	char		*temp2;
 	char		*new_line;
-	int			bytes_read;
+	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = ft_strdup("");
-	while (fd >= 0 && BUFFER_SIZE > 0)
+	line = "";
+	leftover = NULL;
+	while (fd >= 0 && BUFFER_SIZE > 0 && !leftover)
 	{
-		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		buffer = read_to_buffer(fd, buffer);
+		printf("1: buffer: %s\n", buffer);
 		if (!buffer)
-			return (NULL);
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
 		{
-			free(buffer);
-			return (NULL);
+			new_line = ft_strdup(line);
+			printf("4: line: %s\n", line);
+			printf("5: new_line: %s\n", new_line);
+			free_there(&line);
+			return (new_line);
 		}
-		buffer[bytes_read] = '\0';
 		leftover = ft_strchr(buffer, '\n');
-		if (!leftover)
+		printf("2: leftover: %s$\n", leftover);
+		temp = ft_strjoin(line, buffer);
+		printf("3: line: %s\n", line);
+		free_there(&buffer);
+		free_there(&line);
+		line = ft_strdup(temp);
+		free_there(&temp);
+		if (leftover)
 		{
-			temp2 = ft_strjoin(line, buffer);
-			free(buffer);
-			if (line)
-				free(line);
-			line = temp2;
-		}
-		else if (leftover)
-		{
-			temp = ft_strjoin(line, buffer);
-			free(buffer);
-			if (line)
-				free(line);
-			new_line = trim_leftover(temp);
-			free(temp);
+			new_line = trim_leftover(line);
+			// printf("line: %s\n", line);
+			// printf("new_line: %s\n", new_line);
+			free_there(&line);
 			return (new_line);
 		}
 	}
+	free_there(&line);
 	return (NULL);
 }

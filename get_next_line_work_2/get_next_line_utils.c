@@ -6,11 +6,21 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/12 14:26:59 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/14 21:25:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*free_there(char **str)
+{
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	return (NULL);
+}
 
 char	*ft_strdup(const char *s)
 {
