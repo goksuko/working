@@ -6,21 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 19:26:05 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/15 18:04:40 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/15 18:09:26 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n] != 0)
-		n++;
-	return (n);
-}
 
 static size_t	do_type(char t, va_list args)
 {
