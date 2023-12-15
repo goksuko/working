@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 20:26:29 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/12 12:09:12 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/15 17:43:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	print_string(void *ptr)
 	total = 0;
 	if (ptr == NULL)
 	{
-		total += write(STDOUT_FD, "(nil)", 5);
+		total += write(STDOUT_FD, "(null)", 6);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 14:17:20 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/14 22:54:46 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/15 10:44:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ char	*get_next_line(int fd)
 	while (fd >= 0 && BUFFER_SIZE > 0 && !leftover)
 	{
 		buffer = read_to_buffer(fd, buffer);
-		printf("1: buffer: %s\n", buffer);
+		// printf("1: buffer: %s\n", buffer);
 		if (!buffer)
 		{
 			new_line = ft_strdup(line);
-			printf("4: line: %s\n", line);
-			printf("5: new_line: %s\n", new_line);
+			// printf("4: line: %s\n", line);
+			// printf("5: new_line: %s\n", new_line);
 			free_there(&line);
 			return (new_line);
 		}
 		leftover = ft_strchr(buffer, '\n');
-		printf("2: leftover: %s$\n", leftover);
+		// printf("2: leftover: %s$\n", leftover);
 		temp = ft_strjoin(line, buffer);
-		printf("3: line: %s\n", line);
+		// printf("3: line: %s\n", line);
 		free_there(&buffer);
 		free_there(&line);
 		line = ft_strdup(temp);

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 20:26:29 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/06 10:41:39 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/11 09:56:43 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	print_char(int i)
 	return (total);
 }
 
-size_t	print_string(void *ptr)
+size_t	print_string(char *ptr)
 {
 	static size_t	total;
 	char			*str;

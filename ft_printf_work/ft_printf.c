@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 19:26:05 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/08 18:58:26 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/11 12:41:27 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static size_t	do_type(char t, va_list args)
 	if (t == 'c')
 		total += print_char(va_arg(args, int));
 	else if (t == 's')
-		total += print_string(va_arg(args, void *));
+		total += print_string(va_arg(args, char *));
 	else if (t == 'p')
-		total += print_pointer(va_arg(args, long long));
+		total += print_pointer(va_arg(args, unsigned int));
 	else if (t == 'i' || t == 'd')
 		total += print_decimal(va_arg(args, int));
 	else if (t == 'u')
@@ -50,6 +50,8 @@ int	ft_printf(const char *format, ...)
 
 	va_start (args, format);
 	total = 0;
+	if(!format)
+		return (0);
 	s = (char *)format;
 	i = 0;
 	while (s[i] != 0)
@@ -69,3 +71,4 @@ int	ft_printf(const char *format, ...)
 	va_end (args);
 	return (total);
 }
+//tes

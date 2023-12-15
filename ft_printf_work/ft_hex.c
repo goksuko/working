@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 20:26:18 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/08 19:29:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/11 10:00:44 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ size_t	print_upp_hexadecimal(unsigned int hexa)
 	return (total);
 }
 
-size_t	print_pointer(long long nb)
+size_t	print_pointer(unsigned int nb)
 {
 	static size_t	total;
 

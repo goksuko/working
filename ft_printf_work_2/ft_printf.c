@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 19:26:05 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/12 12:05:29 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/15 17:44:18 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	do_type(char t, va_list args)
 	else if (t == 's')
 		total += print_string(va_arg(args, void *));
 	else if (t == 'p')
-		total += print_pointer(va_arg(args, size_t));
+		total += print_pointer(va_arg(args, unsigned long int));
 	else if (t == 'i' || t == 'd')
 		total += print_decimal(va_arg(args, int));
 	else if (t == 'u')

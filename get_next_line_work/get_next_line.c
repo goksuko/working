@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/10 12:18:05 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/11 14:17:00 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,41 @@ char	*gnl_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*read_buffer(int fd, char *line)
+char	*read_buffer(int fd, char **line)
 {
 	char	*buffer;
 	ssize_t	bytes_read;
+	static int i = 0;
 
 	bytes_read = BUFFER_SIZE;
-	while (bytes_read == BUFFER_SIZE && !gnl_strchr(line, '\n'))
+	while (bytes_read == BUFFER_SIZE && !gnl_strchr(*line, '\n'))
 	{
+		i++;
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
-			return (free_there(&line));
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+			return (free_there(line));
+		if (i == 3)
+		{
+			bytes_read = -1;
+		}
+		else 
+		{
+			bytes_read = read(fd, buffer, BUFFER_SIZE);
+		}
 		if (bytes_read == -1)
 		{
 			free_there(&buffer);
-			return (free_there(&line));
+			free_there(line);
+			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-		if (!line && buffer)
-			line = gnl_strdup(buffer);
-		else if (line && buffer)
-			line = gnl_strjoin(line, buffer);
+		if (!*line && buffer)
+			*line = gnl_strdup(buffer);
+		else if (*line && buffer)
+			*line = gnl_strjoin(*line, buffer);
 		free_there(&buffer);
 	}
-	return (line);
+	return (*line);
 }
 
 char	*take_line_left(char *line)
@@ -109,14 +119,27 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &new_line, 0) < 0)
 		return (NULL);
-	line = read_buffer(fd, line);
+	line = read_buffer(fd, &line);
 	if (!line)
 		return (NULL);
 	new_line = take_line_left(line);
 	line = trim_line_right(line);
 	if (!new_line)
 		free_there(&line);
+	printf("%s", new_line);
 	return (new_line);
+}
+
+int main()
+{
+	char *result;
+	int fd = open("short.txt", O_RDONLY);
+	for (int i = 0; i < 10; i++) {
+		result = get_next_line(fd);
+		printf("%s\n", result);
+		if (result != NULL)
+			free(result);
+	}
 }
 /*
 // main helper function below

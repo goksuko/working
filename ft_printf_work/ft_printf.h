@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/17 20:00:33 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/08 14:40:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/11 10:00:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 
 int		ft_printf(const char *format, ...);
 size_t	print_char(int i);
-size_t	print_string(void *ptr);
+size_t	print_string(char *ptr);
 // size_t	print_number(int nb);
 size_t	print_decimal(int nb);
 size_t	print_unsign_decimal(unsigned int nb);
 size_t	print_hexadecimal(unsigned int hexa);
 size_t	print_upp_hexadecimal(unsigned int hexa);
-size_t	print_pointer(long long nb);
+size_t	print_pointer(unsigned int nb);
 
 #endif
