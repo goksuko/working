@@ -30,5 +30,7 @@ int     length(Node **head);
 Node    *duplicate_list(Node **head);
 Node    *insert_at_tail(Node **head, int new_value);
 void print_list(Node **head);
+Node *rest_list(Node **long_list, Node **begin);
+
 
 #endif

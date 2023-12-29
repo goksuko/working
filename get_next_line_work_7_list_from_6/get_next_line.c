@@ -65,26 +65,28 @@ int	search_value(Node **head, int value)
 		current = current->next;
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 Node *return_new_line(Node **buffer_list)
 {
 	Node	*current;
 	int		new_line_node;
+	int		i;
 
 	new_line_node = search_value(buffer_list, '\n');
-	if (new_line_node == 0)
+	if (new_line_node == -1)
 		return (NULL);
 	else
 	{
+		i = 0;
 		current = *buffer_list;
-		printf("current: %d\n", current->value);
-		while (current->next->value != '\n')
+		while (i < new_line_node)
+		{
 			current = current->next;
-		printf("current: %d\n", current->value);
+			i++;
+		}
 		current->next = NULL;
-		printf("buffer_list: %d\n", (*buffer_list)->value);
 		return (*buffer_list); //memory leak beacuse of this line
 	}
 }
@@ -96,17 +98,19 @@ char	*list_to_string(Node **list)
 	Node	*current;
 	char	temp_string[2];
 
-	string = malloc(sizeof(char));
-	if (string == NULL)
-		return (NULL);
-	string[0] = '\0';
 	current = *list;
-	while (current->next != NULL)
+	if (current == NULL)
+		return (NULL);
+	// string = malloc(sizeof(char) * 1);
+	// if (string == NULL)
+	// 	return (NULL);
+	// string[0] = '\0';
+	string = "";
+	while (current != NULL)
 	{
 		temp_string[0] = current->value;
 		temp_string[1] = '\0';
 		temp = ft_strjoin(string, temp_string);
-		free(string);
 		current = current->next;
 		string = temp;
 	}
@@ -126,20 +130,27 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = read_buffer(fd);
 	buffer_list = string_to_list(buffer);
-	printf("buffer_list: %d\n", buffer_list->value);
 	temp = duplicate_list_recursive(buffer_list);
 	new_line_list = return_new_line(&temp);
-	delete_list(temp);
+	delete_list(buffer_list);
+	buffer_list = rest_list(&temp, &new_line_list);
+	printf("first buffer_list: %s\n", list_to_string(&buffer_list));
 	while (new_line_list == NULL)
 	{
-		printf("buffer_list: %d\n", buffer_list->value);
 		new_buffer_list = string_to_list(read_buffer(fd));
-		printf("new_buffer_list: %d\n", new_buffer_list->value);
-		print_list(&new_buffer_list); //buffer list yanlis
+		printf("new_buffer_list: %s\n", list_to_string(&new_buffer_list));
 		buffer_list = append_list(&buffer_list, &new_buffer_list);
-		// print_list(&buffer_list);
+		printf("newly new_buffer_list: %s\n", list_to_string(&new_buffer_list));
+		new_buffer_list = NULL;
+		printf("latest new_buffer_list: %s\n", list_to_string(&new_buffer_list));
+		printf("buffer_list: %d\n", buffer_list->value);
+		printf("length: %d\n", length(&buffer_list));
+		temp = duplicate_list_recursive(buffer_list);
+		printf("temp: %s\n", list_to_string(&temp));
 		new_line_list = return_new_line(&buffer_list);
-		delete_list(new_buffer_list);
+		delete_list(buffer_list);
+		buffer_list = rest_list(&temp, &new_line_list);
+		delete_list(temp);
 	}
 	new_line = list_to_string(&new_line_list);
 	return (new_line);
