@@ -140,3 +140,58 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join[j] = '\0';
 	return (join);
 }
+
+Node *split_from_value(Node **head, int value)
+{
+	Node    *current;
+	Node    *following;
+	Node	*temp;
+	
+	current = *head;
+	if (current == NULL)
+		return (NULL);
+	temp = NULL;
+	while (current != NULL)
+	{
+		if (current->value == value)
+		{
+			following = current->next;
+			temp = current;
+			break ;
+		}
+		current = current->next;
+	}
+	if (temp != NULL)
+	{
+		current = *head;
+		while (current->next != following)
+		{
+			temp = current;
+			current = current->next;
+			free(temp);
+		}
+		current->next = NULL;
+		free(current);
+		return (following);
+	}
+	return (*head);
+}
+
+
+Node *append_list(Node **head1, Node **head2)
+{
+	Node    *current;
+
+	current = *head1;
+	if (current == NULL)
+		return (*head2);
+	else
+	{
+		while (current->next != NULL)
+		{
+			current = current->next;
+		}
+		current->next = *head2;
+		return (*head1);
+	}
+}
