@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:58:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/30 20:52:08 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2023/12/30 22:13:35 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ char	*ft_strchr(const char *s, int c);
 void	*free_there(char **line);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-char	*take_leftover(const char *s);
 
 #endif

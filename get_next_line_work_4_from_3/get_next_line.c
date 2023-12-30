@@ -46,7 +46,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	char		*leftover;
 	char		*new_line;
-	char		*temp;
+	char		*temp_buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &new_line, 0) < 0)
 		return (NULL);
@@ -54,13 +54,16 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (NULL);
 	line[0] = '\0';
-	// printf("line: %s\n", line);
 	leftover = NULL;
-	// printf("leftover: %s\n", leftover);
+	buffer = NULL;
 	while (fd >= 0 && BUFFER_SIZE > 0 && !leftover)
 	{
-		buffer = read_to_buffer(fd, buffer);
-		// printf("1: buffer: %s$\n", buffer);
+		temp_buffer = read_to_buffer(fd, buffer);
+		// printf("temp_buffer: %s\n", temp_buffer);
+		buffer = ft_strjoin(buffer, temp_buffer);
+		// printf("buffer: %s\n", buffer);
+		free_there(&temp_buffer);
+		// printf("buffer: %s\n", buffer);
 		if (!buffer && line[0] == '\0')
 		{
 			free_there(&line);
@@ -69,25 +72,15 @@ char	*get_next_line(int fd)
 		if (!buffer && line)
 		{
 			new_line = ft_strdup(line);
-			// printf("5: line: %s\n", line);
-			// printf("6: new_line: %s\n", new_line);
 			free_there(&line);
 			return (new_line);
 		}
-		leftover = ft_strchr(buffer, '\n');
-		// printf("2: leftover: %s$\n", leftover);
-		temp = ft_strjoin(line, buffer);
-		// printf("3: line: %s$\n", line);
-		// printf("3: temp: %s$\n", temp);
-		free_there(&buffer);
-		free_there(&line);
-		line = ft_strdup(temp);
-		free_there(&temp);
+		leftover = take_leftover(buffer);
+		line = ft_strjoin(line, buffer);
 		if (leftover)
 		{
 			new_line = trim_leftover(line);
-			// printf("4: line: %s$\n", line);
-			// printf("4: new_line: %s$\n", new_line);
+			buffer = ft_strdup(leftover);
 			free_there(&line);
 			return (new_line);
 		}

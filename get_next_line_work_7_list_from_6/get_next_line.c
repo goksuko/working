@@ -134,17 +134,11 @@ char	*get_next_line(int fd)
 	new_line_list = return_new_line(&temp);
 	delete_list(buffer_list);
 	buffer_list = rest_list(&temp, &new_line_list);
-	printf("first buffer_list: %s\n", list_to_string(&buffer_list));
 	while (new_line_list == NULL)
 	{
 		new_buffer_list = string_to_list(read_buffer(fd));
-		printf("new_buffer_list: %s\n", list_to_string(&new_buffer_list));
 		buffer_list = append_list(&buffer_list, &new_buffer_list);
-		printf("newly new_buffer_list: %s\n", list_to_string(&new_buffer_list));
 		new_buffer_list = NULL;
-		printf("latest new_buffer_list: %s\n", list_to_string(&new_buffer_list));
-		printf("buffer_list: %d\n", buffer_list->value);
-		printf("length: %d\n", length(&buffer_list));
 		temp = duplicate_list_recursive(buffer_list);
 		printf("temp: %s\n", list_to_string(&temp));
 		new_line_list = return_new_line(&buffer_list);
@@ -152,6 +146,7 @@ char	*get_next_line(int fd)
 		buffer_list = rest_list(&temp, &new_line_list);
 		delete_list(temp);
 	}
+	printf("test\n");
 	new_line = list_to_string(&new_line_list);
 	return (new_line);
 }
