@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 12:16:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/10 12:18:11 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/01 16:54:20 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char	*read_buffer(int fd, char *line)
 	char	*buffer;
 	ssize_t	bytes_read;
 
-	bytes_read = BUFFER_SIZE;
-	while (bytes_read == BUFFER_SIZE && !gnl_strchr(line, '\n'))
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read > 0 && !gnl_strchr(line, '\n'))
 	{
-		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer)
-			return (free_there(&line));
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
@@ -54,8 +54,8 @@ char	*read_buffer(int fd, char *line)
 			line = gnl_strdup(buffer);
 		else if (line && buffer)
 			line = gnl_strjoin(line, buffer);
-		free_there(&buffer);
 	}
+	free_there(&buffer);
 	return (line);
 }
 
@@ -107,8 +107,8 @@ char	*get_next_line(int fd)
 	static char	*line[1024];
 	char		*new_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &new_line, 0) < 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (free_there(&line[fd]));
 	line[fd] = read_buffer(fd, line[fd]);
 	if (!line[fd])
 		return (NULL);
