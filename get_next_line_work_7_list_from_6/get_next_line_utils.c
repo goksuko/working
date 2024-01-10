@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line_utils.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/04 16:05:00 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/01/04 16:08:32 by akaya-oz      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include "get_next_line.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -39,12 +50,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (join);
 }
 
-Node *split_from_value(Node **head, int value)
+t_node	*split_from_value(t_node **head, int value)
 {
-	Node    *current;
-	Node    *following;
-	Node	*temp;
-	
+	t_node    *current;
+	t_node    *following;
+	t_node	*temp;
+
 	current = *head;
 	if (current == NULL)
 		return (NULL);
@@ -76,9 +87,9 @@ Node *split_from_value(Node **head, int value)
 }
 
 
-Node *append_list(Node **head1, Node **head2)
+t_node	*append_list(t_node **head1, t_node **head2)
 {
-	Node    *current;
+	t_node	*current;
 
 	current = *head1;
 	if (current == NULL)
@@ -96,12 +107,12 @@ Node *append_list(Node **head1, Node **head2)
 	}
 }
 
-Node* insert_at_tail(Node **head, int new_value)
+t_node*	insert_at_tail(t_node **head, int new_value)
 {
-	Node    *new_node;
-	Node    *current;
+	t_node	*new_node;
+	t_node	*current;
 
-	new_node = calloc(1, sizeof(Node));
+	new_node = calloc(1, sizeof(t_node));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->value = new_value;
@@ -120,10 +131,10 @@ Node* insert_at_tail(Node **head, int new_value)
 	}
 }
 
-Node *duplicate_list(Node **head)
+t_node	*duplicate_list(t_node **head)
 {
-	Node    *current;
-	Node    *new_head;
+	t_node	*current;
+	t_node	*new_head;
 
 	current = *head;
 	if (current == NULL)
@@ -138,14 +149,14 @@ Node *duplicate_list(Node **head)
 }
 
 
-Node *duplicate_list_recursive(Node *node)
+t_node	*duplicate_list_recursive(t_node *node)
 {
-	Node    *new_node;
+	t_node	*new_node;
 
 	//in order to finish the recursive at tail
 	if (node == NULL)
 		return (NULL);
-	new_node = calloc(1, sizeof(Node));
+	new_node = calloc(1, sizeof(t_node));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->value = node->value;
@@ -153,7 +164,7 @@ Node *duplicate_list_recursive(Node *node)
 	return (new_node);
 }
 
-Node *delete_list(Node *node)
+t_node	*delete_list(t_node *node)
 {
 	if (node != NULL)
 	{
@@ -163,10 +174,10 @@ Node *delete_list(Node *node)
 	return (NULL);
 }
 
-int length(Node **head)
+int	length(t_node **head)
 {
-	Node    *current;
-	int     i;
+	t_node	*current;
+	int		i;
 
 	current = *head;
 	i = 0;
@@ -178,28 +189,28 @@ int length(Node **head)
 	return (i);
 }  
 
-void print_list(Node **head)
+void	print_list(t_node **head)
 {
-	Node    *current;
-	int     i;
+	t_node	*current;
+	int		i;
 
 	current = *head;
 	i = 0;
 	printf("===Printing List===\n");
 	while (current != NULL)
 	{
-		printf("Node %d: %d\n", i, current->value);
+		printf("t_node %d: %d\n", i, current->value);
 		i++;
 		current = current->next;
 	}
 }
 
-Node *rest_list(Node **long_list, Node **begin)
+t_node	*rest_list(t_node **long_list, t_node **begin)
 {
-	Node *current_long;
-	Node *current_begin;
-	Node *new_head;
-	Node *temp;
+	t_node	*current_long;
+	t_node	*current_begin;
+	t_node	*new_head;
+	t_node	*temp;
 
 	current_long = *long_list;
 	current_begin = *begin;

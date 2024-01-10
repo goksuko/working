@@ -1,4 +1,16 @@
-# include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/04 16:05:13 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/01/04 16:07:01 by akaya-oz      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
 
 char	*read_buffer(int fd)
 {
@@ -18,19 +30,19 @@ char	*read_buffer(int fd)
 	return (buffer);
 }
 
-Node *string_to_list(char *string)
+t_node	*string_to_list(char *string)
 {
-	Node	*head;
-	Node	*temp;
-	Node	*new_node;
+	t_node	*head;
+	t_node	*temp;
+	t_node	*new_node;
 	int		i;
-	
+
 	if (string == NULL)
 		return (NULL);
 	head = NULL;
 	temp = NULL;
 	i = 0;
-	head = (Node *)malloc(sizeof(Node));
+	head = (t_node *)malloc(sizeof(t_node));
 	if (head == NULL)
 		return (NULL);
 	head->value = string[i];
@@ -39,7 +51,7 @@ Node *string_to_list(char *string)
 	temp = head;
 	while (string[i] != '\0')
 	{
-		new_node = malloc(sizeof(Node));
+		new_node = malloc(sizeof(t_node));
 		if (new_node == NULL)
 			return (NULL);
 		new_node->value = string[i];
@@ -51,9 +63,9 @@ Node *string_to_list(char *string)
 	return (head);
 }
 
-int	search_value(Node **head, int value)
+int	search_value(t_node **head, int value)
 {
-	Node	*current;
+	t_node	*current;
 	int		i;
 
 	i = 0;	
@@ -68,9 +80,9 @@ int	search_value(Node **head, int value)
 	return (-1);
 }
 
-Node *return_new_line(Node **buffer_list)
+t_node	*return_new_line(t_node **buffer_list)
 {
-	Node	*current;
+	t_node	*current;
 	int		new_line_node;
 	int		i;
 
@@ -91,11 +103,11 @@ Node *return_new_line(Node **buffer_list)
 	}
 }
 
-char	*list_to_string(Node **list)
+char	*list_to_string(t_node **list)
 {
 	char	*string;
 	char	*temp;
-	Node	*current;
+	t_node	*current;
 	char	temp_string[2];
 
 	current = *list;
@@ -121,10 +133,10 @@ char	*get_next_line(int fd)
 {
 	char	*buffer;
 	char	*new_line;
-	Node 	*buffer_list;
-	Node	*new_line_list;
-	Node	*new_buffer_list;
-	Node	*temp;
+	t_node	*buffer_list;
+	t_node	*new_line_list;
+	t_node	*new_buffer_list;
+	t_node	*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &new_line, 0) < 0)
 		return (NULL);
