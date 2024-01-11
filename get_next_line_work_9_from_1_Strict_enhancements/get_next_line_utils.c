@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/11 10:58:39 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/11 13:26:42 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ size_t	ft_strlen(const char *s)
 	return (n);
 }
 
-// not in my Libft!!
 char	*gnl_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
@@ -51,7 +50,6 @@ char	*gnl_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-// different from my Libft!!
 char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*full_s;
@@ -83,8 +81,7 @@ char	*gnl_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	// temp = (char *)malloc((ft_strlen((char *)s) + 1) * sizeof(char));
-	temp = NULL;
+	temp = (char *)malloc((ft_strlen((char *)s) + 1) * sizeof(char));
 	if (!temp)
 		return (NULL);
 	i = 0;
