@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/01 16:38:07 by root          ########   odam.nl         */
+/*   Updated: 2024/01/15 18:14:01 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,17 @@ char	*get_next_line(int fd)
 	return (new_line);
 }
 
-// int main()
-// {
-// 	char *result;
-// 	int fd = open("short.txt", O_RDONLY);
-// 	for (int i = 0; i < 10; i++) {
-// 		result = get_next_line(fd);
-// 		printf("%s\n", result);
-// 		if (result != NULL)
-// 			free(result);
-// 	}
-// }
+int main()
+{
+	char *result;
+	int fd = open("short.txt", O_RDONLY);
+	for (int i = 0; i < 10; i++) {
+		result = get_next_line(fd);
+		printf("%s\n", result);
+		if (result != NULL)
+			free(result);
+	}
+}
 /*
 // main helper function below
 void	print_lines(int fd)

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/11 13:25:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/18 22:47:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ char	*read_buffer(int fd, char *line)
 char	*take_line_left(char *line)
 {
 	size_t	i;
+	size_t	j;
 	char	*string;
 
 	i = 0;
+	j = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 		i++;
 	if (line[i] == '\n')
@@ -75,7 +77,11 @@ char	*take_line_left(char *line)
 	string = (char *)malloc(sizeof(char) * (i + 1));
 	if (!string)
 		return (NULL);
-	gnl_strncpy(string, line, i);
+	while (j < i)
+	{
+		string[j] = line [j];
+		j++;
+	}
 	string[i] = '\0';
 	return (string);
 }
@@ -86,15 +92,18 @@ char	*trim_line_right(char *line)
 	int		j;
 	char	*rest;
 
+	if (line == NULL)
+		return (free_there(&line));
 	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (line[i] == '\0')
 		return (free_there(&line));
+	if (line[i] == '\n')
+		i++;
 	rest = (char *)malloc(sizeof(char) * (ft_strlen(line) - i + 1));
 	if (!rest)
 		return (free_there(&line));
-	i++;
 	j = 0;
 	while (line[i])
 		rest[j++] = line[i++];
@@ -126,7 +135,7 @@ char	*get_next_line(int fd)
 // 	int fd = open("short.txt", O_RDONLY);
 // 	for (int i = 0; i < 10; i++) {
 // 		result = get_next_line(fd);
-// 		printf("%s\n", result);
+// 		printf("%s", result);
 // 		if (result != NULL)
 // 			free(result);
 // 	}

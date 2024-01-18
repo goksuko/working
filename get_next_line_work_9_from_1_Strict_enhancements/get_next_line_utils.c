@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/11 13:26:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/18 22:32:23 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,6 @@ size_t	ft_strlen(const char *s)
 	while (s[n] != 0)
 		n++;
 	return (n);
-}
-
-char	*gnl_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (!dest || !src)
-		return (dest);
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
 }
 
 char	*gnl_strjoin(char *s1, char *s2)
