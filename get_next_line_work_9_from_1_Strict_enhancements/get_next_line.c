@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/18 22:47:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/19 11:31:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*take_line_left(char *line)
 		string[j] = line [j];
 		j++;
 	}
-	string[i] = '\0';
+	string[j] = '\0';
 	return (string);
 }
 
@@ -137,72 +137,74 @@ char	*get_next_line(int fd)
 // 		result = get_next_line(fd);
 // 		printf("%s", result);
 // 		if (result != NULL)
-// 			free(result);
+// 			free_there(&result);
 // 	}
+// 	return (0);
 // }
 
-/*
-// main helper function below
-void	print_lines(int fd)
-{
-	char	*next;
-	int		i = 8;
+// // main helper function below
+// void	print_lines(int fd)
+// {
+// 	char	*next;
+// 	int		i = 8;
 
-	next = get_next_line(fd);
-	while (i--)
-	{
-		printf("%s", next);
-		next = get_next_line(fd);
-		printf("\n");
-	}
-}
+// 	next = get_next_line(fd);
+// 	while (i--)
+// 	{
+// 		printf("%s", next);
+// 		free_there(&next);
+// 		next = get_next_line(fd);
+// 		printf("\n");
+// 	}
+// 	if (next != NULL)
+// 		free_there(&next);
+// }
 
-int main(void)
-{
-	int fd1 = 0;
-	int fd2 = 0;
-	int fd3 = 0;
-	int fd4 = 0;
+// int main(void)
+// {
+// 	int fd1 = 0;
+// 	int fd2 = 0;
+// 	int fd3 = 0;
+// 	int fd4 = 0;
 
-	printf("fd1\n");
-	fd1 = open("empty.txt", O_RDONLY);
-	if (fd1 == -1)
-	{
-		printf("fd1: fault");
-		return (1);
-	}
-	print_lines(fd1);
-	close(fd1);
+// 	printf("fd1\n");
+// 	fd1 = open("empty.txt", O_RDONLY);
+// 	if (fd1 == -1)
+// 	{
+// 		printf("fd1: fault");
+// 		return (1);
+// 	}
+// 	print_lines(fd1);
+// 	close(fd1);
 
-	printf("fd2\n");
-	fd2 = open("short.txt", O_RDONLY);
-	if (fd2 == -1)
-	{
-		printf("fd2: fault");
-		return (1);
-	}
-	print_lines(fd2);
-	close(fd2);
-	
-	printf("fd3\n");
-	fd3 = open("one.txt", O_RDONLY);
-	if (fd3 == -1)
-	{
-		printf("fd3: fault");
-		return (1);
-	}
-	print_lines(fd3);
-	close(fd3);
-	
-	printf("fd4\n");
-	fd4 = open("long.txt", O_RDONLY);
-	if (fd4 == -1)
-	{
-		printf("fd4: fault");
-		return (1);
-	}
-	print_lines(fd4);
-	close(fd4);
-	return (0);
-}
-*/
+// 	printf("fd2\n");
+// 	fd2 = open("short.txt", O_RDONLY);
+// 	if (fd2 == -1)
+// 	{
+// 		printf("fd2: fault");
+// 		return (1);
+// 	}
+// 	print_lines(fd2);
+// 	close(fd2);
+
+// 	printf("fd3\n");
+// 	fd3 = open("one.txt", O_RDONLY);
+// 	if (fd3 == -1)
+// 	{
+// 		printf("fd3: fault");
+// 		return (1);
+// 	}
+// 	print_lines(fd3);
+// 	close(fd3);
+
+// 	printf("fd4\n");
+// 	fd4 = open("long.txt", O_RDONLY);
+// 	if (fd4 == -1)
+// 	{
+// 		printf("fd4: fault");
+// 		return (1);
+// 	}
+// 	print_lines(fd4);
+// 	close(fd4);
+// 	return (0);
+// }

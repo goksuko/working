@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/12/02 12:22:17 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/12/10 12:18:09 by akaya-oz      ########   odam.nl         */
+/*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/01/19 11:32:29 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*free_there(char **line)
 {
-	if (*line)
+	if (*line || line)
 		free(*line);
 	*line = NULL;
 	return (NULL);
@@ -30,28 +30,6 @@ size_t	ft_strlen(const char *s)
 	return (n);
 }
 
-// not in my Libft!!
-char	*gnl_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (!dest || !src)
-		return (dest);
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
-
-// different from my Libft!!
 char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*full_s;

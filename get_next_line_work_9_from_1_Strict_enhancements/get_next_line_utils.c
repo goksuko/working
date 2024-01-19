@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/18 22:32:23 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/19 10:39:40 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*free_there(char **line)
 {
-	if (*line)
+	if (*line || line)
 		free(*line);
 	*line = NULL;
 	return (NULL);
