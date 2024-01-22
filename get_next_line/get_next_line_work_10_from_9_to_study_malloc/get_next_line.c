@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line_bonus.c                              :+:    :+:            */
+/*   get_next_line.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/19 11:32:23 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/01/22 15:56:58 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+
+char *gnl_malloc(size_t size, char *string)
+{
+	static int i = 0;
+
+	if (i == 4)
+	{
+		printf("fail: gnl_malloc: %d for %s\n", i, string);
+		return (NULL);
+	}		
+	printf("succes: gnl_malloc: %d for %s\n", i, string);
+	i++;
+	return (malloc(size));
+}
 
 char	*gnl_strchr(const char *s, int c)
 {
@@ -37,7 +51,7 @@ char	*read_buffer(int fd, char *line)
 	char	*buffer;
 	ssize_t	bytes_read;
 
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = (char *)gnl_malloc(sizeof(char) * (BUFFER_SIZE + 1), "read buffer");
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
@@ -74,7 +88,7 @@ char	*take_line_left(char *line)
 		i++;
 	if (i == 0 && line[i] == '\0')
 		return (NULL);
-	string = (char *)malloc(sizeof(char) * (i + 1));
+	string = (char *)gnl_malloc(sizeof(char) * (i + 1), "left");
 	if (!string)
 		return (NULL);
 	while (j < i)
@@ -101,7 +115,7 @@ char	*trim_line_right(char *line)
 		return (free_there(&line));
 	if (line[i] == '\n')
 		i++;
-	rest = (char *)malloc(sizeof(char) * (ft_strlen(line) - i + 1));
+	rest = (char *)gnl_malloc(sizeof(char) * (ft_strlen(line) - i + 1), "right");
 	if (!rest)
 		return (free_there(&line));
 	j = 0;
@@ -114,33 +128,40 @@ char	*trim_line_right(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line[1024];
+	static char	*line;
 	char		*new_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free_there(&line[fd]));
-	line[fd] = read_buffer(fd, line[fd]);
-	if (!line[fd])
-		return (NULL);
-	new_line = take_line_left(line[fd]);
-	line[fd] = trim_line_right(line[fd]);
+		return (free_there(&line));
+	line = read_buffer(fd, line);
+	if (!line)
+		return (free_there(&line));
+	new_line = take_line_left(line);
+	line = trim_line_right(line);
 	if (!new_line)
-		free_there(&line[fd]);
+		free_there(&line);
+	if (*line == '\0')
+		free_there(&line);
 	return (new_line);
 }
 
-// int main()
-// {
-// 	char *result;
-// 	int fd = open("short.txt", O_RDONLY);
-// 	for (int i = 0; i < 10; i++) {
-// 		result = get_next_line(fd);
-// 		printf("%s", result);
-// 		if (result != NULL)
-// 			free_there(&result);
-// 	}
-// 	return (0);
-// }
+int main()
+{
+	char *result;
+	int fd = open("short.txt", O_RDONLY);
+	while (1)
+	{
+		result = get_next_line(fd);
+		if (result == NULL)
+		{
+			free(result);
+			return (0);
+		}
+		printf("%s", result);
+		free_there(&result);
+	}
+	return (0);
+}
 
 // // main helper function below
 // void	print_lines(int fd)
