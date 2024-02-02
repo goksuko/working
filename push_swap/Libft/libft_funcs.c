@@ -1,36 +1,17 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   libft_funcs.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/02/02 11:35:53 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/02/02 12:35:38 by akaya-oz      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-// t_stack *ps_array_to_stack_a(int *array, t_stack **a)
-// {
-// 	t_stack		*new_t_stack;
-// 	t_stack		*current;
-// 	int			i;
-// 	int			length;
-// 	int			*temp_array;
-
-// 	temp_array = array;
-// 	length = sizeof(temp_array) / sizeof(int);
-// 	i = 0;
-// 	while (i < length)
-// 	{
-// 		new_t_stack = calloc(1, sizeof(t_stack));
-// 		if (new_t_stack == NULL)
-// 			return (NULL);
-// 		new_t_stack->value = array[i];
-// 		new_t_stack->next = NULL;
-// 		current = *a;
-// 		if (current == NULL)	
-// 			*a = new_t_stack;
-// 		else
-// 		{
-// 			while (current->next != NULL)
-// 				current = current->next;
-// 			current->next = new_t_stack;
-// 		}
-// 		i++;
-// 	}
-// 	return(*a);	
-// }
+#include "libft.h"
+// #include "push_swap.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -41,6 +22,7 @@ size_t	ft_strlen(const char *s)
 		n++;
 	return (n);
 }
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	src_len;
@@ -53,7 +35,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	*dst = '\0';
 	return (src_len);
 }
-
 
 char	*ft_strdup(const char *s)
 {
@@ -89,7 +70,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen(s + start);
 	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
-		return (0);
+		return (NULL);
 	ft_strlcpy(sub, s + start, len + 1);
 	return (sub);
 }
@@ -168,7 +149,6 @@ char	**ft_split(char const *s, char c)
 	return (matrix);
 }
 
-
 static int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\f' || c == '\n'
@@ -204,59 +184,17 @@ int	ft_atoi(const char *nptr)
 	return (sign * nb);
 }
 
-t_stack *ps_string_to_stack_a(char *string, t_stack **a)
-{
-	char		**array;
-	t_stack		*new_t_stack;
-	t_stack		*current;
-	int			i;
-	int			nb;
+// int	main(void)
+// {
+// 	char	*s;
+// 	char	ss[] = "tripouille";
+// 	int		c;
 
-	array = ft_split(string, ' ');
-	i = 0;
-	while (array[i])
-	{
-		nb = ft_atoi(array[i]);
-		new_t_stack = calloc(1, sizeof(t_stack));
-		if (new_t_stack == NULL)
-			return (NULL);
-		new_t_stack->value = nb;
-		new_t_stack->next = NULL;
-		current = *a;
-		if (current == NULL)	
-			*a = new_t_stack;
-		else
-		{
-			while (current->next != NULL)
-				current = current->next;
-			current->next = new_t_stack;
-		}
-		i++;
-	}
-	return(*a);	
-}
-
-
-t_stack *ps_arguments_to_stack_a(char *string, t_stack **a)
-{
-	t_stack		*new_t_stack;
-	t_stack		*current;
-	int			nb;
-
-	nb = ft_atoi(string);
-	new_t_stack = calloc(1, sizeof(t_stack));
-	if (new_t_stack == NULL)
-		return (NULL);
-	new_t_stack->value = nb;
-	new_t_stack->next = NULL;
-	current = *a;
-	if (current == NULL)	
-		*a = new_t_stack;
-	else
-	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new_t_stack;
-	}
-	return(*a);	
-}
+// 	s = "Hello";
+// 	c = 'l';
+// 	printf("org code:%s\n", strrchr(s, c));
+// 	printf(" my code:%s\n", ft_strrchr(s, c));
+// 	printf("org code:%s\n", strrchr(ss, 't' + 256));
+// 	printf(" my code:%s\n", ft_strrchr(ss, 't' + 256));
+// 	return (0);
+// }
