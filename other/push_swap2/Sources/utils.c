@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/05 00:07:27 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/05 00:24:07 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,16 @@ t_stack	*ps_string_to_stack_a(char *string, t_stack **a)
 		if (new_t_stack == NULL)
 			return (NULL);
 		new_t_stack->value = nb;
-		new_t_stack->next = NULL;
 		current = *a;
 		if (current == NULL)
+		{
 			*a = new_t_stack;
+			new_t_stack->next = NULL;
+		}
 		else
 		{
-			while (current->next != NULL)
-				current = current->next;
-			current->next = new_t_stack;
+			new_t_stack->next = current;
+			*a = new_t_stack;
 		}
 		i++;
 	}
@@ -101,15 +102,27 @@ t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a)
 	new_t_stack->next = NULL;
 	current = *a;
 	if (current == NULL)
+	{
 		*a = new_t_stack;
+		new_t_stack->next = NULL;
+	}
 	else
 	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new_t_stack;
+		new_t_stack->next = current;
+		*a = new_t_stack;
 	}
 	return	(*a);	
 }
+
+static int	ft_isspace(int c)
+{
+	if (c == ' ' || c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t' || c == '\v')
+		return (1);
+	else
+		return (0);
+}
+
 
 long	ps_atoi(const char *string)
 {
@@ -165,7 +178,7 @@ long	ps_atoi_matrix(const char *string, char **array, t_stack **a)
 	if (sign * nb > 2147483647 || sign * nb < -2147483648)
 	{
 		free_matrix(array);
-		a = ps_free_list(*a);
+		*a = ps_free_list(*a);
 		ps_write_error();
 	}
 	return (sign * nb);

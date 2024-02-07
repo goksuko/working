@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/05 00:06:10 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/05 00:16:11 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *nptr);
 t_stack	*ps_free_list(t_stack *t_stack);
 void	ps_write_error(void);
-long		ps_atoi_matrix(const char *string, char **array, t_stack **a);
-long		ps_atoi(const char *string);
-static int	ft_isspace(int c);
-
+long	ps_atoi_matrix(const char *string, char **array, t_stack **a);
+long	ps_atoi(const char *string);
 
 #endif
