@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/02 14:48:24 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/08 12:31:45 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ps_ra(t_stack **a)
 			current = current->next;
 		current->next = temp;
 	}
+	ft_printf("ra\n");
 }
 
 //rotate b: Shift up all elements of stack b by 1.
@@ -54,10 +55,12 @@ void	ps_rb(t_stack **b)
 			current = current->next;
 		current->next = temp;
 	}
+	ft_printf("rb\n");
 }
 
 void	ps_rr(t_stack **a, t_stack **b)
 {
 	ps_ra(a);
 	ps_rb(b);
+	ft_printf("rr\n");
 }

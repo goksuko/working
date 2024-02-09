@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/07 11:34:01 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/08 12:47:33 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	ps_check_alpha(char *string)
 	return (0);
 }
 
+// ===Printing Stack A===
+// Stack 0: 3
+// Stack 1: 2
+// Stack 2: 1
 int	ps_check_if_sorted(t_stack **a)
 {
 	t_stack	*current;
@@ -36,12 +40,33 @@ int	ps_check_if_sorted(t_stack **a)
 	while (current->next != NULL)
 	{
 		temp = current->next;
-		if (current->value > temp->value)
+		if (current->value < temp->value)
 			return (0);
 		current = current->next;
 	}
 	return (1);
 }
+
+
+// ===Printing Stack A===
+// Stack 0: 1
+// Stack 1: 2
+// Stack 2: 3
+// int	ps_check_if_sorted(t_stack **a)
+// {
+// 	t_stack	*current;
+// 	t_stack	*temp;
+
+// 	current = *a;
+// 	while (current->next != NULL)
+// 	{
+// 		temp = current->next;
+// 		if (current->value > temp->value)
+// 			return (0);
+// 		current = current->next;
+// 	}
+// 	return (1);
+// }
 
 int	ps_check_duplicates(t_stack **a)
 {

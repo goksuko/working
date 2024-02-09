@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/07 22:05:09 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/08 12:30:06 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stddef.h>
+# include <limits.h>
 
 typedef struct s_stack
 {
@@ -52,14 +53,16 @@ int		ps_check_if_sorted(t_stack **a);
 void	*free_matrix(char **string);
 void	ps_print_stack(t_stack *a);
 int		ps_find_length(t_stack **a);
-void	ps_sort(t_stack **a);
+void	ps_sort(t_stack **a, int median);
 int		find_max(t_stack **a);
 int		find_min(t_stack **a);
 int		find_median(t_stack **a);
-void	do_for_three(t_stack **a);
+void	do_for_three(t_stack **a, int median);
 void	do_for_five(t_stack **a);
 void	do_big_sort(t_stack **a);
 void	ps_make_bubble_sort(t_stack **a);
 void	*free_array(int *array);
+int		ft_printf(const char *format, ...);
+
 
 #endif

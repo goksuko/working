@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:44:00 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/07 22:06:24 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/09 14:37:00 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void	*free_matrix(char **string)
 	return (NULL);
 }
 
-void	*free_array(int *array)
-{
-	int	i;
+// void	*free_array(int *array)
+// {
+// 	int	i;
 
-	i = 0;
-	while (array[i])
-	{
-		free(&array[i]);
-		i++;
-	}
-	free(array);
-	return (NULL);
-}
+// 	i = 0;
+// 	while (array[i])
+// 	{
+// 		free(&array[i]);
+// 		i++;
+// 	}
+// 	free(array);
+// 	return (NULL);
+// }
 
 // void	*free_there(void **db_ptr)
 // {

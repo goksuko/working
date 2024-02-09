@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/07 21:00:05 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/09 23:49:52 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,47 +61,46 @@ t_stack	*ps_take_numbers(int argc, char *argv[])
 	return (a);
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	t_stack	*a;
-// 	// t_stack	*b;
-
-// 	// b = NULL;
-// 	a = ps_take_numbers(argc, argv);
-// 	printf("===Printing Stack A===\n");
-// 	ps_print_stack(a);
-// 	if (!a || ps_check_duplicates(&a))
-// 		ps_write_error();
-// 	// printf("===Printing Stack A===\n");
-// 	// ps_print_stack(a);
-// 	if (!ps_check_if_sorted(&a))
-// 		ps_sort(&a);
-// 		// ps_make_bubble_sort(&a);
-// 	printf("===Printing Stack A===\n");
-// 	ps_print_stack(a);
-// 	if (a != NULL)
-// 		a = ps_free_list(a);
-// 	// if (b != NULL)
-// 	// 	b = ps_free_list(b);	
-// 	return (0);
-// }
-
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
-	// t_stack	*b;
+	int		median;
 
-	// b = NULL;
 	a = ps_take_numbers(argc, argv);
-	printf("===Printing Stack A===\n");
+	median = find_median(&a);
+	printf("===Printing Stack A BEFORE SORT===\n");
 	ps_print_stack(a);
-	// ps_sa(&a);
-	ps_sort(&a);
-	printf("===Printing Stack A===\n");
+	if (!a || ps_check_duplicates(&a))
+		ps_write_error();
+	if (!ps_check_if_sorted(&a))
+		ps_sort(&a, median);
+		// ps_make_bubble_sort(&a);
+	printf("===Printing Stack A AFTER SORT===\n");
 	ps_print_stack(a);
 	if (a != NULL)
 		a = ps_free_list(a);
-	// if (b != NULL)
-	// 	b = ps_free_list(b);	
 	return (0);
 }
+
+//thats OK
+// ./push_swap 1 2 3
+// ===Printing Stack A BEFORE SORT===
+// Stack 0: 3
+// Stack 1: 2
+// Stack 2: 1
+// ===Printing Stack A AFTER SORT===
+// Stack 0: 3
+// Stack 1: 2
+// Stack 2: 1
+
+// but thats KO
+// ./push_swap 2 3 1
+// ===Printing Stack A BEFORE SORT===
+// Stack 0: 1
+// Stack 1: 3
+// Stack 2: 2
+// ra
+// ===Printing Stack A AFTER SORT===
+// Stack 0: 3
+// Stack 1: 2
+// Stack 2: 1

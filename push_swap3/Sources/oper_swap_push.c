@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/02 14:50:19 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/08 12:31:17 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ps_sa(t_stack **a)
 	t_stack2->next = temp2;
 	current = t_stack2;
 	*a = current;
+	ft_printf("sa\n");
 }
 
 //Swap the first 2 elements at the top of stack b.
@@ -59,12 +60,14 @@ void	ps_sb(t_stack **b)
 	t_stack2->next = temp2;
 	current = t_stack2;
 	*b = current;
+	ft_printf("sb\n");
 }
 
 void	ps_ss(t_stack **a, t_stack **b)
 {
 	ps_sa(a);
 	ps_sb(b);
+	ft_printf("ss\n");
 }
 
 //push a: Take the first element at the top of b and put it at the top of a.
@@ -94,6 +97,8 @@ void	ps_pa(t_stack **a, t_stack **b)
 		temp->next = *a;
 		*a = temp;
 	}
+	ft_printf("pa\n");
+
 }
 
 //push b: Take the first element at the top of a and put it at the top of b.
@@ -123,4 +128,5 @@ void	ps_pb(t_stack **a, t_stack **b)
 		temp->next = *b;
 		*b = temp;
 	}
+	ft_printf("pb\n");
 }

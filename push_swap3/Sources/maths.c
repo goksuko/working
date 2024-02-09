@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 20:26:16 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/07 22:00:44 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/09 23:51:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,52 +44,39 @@ int	find_min(t_stack **a)
 	return (nb);
 }
 
-// int	find_median(t_stack **a)
-// {
-// 	t_stack	*copy;
-// 	t_stack	*current;
-
-// 	current = *a;
-
-// }
-
-
-int	*stack_to_array(t_stack **a)
+long	*stack_to_array(t_stack **a, long *array)
 {
-	int		**array;
 	int		i;
 	t_stack	*current;
 
+	for (int i = 0; i < 1024; i++)
+    	array[i] = LONG_MAX;
 	current = *a;
 	i = 0;
-	array = malloc(sizeof(int*) * 1024);
-	if (array == NULL)
-		return (NULL);
 	while (current != NULL)
 	{
-		array[i] = (int *)malloc(sizeof(int *) * 1);
-		if (array[i] == NULL)
-			return (free_array(*array));
-		*array[i] = current->value;
+		array[i] = (long)current->value;
 		current = current->next;
 		i++;
 	}
-	return (array[0]);
+	return (array);
 }
 
-int	*sort_array(int *array)
+long	*sort_array(long *array)
 {
-	int	length;
-	int	i;
-	int	temp;
-	int	length2;
+	int		length;
+	int		i;
+	long	temp;
+	int		length2;
 
-	length = sizeof(*array) / sizeof(array[0]);
+	length = 0;
+	while (array[length] != LONG_MAX)
+		length++;
 	length2 = length;
 	while (length2--)
 	{
 		i = 0;
-		while (length--)
+		while (i < length)
 		{
 			if (array[i] > array[i+1])
 			{
@@ -100,19 +87,37 @@ int	*sort_array(int *array)
 			i++;
 		}
 	}
-	return (&array[0]);
+	return (array);
 }
 
 int	find_median(t_stack **a)
 {
-	int	*array;
-	int	nb;
-	int	length;
+	long	*array;
+	int		nb;
+	int		length;
+	int		i;
 
+	array = malloc(1024 * sizeof(long));
+	if (array == NULL)
+	{
+		if (*a != NULL)
+			*a = ps_free_list(*a);
+		return (0);
+	}
 	length = ps_find_length(a);
-	array = stack_to_array(a);
+	i = 0;
+	while (i < 1024)
+	{
+		array[i] = LONG_MAX;
+		i++;
+	}
+	array = stack_to_array(a, array);
+	// for (nb = 0; nb < 10; nb++)
+	// 	ft_printf("array[%d] = %d\n", nb, (int)array[nb]);
 	array = sort_array(array);
-	nb = array[length / 2];
-	free_array(array);
+	nb = (int)array[length / 2];
+	free(array);
 	return (nb);
 }
+
+
