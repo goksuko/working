@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 16:15:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 00:24:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	do_for_three(t_stack **a, int median);
 void	do_for_five(t_stack **a);
 void	do_big_sort(t_stack **a, int median, int length);
 void	ps_make_bubble_sort(t_stack **a);
-void	*free_array(int *array);
+t_stack	*ps_take_numbers(int argc, char *argv[]);
+char	*get_next_line(int fd);
 int		ft_printf(const char *format, ...);
-
 
 #endif

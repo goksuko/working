@@ -1,7 +1,7 @@
 #!/bin/bash
 
 make
-ARG=$(shuf -i 1-100 -n 10)
+ARG=$(shuf -i 1-1000 -n 100)
 ./push_swap $ARG
 echo "line number: "
 ./push_swap $ARG | wc -l

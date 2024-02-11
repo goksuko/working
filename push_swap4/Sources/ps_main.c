@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 17:30:30 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 00:58:38 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	main(int argc, char *argv[])
 	a = ps_take_numbers(argc, argv);
 	median = find_median(&a);
 
-	printf("===Printing Stack A BEFORE SORT===\n");
-	ps_print_stack(a);
+	// printf("===Printing Stack A BEFORE SORT===\n");
+	// ps_print_stack(a);
 
 	if (!a || ps_check_duplicates(&a))
 		ps_write_error();
@@ -81,8 +81,8 @@ int	main(int argc, char *argv[])
 	}
 		// ps_make_bubble_sort(&a);
 
-	printf("===Printing Stack A AFTER SORT===\n");
-	ps_print_stack(a);
+	// printf("===Printing Stack A AFTER SORT===\n");
+	// ps_print_stack(a);
 
 	if (a != NULL)
 		a = ps_free_list(a);
@@ -130,6 +130,21 @@ int	main(int argc, char *argv[])
 // Stack 0: 1
 // Stack 1: 2
 // Stack 2: 3
+
+// time to push back
+// ===Printing Stack A===
+// Stack is empty.
+// ===Printing Stack B===
+// Stack 0: 942
+// Stack 1: 834
+// Stack 2: 585
+// Stack 3: 555
+// Stack 4: 532
+// Stack 5: 529
+// Stack 6: 280
+// Stack 7: 247
+// Stack 8: 156
+// Stack 9: 154
 
 
 //chmod +x test.sh && ./test.sh

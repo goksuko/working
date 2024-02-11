@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 17:29:25 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 00:58:52 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,82 @@ void	do_for_three_in_b(t_stack **b, int median)
 	}
 }
 
+// void	do_first_half(t_stack **a, t_stack **b)
+// {
+// 	t_stack		*current_a;
+// 	t_stack		*current_b;
+// 	int			clock_wise;
+// 	// int			counter_cw;
+// 	int			min_b;
+// 	int			max_b;
+// 	int			length;
+
+// 	current_a = *a;
+// 	current_b = *b;
+// 	min_b = find_min(b);
+// 	max_b = find_max(b);
+// 	clock_wise = 0;
+// 	// counter_cw = 0;
+// 	if (current_a->value > current_b->value && current_a->value < max_b)
+// 	{
+// 		while (current_a->value > current_b->value) 
+// 		{
+// 			clock_wise++;
+// 			current_b = current_b->next;
+// 		}
+// 		current_b = *b;
+// 		length = ps_find_length(b);
+// 		if (length > 2 * clock_wise)
+// 		{
+// 			while (current_a->value > current_b->value) 
+// 			{
+// 				ps_rrb(b);
+// 				current_b = *b;
+// 			}
+// 			ps_rb(b);
+// 			ps_pb(a, b);
+// 		}
+// 		else
+// 		{
+// 			while (current_a->value > current_b->value) 
+// 			{
+// 				ps_rb(b);
+// 				current_b = *b;
+// 			}
+// 			ps_rrb(b);
+// 			ps_pb(a, b);
+// 		}
+// 	}
+// 	else if (current_a->value > current_b->value && current_a->value > max_b)
+// 	{
+// 		while (current_b->value != max_b)
+// 		{
+// 			ps_rb(b);
+// 			current_b = *b;
+// 		}
+// 		ps_pb(a, b);
+// 	}
+// 	else if (current_a->value < current_b->value && current_a->value < min_b)
+// 	{
+// 		while (current_b->value != max_b)
+// 		{
+// 			ps_rb(b);
+// 			current_b = *b;
+// 		}
+// 		ps_pb(a, b);
+// 		ps_rb(b);
+// 	}
+// 	else if (current_a->value < current_b->value && current_a->value > min_b)
+// 	{
+// 		while (current_a->value < current_b->value)
+// 		{
+// 			ps_rb(b);
+// 			current_b = *b;
+// 		}
+// 		ps_pb(a, b);
+// 	}
+// }
+
 void	do_first_half(t_stack **a, t_stack **b)
 {
 	t_stack		*current_a;
@@ -144,20 +220,43 @@ void	do_first_half(t_stack **a, t_stack **b)
 	// int			counter_cw;
 	int			min_b;
 	int			max_b;
+	// int			length;
 
 	current_a = *a;
 	current_b = *b;
 	min_b = find_min(b);
 	max_b = find_max(b);
+	// clock_wise = 0;
+	// counter_cw = 0;
 	if (current_a->value > current_b->value && current_a->value < max_b)
 	{
-		while (current_a->value > current_b->value) 
-		{
-			ps_rrb(b);
-			current_b = *b;
-		}
-		ps_rb(b);
-		ps_pb(a, b);
+		// while (current_a->value > current_b->value) 
+		// {
+		// 	clock_wise++;
+		// 	current_b = current_b->next;
+		// }
+		// current_b = *b;
+		// length = ps_find_length(b);
+		// if (length > 2 * clock_wise)
+		// {
+			while (current_a->value > current_b->value) 
+			{
+				ps_rrb(b);
+				current_b = *b;
+			}
+			ps_rb(b);
+			ps_pb(a, b);
+		// }
+		// else
+		// {
+		// 	while (current_a->value > current_b->value) 
+		// 	{
+		// 		ps_rb(b);
+		// 		current_b = *b;
+		// 	}
+		// 	ps_rrb(b);
+		// 	ps_pb(a, b);
+		// }
 	}
 	else if (current_a->value > current_b->value && current_a->value > max_b)
 	{
@@ -243,14 +342,14 @@ t_stack		*current_a;
 	}
 }
 
-// void	do_for_five(t_stack **a)
+
 void	do_big_sort(t_stack **a, int median, int length)
 {
 	t_stack		*current_a;
 	t_stack		*current_b;
 	t_stack		*b;
 	int			times;
-	int			new_median;
+	int			max_b;
 
 	b = NULL;
 	current_a = *a;
@@ -268,22 +367,35 @@ void	do_big_sort(t_stack **a, int median, int length)
 		else
 			ps_ra(a);
 	}
-	printf("first half finished. stack 0 of a: %d\n", current_a->value);
-	ps_print_stack(*a);
+	// printf("first half finished. stack 0 of a: %d\n", current_a->value);
+	// printf("===Printing Stack A===\n");
+	// ps_print_stack(*a);
+	// printf("===Printing Stack B===\n");
+	// ps_print_stack(b);
 	length = ps_find_length(a);
-	times = length - 3;
+	times = length;
 	while (times--)
 	{
 		current_a = *a;
 		do_second_half(a, &b);
 	}
-	printf("last 3 in stack A. stack 0 of a: %d\n", current_a->value);
-	ps_print_stack(*a);
-	new_median = find_median(a);
-	if (!ps_check_if_sorted(a))
-		do_for_three(a, new_median);
-	printf("time to push back\n");
-	ps_print_stack(*a);
+	// printf("time to sort B\n");
+	// printf("===Printing Stack A===\n");
+	// ps_print_stack(*a);
+	// printf("===Printing Stack B===\n");
+	// ps_print_stack(b);
+	current_b = b;
+	max_b = find_max(&current_b);
+	while (current_b->value != max_b)
+	{
+		ps_rb(&b);
+		current_b = b;
+	}
+	// printf("time to push back\n");
+	// printf("===Printing Stack A===\n");
+	// ps_print_stack(*a);
+	// printf("===Printing Stack B===\n");
+	// ps_print_stack(b);
 	while (b != NULL)
 		ps_pa(a, &b);
 }
