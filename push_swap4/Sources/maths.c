@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 20:26:16 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 14:23:44 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:29:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ long	*sort_array(long *array)
 		i = 0;
 		while (i < length)
 		{
-			if (array[i] > array[i+1])
+			if (array[i] > array[i + 1])
 			{
 				temp = array[i];
-				array[i] = array[i+1];
-				array[i+1] = temp;
+				array[i] = array[i + 1];
+				array[i + 1] = temp;
 			}
 			i++;
 		}
@@ -110,12 +110,8 @@ int	find_median(t_stack **a)
 		i++;
 	}
 	array = stack_to_array(a, array);
-	// for (nb = 0; nb < 10; nb++)
-	// 	ft_printf("array[%d] = %d\n", nb, (int)array[nb]);
 	array = sort_array(array);
 	nb = (int)array[length / 2];
 	free(array);
 	return (nb);
 }
-
-

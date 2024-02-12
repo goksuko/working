@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/02 10:32:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/19 11:31:16 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:51:05 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*gnl_strchr(const char *s, int c)
 {
@@ -20,7 +20,7 @@ char	*gnl_strchr(const char *s, int c)
 	if (!s || !c)
 		return (NULL);
 	if (c == '\0')
-		return ((char *)&s[ft_strlen((char *)s)]);
+		return ((char *)&s[gnl_strlen((char *)s)]);
 	while (s[i])
 	{
 		if (s[i] == (unsigned char)c)
@@ -101,7 +101,7 @@ char	*trim_line_right(char *line)
 		return (free_there(&line));
 	if (line[i] == '\n')
 		i++;
-	rest = (char *)malloc(sizeof(char) * (ft_strlen(line) - i + 1));
+	rest = (char *)malloc(sizeof(char) * (gnl_strlen(line) - i + 1));
 	if (!rest)
 		return (free_there(&line));
 	j = 0;

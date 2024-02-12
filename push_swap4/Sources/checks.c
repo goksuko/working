@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 10:26:30 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:28:23 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ps_check_digit(char *string)
 // 	}
 // 	return (1);
 // }
-
 
 // ===Printing Stack A===
 // Stack 0: 1

@@ -6,15 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/10 14:38:36 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:29:31 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-//push a: Take the first element at the top of b and put it at the top of a.
-//Do nothing if b is empty.
-void	ps_pa(t_stack **a, t_stack **b)
+void	ps_pa_function(t_stack **a, t_stack **b)
 {
 	t_stack		*to_return;
 	t_stack		*current;
@@ -39,13 +37,17 @@ void	ps_pa(t_stack **a, t_stack **b)
 		temp->next = *a;
 		*a = temp;
 	}
-	ft_printf("pa\n");
-
 }
 
-//push b: Take the first element at the top of a and put it at the top of b.
-//Do nothing if a is empty.
-void	ps_pb(t_stack **a, t_stack **b)
+//push a: Take the first element at the top of b and put it at the top of a.
+//Do nothing if b is empty.
+void	ps_pa(t_stack **a, t_stack **b)
+{
+	ps_pa_function(a, b);
+	ft_printf("pa\n");
+}
+
+void	ps_pb_function(t_stack **a, t_stack **b)
 {
 	t_stack		*to_return;
 	t_stack		*current;
@@ -70,6 +72,12 @@ void	ps_pb(t_stack **a, t_stack **b)
 		temp->next = *b;
 		*b = temp;
 	}
-	ft_printf("pb\n");
 }
 
+//push b: Take the first element at the top of a and put it at the top of b.
+//Do nothing if a is empty.
+void	ps_pb(t_stack **a, t_stack **b)
+{
+	ps_pb_function(a, b);
+	ft_printf("pb\n");
+}

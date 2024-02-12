@@ -6,20 +6,41 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/10 23:47:15 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/12 00:23:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:24:38 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Include/push_swap.h"
+#include "checker.h"
+
+t_stack	*ps_take_numbers(int argc, char *argv[])
+{
+	t_stack		*a;
+	int			i;
+
+	a = NULL;
+	i = 1;
+	if (argc < 2)
+		ps_write_error();
+	else if (argc == 2)
+		a = ps_one_arg_to_stack_a(argv[1], &a);
+	else if (argc > 2)
+	{
+		while (i < argc)
+		{
+			a = ps_arguments_to_stack_a(argv[i], &a);
+			i++;
+		}
+	}
+	return (a);
+}
 
 char	*do_operation2(t_stack **a, t_stack **b, char *line)
 {
-	if (line[0] == 'r' && line[1] == 'r'&& line[2] == 'a' && line[3] == '\n')
-		ps_rra(a);
-	else if (line[0] == 'r' && line[1] == 'r'&& line[2] == 'b' && line[3] == '\n')
-		ps_rrb(b);
-	else if (line[0] == 'r' && line[1] == 'r'&& line[2] == 'r' && line[3] == '\n')
-		ps_rrr(a, b);
+	if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a' && line[3] == '\n')
+		ps_rra_function(a);
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b'
+		&& line[3] == '\n')
+		ps_rrb_function(b);
 	else
 		ps_write_error();
 	return (get_next_line(0));
@@ -28,22 +49,18 @@ char	*do_operation2(t_stack **a, t_stack **b, char *line)
 char	*do_operation(t_stack **a, t_stack **b, char *line)
 {
 	if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
-		ps_sa(a);
+		ps_sa_function(a);
 	else if (line[0] == 's' && line[1] == 'b' && line[2] == '\n')
-		ps_sb(b);
-	else if (line[0] == 's' && line[1] == 's' && line[2] == '\n')
-		ps_ss(a, b);
+		ps_sb_function(b);
 	else if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
-		ps_pa(a, b);
+		ps_pa_function(a, b);
 	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
-		ps_pb(a, b);
+		ps_pb_function(a, b);
 	else if (line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
-		ps_ra(a);
+		ps_ra_function(a);
 	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
-		ps_rb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
-		ps_rr(a, b);
-	else 
+		ps_rb_function(b);
+	else
 		return (do_operation2(a, b, line));
 	return (get_next_line(0));
 }
@@ -83,7 +100,7 @@ int	main(int argc, char *argv[])
 	line = get_next_line(0);
 	if (!line && !ps_check_if_sorted(&a))
 		write(1, "KO\n", 3);
-	else if(!line && ps_check_if_sorted(&a))
+	else if (!line && ps_check_if_sorted(&a))
 		write(1, "OK\n", 3);
 	else
 		do_check(&a, &b, line);

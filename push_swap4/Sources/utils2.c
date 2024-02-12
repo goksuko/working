@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:44:00 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/09 14:37:00 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:27:47 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,17 @@ void	ps_print_stack(t_stack *a)
 
 	current = a;
 	i = 0;
-	printf("\033[1;34m");
 	if (current == NULL)
-		printf("Stack is empty.\n");
+		ft_printf("Stack is empty.\n");
 	else
 	{
 		while (current != NULL)
 		{
-			printf("Stack %d: %d\n", i, current->value);
+			ft_printf("Stack %d: %d\n", i, current->value);
 			i++;
 			current = current->next;
 		}
 	}
-	printf("\033[0m");
 }
 
 t_stack	*ps_free_list(t_stack *t_stack)

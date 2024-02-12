@@ -6,20 +6,26 @@
 /*   By: akaya-oz <akaya-oz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 14:11:14 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2023/10/25 11:38:40 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 10:40:36 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
 # include <string.h>
-# include <stdio.h>
 # include <ctype.h>
-# include <stdint.h>
+# include <unistd.h> //read
+# include <stdlib.h> //malloc
+# include <stdio.h> // printf and End Of File
+# include <limits.h>
+# include <fcntl.h> //open txt file
+# include <stdint.h> //ft_calloc
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 
 typedef struct s_list
 {
@@ -84,5 +90,16 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/////   Functions From Get Next Line    /////
+
+char	*get_next_line(int fd);
+void	*free_there(char **line);
+char	*gnl_strncpy(char *dest, char *src, unsigned int n);
+size_t	gnl_strlen(const char *s);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_strdup(const char *s);
+
 
 #endif

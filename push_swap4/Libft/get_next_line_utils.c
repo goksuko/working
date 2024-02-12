@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/21 12:36:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/01/19 10:39:40 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/12 11:51:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 void	*free_there(char **line)
 {
@@ -20,7 +20,7 @@ void	*free_there(char **line)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	n;
 
@@ -35,9 +35,9 @@ char	*gnl_strjoin(char *s1, char *s2)
 	char	*full_s;
 	int		i;
 
-	if (ft_strlen(s1) + ft_strlen(s2) == 0)
+	if (gnl_strlen(s1) + gnl_strlen(s2) == 0)
 		return (free_there(&s1));
-	full_s = (char *)malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1)
+	full_s = (char *)malloc(((gnl_strlen(s1) + gnl_strlen(s2)) + 1)
 			* sizeof(char));
 	if (!full_s)
 		return (free_there(&s1));
@@ -61,7 +61,7 @@ char	*gnl_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	temp = (char *)malloc((ft_strlen((char *)s) + 1) * sizeof(char));
+	temp = (char *)malloc((gnl_strlen((char *)s) + 1) * sizeof(char));
 	if (!temp)
 		return (NULL);
 	i = 0;

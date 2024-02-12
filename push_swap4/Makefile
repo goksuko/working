@@ -2,7 +2,7 @@ NAME = push_swap
 BONUS_NAME = checker
 LIBFT = ./Libft/libft.a
 FT_PRINTF = ./ft_printf/ft_printf.a
-HEAD = ./Include/push_swap.h
+HEAD = ../Include/push_swap.h
 
 SRCS_1 = \
 			ps_main.c \
@@ -60,14 +60,14 @@ $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS)
+$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS) 
 	$(CC) $(CFLAGS) -g -fsanitize=address $(BONUS_OBJS) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(BONUS_NAME)
 
 $(BONUS_OBJS_DIR):
 	mkdir -p $(BONUS_OBJS_DIR)
 
 $(BONUS_OBJS_DIR)/%.o:$(BONUS_SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) -c -o $@ $^ -I $(HEAD)
 
 clean:
 	rm -rf $(OBJS_DIR)
