@@ -1,8 +1,9 @@
 #!/bin/bash
 
 make && make bonus
-ARG=$(shuf -i 1-2000 -n 1000)
+ARG=$(shuf -i 5-200 -n 4)
 ./push_swap $ARG
+#./push_swap "-5 12 -85 -45 6 -97 4 -58 65 87 99 13"
 echo "line number: "
 ./push_swap $ARG | wc -l
 echo "result: "

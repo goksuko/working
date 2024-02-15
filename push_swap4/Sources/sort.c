@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 11:10:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 14:39:00 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,56 +23,16 @@ void	ps_sort(t_stack **a, int median)
 		ps_ra(a);
 	else if (length == 3)
 		do_for_three(a, median);
-	// else if (length <= 5)
-	// 	do_for_five(a);
+	else if (length == 4)
+		do_for_four(a, length);
+	else if (length == 5)
+		do_for_five(a, median, length);
 	else
 		do_big_sort(a, median, length);
 		// do_radix_sort(a);
 	return;			 
 }
 
-// // ===Printing Stack A===
-// // Stack 0: 3
-// // Stack 1: 2
-// // Stack 2: 1
-// void	do_for_three(t_stack **a, int median)
-// {
-// 	// int 	min;
-// 	int		max;
-// 	t_stack	*current;
-
-
-// 	// min = find_min(a);
-// 	max = find_max(a);
-// 	current = *a;
-// 	if (current->value == max)
-// 	{
-// 		ps_rra(a);
-// 		ps_sa(a);
-// 	}
-// 	else if (current->value == median)
-// 	{
-// 		if (current->next->value == max)
-// 			ps_sa(a);
-// 		else
-// 			ps_rra(a);
-// 	}
-// 	else
-// 	{
-// 		if (current->next->value == max)
-// 			ps_ra(a);
-// 		else
-// 		{
-// 			ps_sa(a);
-// 			ps_rra(a);
-// 		}
-// 	}
-// }
-
-// ===Printing Stack A===
-// Stack 0: 1
-// Stack 1: 2
-// Stack 2: 3
 void	do_for_three(t_stack **a, int median)
 {
 	int 	min;
@@ -137,81 +97,75 @@ void	do_for_three_in_b(t_stack **b, int median)
 	}
 }
 
-// void	do_first_half(t_stack **a, t_stack **b)
-// {
-// 	t_stack		*current_a;
-// 	t_stack		*current_b;
-// 	int			clock_wise;
-// 	// int			counter_cw;
-// 	int			min_b;
-// 	int			max_b;
-// 	int			length;
+void	do_for_four(t_stack **a, int length)
+{
+	t_stack	*b;
+	t_stack	*current_a;
+	int		min_a;
+	int		max_a;
 
-// 	current_a = *a;
-// 	current_b = *b;
-// 	min_b = find_min(b);
-// 	max_b = find_max(b);
-// 	clock_wise = 0;
-// 	// counter_cw = 0;
-// 	if (current_a->value > current_b->value && current_a->value < max_b)
-// 	{
-// 		while (current_a->value > current_b->value) 
-// 		{
-// 			clock_wise++;
-// 			current_b = current_b->next;
-// 		}
-// 		current_b = *b;
-// 		length = ps_find_length(b);
-// 		if (length > 2 * clock_wise)
-// 		{
-// 			while (current_a->value > current_b->value) 
-// 			{
-// 				ps_rrb(b);
-// 				current_b = *b;
-// 			}
-// 			ps_rb(b);
-// 			ps_pb(a, b);
-// 		}
-// 		else
-// 		{
-// 			while (current_a->value > current_b->value) 
-// 			{
-// 				ps_rb(b);
-// 				current_b = *b;
-// 			}
-// 			ps_rrb(b);
-// 			ps_pb(a, b);
-// 		}
-// 	}
-// 	else if (current_a->value > current_b->value && current_a->value > max_b)
-// 	{
-// 		while (current_b->value != max_b)
-// 		{
-// 			ps_rb(b);
-// 			current_b = *b;
-// 		}
-// 		ps_pb(a, b);
-// 	}
-// 	else if (current_a->value < current_b->value && current_a->value < min_b)
-// 	{
-// 		while (current_b->value != max_b)
-// 		{
-// 			ps_rb(b);
-// 			current_b = *b;
-// 		}
-// 		ps_pb(a, b);
-// 		ps_rb(b);
-// 	}
-// 	else if (current_a->value < current_b->value && current_a->value > min_b)
-// 	{
-// 		while (current_a->value < current_b->value)
-// 		{
-// 			ps_rb(b);
-// 			current_b = *b;
-// 		}
-// 		ps_pb(a, b);
-// 	}
-// }
+	b = NULL;
+	min_a = find_min(a);
+	max_a = find_max(a);
+	current_a = *a;
+	while (length--)
+	{
+		if (current_a->value == min_a || current_a->value == max_a)
+			ps_pb(a, &b);
+		else
+			ps_ra(a);
+		current_a = *a;
+	}
+	if (!ps_check_if_sorted(a))
+		ps_sa(a);
+	if (b->value == max_a)
+	{
+		ps_pa(a, &b);
+		ps_ra(a);
+		ps_pa(a, &b);
+	}
+	else
+	{
+		ps_pa(a, &b);
+		ps_pa(a, &b);
+		ps_ra(a);			
+	}
+}
+
+void	do_for_five(t_stack **a, int median, int length)
+{
+	t_stack	*b;
+	t_stack	*current_a;
+	int		min_a;
+	int		max_a;
+
+	b = NULL;
+	min_a = find_min(a);
+	max_a = find_max(a);
+	current_a = *a;
+	while (length--)
+	{
+		if (current_a->value == min_a || current_a->value == max_a)
+			ps_pb(a, &b);
+		else
+			ps_ra(a);
+		current_a = *a;
+	}
+	if (!ps_check_if_sorted(a))
+		do_for_three(a, median);
+	if (b->value == max_a)
+	{
+		ps_pa(a, &b);
+		ps_ra(a);
+		ps_pa(a, &b);
+	}
+	else
+	{
+		ps_pa(a, &b);
+		ps_pa(a, &b);
+		ps_ra(a);			
+	}
+}
 
 void	do_edge_nb(t_stack **a, t_stack **b)
 {
@@ -359,9 +313,9 @@ void	do_first_half(t_stack **a, t_stack **b)
 	}
 	else if (current_a->value > current_b->value && current_a->value > max_b)
 	{
-		do_edge_nb(a, b);
-		// sort_eff_b(b);
-		// ps_pb(a, b);
+		// do_edge_nb(a, b);
+		sort_eff_b(b);
+		ps_pb(a, b);
 	}
 	else if (current_a->value < current_b->value && current_a->value < min_b)
 	{
@@ -605,117 +559,75 @@ void	do_big_sort(t_stack **a, int median, int length)
 		ps_pa(a, &b);
 }
 
-// // void	do_for_five(t_stack **a)
-// void	do_big_sort(t_stack **a, int median)
-// {
-// 	t_stack		*current_a;
-// 	t_stack		*b;
-// 	int			start;
-// 	int			new_median;
-// 	int			max_b;
-
-// 	b = NULL;
-// 	ps_pb(a,&b);
-// 	ps_pb(a,&b);
-// 	ps_pb(a,&b);
-// 	new_median = find_median(&b);
-// 	printf("===Printing Stack B BEFORE SORT===\n");
-// 	ps_print_stack(b);
-// 	if (!ps_check_if_sorted(&b))
-// 		do_for_three_in_b(&b, median);
-// 	printf("===Printing Stack B AFTER SORT===\n");
-// 	ps_print_stack(b);
-// 	current_a = *a;
-// 	start = current_a->value;
-// 	ps_ra(a);
-// 	current_a = *a;
-// 	printf("start is known (%d). stack 0 of a: %d\n", start, current_a->value);
-// 	while (current_a->value != start)
-// 	{
-// 		// current_a = *a;
-// 		if (current_a->value < median)
-// 			do_first_half(a, &b);
-// 		else
-// 			ps_ra(a);
-// 		current_a = *a;
-// 	}
-// 	printf("first half finished. stack 0 of a: %d\n", current_a->value);
-// 	current_a = *a;
-// 	max_b = find_max(&b);
-// 	while (current_a->next->next->next != NULL)
-// 	{
-// 		do_second_half(a, &b, max_b);
-// 		current_a = *a;
-// 	}
-// 	printf("last 3 in stack A. stack 0 of a: %d\n", current_a->value);
-// 	new_median = find_median(a);
-// 	if (!ps_check_if_sorted(a))
-// 		do_for_three(a, new_median);
-// 	printf("time to push back\n");
-// 	while (b != NULL)
-// 		ps_pa(a, &b);
-// }
-
 void	do_radix_sort(t_stack **a)
 {
 	t_stack	*b;
 	t_stack	*current_a;
 	t_stack	*current_b;
 	int		length;
-	// int		length2;
 	int		rest;
+	int		num;
+	int		power;
 	
-	current_a = *a;
 	b = NULL;
-	rest = 0;
-	while (rest < 10)
+	power = 0;
+	
+	while (power < 2)
 	{
-		length = ps_find_length(a);
-		while (length-- && current_a != NULL)
+		rest = 0;
+		while (rest < 10)
 		{
-			if (current_a->value % 10 == rest)
-				ps_pb(a, &b);
-			else
-				ps_ra(a);
-			current_a = *a;
+			length = ps_find_length(a);
+			while (length--)
+			{
+				current_a = *a;
+				num = current_a->value % (10 ^ power);
+				if (num % 10 == rest)
+					ps_pb(a, &b);
+				else
+					ps_ra(a);
+			}
+			rest++;
 		}
-		rest++;
-	}
-	rest = 10;
-	while (rest < 91)
-	{
-		length = ps_find_length(&b);
-		while (length--)
+		power++;
+
+		printf("power is %d\n", power);
+		printf("===Printing Stack A===\n");
+		ps_print_stack(*a);
+		printf("===Printing Stack B===\n");
+		ps_print_stack(b);
+
+		rest = 9;
+		while (rest >= 0)
 		{
-			current_b = b;
-			if (current_b->value % 100 == rest)
-				ps_pa(a, &b);
-			else
-				ps_rb(&b);
+			length = ps_find_length(&b);
+			while (length--)
+			{
+				current_b = b;
+				num = current_b->value % (10 ^ power);
+				if (current_b->value / 10 % 10 == rest)
+					ps_pa(a, &b);
+				else
+					ps_rb(&b);
+			}
+			rest--;
 		}
-		rest += 10;
+		power++;
+
+		printf("power is %d\n", power);
+		printf("===Printing Stack A===\n");
+		ps_print_stack(*a);
+		printf("===Printing Stack B===\n");
+		ps_print_stack(b);
+
 	}
-	rest = 100;
-	while (length-- && rest < 901)
-	{
-		length = ps_find_length(a);
-		while (length--)
-		{
-			current_a = *a;
-			if (current_a->value % 1000 == rest)
-				ps_pb(a, &b);
-			else
-				ps_ra(a);
-		}
-		rest += 100;
-	}
+	
 	length = ps_find_length(&b);
 	while (length--)
 	{
 		ps_pa(a, &b);
 	}
 }
-
 
 void	sort_eff_a(t_stack **a)
 {

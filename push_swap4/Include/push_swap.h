@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 10:11:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 14:39:07 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int		find_max(t_stack **a);
 int		find_min(t_stack **a);
 int		find_median(t_stack **a);
 void	do_for_three(t_stack **a, int median);
-void	do_for_five(t_stack **a);
+void	do_for_four(t_stack **a, int length);
+void	do_for_five(t_stack **a, int median, int length);
 void	do_big_sort(t_stack **a, int median, int length);
 void	ps_make_bubble_sort(t_stack **a);
 t_stack	*ps_take_numbers(int argc, char *argv[]);
