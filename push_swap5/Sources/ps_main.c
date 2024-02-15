@@ -6,38 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 18:51:52 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 23:51:08 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
-
-void	ps_make_bubble_sort(t_stack **a)
-{
-	int		start;
-	t_stack	*current;
-	int		length;
-
-	current = *a;
-	length = ps_find_length(a);
-	while (length--)
-	{
-		if (current->value > current->next->value)
-			ps_swap(a, "a");
-		current = *a;
-		start = current->value;
-		ps_rotate(a, "a");
-		current = *a;
-		while (current->value != start)
-		{
-			if (current->value > current->next->value
-				&& current->next->value != start)
-				ps_swap(a, "a");
-			ps_rotate(a, "a");
-			current = *a;
-		}
-	}
-}
 
 t_stack	*ps_take_numbers(int argc, char *argv[])
 {

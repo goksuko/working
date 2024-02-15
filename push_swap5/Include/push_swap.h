@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 18:51:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 23:48:26 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,19 @@ void	ps_push(t_stack **src, t_stack **dest, char *str);
 void	ps_rotate(t_stack **stack, char *str);
 void	ps_reverse_rotate(t_stack **stack, char *str);
 void	ps_swap(t_stack **stack, char *str);
+int		clck_while_nb_edge(t_stack **stack, int edge);
+int		clck_while_nb_small(t_stack **stack, int big);
+int		clck_while_nb_big(t_stack **stack, int small);
+void	reverse_rotate_till(t_stack **stack, int nb, char letter);
+void	reverse_rotate_still_small(t_stack **stack, int big, char letter);
+void	reverse_rotate_still_big(t_stack **stack, int small, char letter);
+void	rotate_till(t_stack **stack, int nb, char letter);
+void	rotate_still_small(t_stack **stack, int big, char letter);
+void	rotate_still_big(t_stack **stack, int small, char letter);
+void	do_first_first(t_stack **a, t_stack **b, int max_b);
+void	do_first_second(t_stack **a, t_stack **b, int min_b);
+void	do_second_first(t_stack **a, t_stack **b, int max_a);
+void	do_second_second(t_stack **a, t_stack **b, int min_a);
+void	do_radix_sort(t_stack **a);
 
 #endif

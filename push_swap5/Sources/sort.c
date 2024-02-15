@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 19:14:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 23:50:42 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,6 @@ void	do_for_three(t_stack **a, int median)
 		{
 			ps_swap(a, "a");
 			ps_reverse_rotate(a, "a");
-		}
-	}
-}
-
-void	do_for_three_in_b(t_stack **b, int median)
-{
-	int		max;
-	t_stack	*current;
-
-	max = find_max(b);
-	current = *b;
-	if (current->value == max)
-	{
-		ps_reverse_rotate(b, "b");
-		ps_swap(b, "b");
-	}
-	else if (current->value == median)
-	{
-		if (current->next->value == max)
-			ps_swap(b, "b");
-		else
-			ps_reverse_rotate(b, "b");
-	}
-	else
-	{
-		if (current->next->value == max)
-			ps_rotate(b, "b");
-		else
-		{
-			ps_swap(b, "b");
-			ps_reverse_rotate(b, "b");
 		}
 	}
 }

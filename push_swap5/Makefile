@@ -8,17 +8,23 @@ SRCS_1 = \
 			ps_main.c \
 
 SRCS_2 = \
+			atois.c \
+			big_sort_first_second.c \
+			big_sort_reverse.c \
+			big_sort_rotate.c \
+			big_sort_utils.c \
 			big_sort.c \
+			checks.c \
+			clockwise.c \
+			maths.c	\
 			oper_swap.c \
 			oper_push.c \
 			oper_rotate.c \
 			oper_reverse.c \
+			radix_sort.c \
+			sort.c \
 			utils.c \
 			utils2.c \
-			checks.c \
-			atois.c \
-			sort.c \
-			maths.c
 
 SRCS_DIR = Sources
 
