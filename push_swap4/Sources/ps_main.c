@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/12 00:58:38 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 11:10:52 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,5 @@ int	main(int argc, char *argv[])
 // Stack 7: 247
 // Stack 8: 156
 // Stack 9: 154
-
 
 //chmod +x test.sh && ./test.sh

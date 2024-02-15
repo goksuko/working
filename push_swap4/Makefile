@@ -43,7 +43,7 @@ all: $(NAME)
 
 $(NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
 #	$(CC) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-	$(CC) $(CFLAGS) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) -g -fPIE -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(CFLAGS) $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 
 $(LIBFT):

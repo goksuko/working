@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/12 00:24:32 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/15 10:11:20 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,9 @@ void	ps_make_bubble_sort(t_stack **a);
 t_stack	*ps_take_numbers(int argc, char *argv[]);
 char	*get_next_line(int fd);
 int		ft_printf(const char *format, ...);
+void	do_radix_sort(t_stack **a);
+void	ps_push(t_stack **src, t_stack **dest, char *str);
+void	sort_eff_a(t_stack **a);
+void	sort_eff_b(t_stack **b);
 
 #endif

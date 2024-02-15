@@ -1,7 +1,7 @@
 #!/bin/bash
 
 make && make bonus
-ARG=$(shuf -i 1-1000 -n 100)
+ARG=$(shuf -i 1-2000 -n 1000)
 ./push_swap $ARG
 echo "line number: "
 ./push_swap $ARG | wc -l

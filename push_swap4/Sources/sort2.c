@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 11:10:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/14 16:53:45 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ps_sort(t_stack **a, int median)
 	// 	do_for_five(a);
 	else
 		do_big_sort(a, median, length);
-		// do_radix_sort(a);
 	return;			 
 }
 
@@ -254,46 +253,6 @@ void	do_edge_nb(t_stack **a, t_stack **b)
 		ps_pb(a, b);
 }
 
-void	do_edge2_nb(t_stack **a, t_stack **b)
-{
-	// t_stack		*current_a;
-	t_stack		*current_a;
-	int			clock_wise;
-	// int			min_b;
-	int			min_a;
-	int			length;
-
-	// current_a = *a;
-	current_a = *a;
-	// min_b = find_min(b);
-	min_a = find_min(a);
-	clock_wise = 0;
-	while (current_a->value != min_a) 
-	{
-		clock_wise++;
-		current_a = current_a->next;
-	}
-	current_a = *a;
-	length = ps_find_length(a);
-	if (length - clock_wise > clock_wise)
-	{
-		while (current_a->value != min_a)
-		{
-			ps_ra(a);
-			current_a = *a;
-		}
-	}
-	else
-	{
-		while (current_a->value != min_a)
-		{
-			ps_rra(a);
-			current_a = *a;
-		}
-	}
-	ps_pa(a, b);
-}
-
 void	do_first_half(t_stack **a, t_stack **b)
 {
 	t_stack		*current_a;
@@ -303,15 +262,10 @@ void	do_first_half(t_stack **a, t_stack **b)
 	int			max_b;
 	int			length;
 
-	// ps_pb(a, b);
-	// ps_pb(a, b);
 	current_a = *a;
-	// current_b = *b;
-	// if (current_b->value < current_b->next->value)
-	// 	ps_rb(b);
+	current_b = *b;
 	min_b = find_min(b);
 	max_b = find_max(b);
-	current_b = *b;	
 	if (current_a->value > current_b->value && current_a->value < max_b)
 	{
 		clock_wise = 0;
@@ -360,8 +314,6 @@ void	do_first_half(t_stack **a, t_stack **b)
 	else if (current_a->value > current_b->value && current_a->value > max_b)
 	{
 		do_edge_nb(a, b);
-		// sort_eff_b(b);
-		// ps_pb(a, b);
 	}
 	else if (current_a->value < current_b->value && current_a->value < min_b)
 	{
@@ -406,132 +358,18 @@ void	do_first_half(t_stack **a, t_stack **b)
 	}
 }
 
-void	do_second_half(t_stack **a, t_stack **b)
-{
-	t_stack		*current_a;
-	t_stack		*current_b;
-	int			clock_wise;
-	int			min_a;
-	int			max_a;
-	int			length;
-
-	current_a = *a;
-	current_b = *b;
-	min_a = find_min(a);
-	max_a = find_max(a);
-	if (current_b->value > current_a->value && current_b->value < max_a)
-	{
-		clock_wise = 0;
-		while (current_b->value > current_a->value) 
-		{
-			clock_wise++;
-			current_a = current_a->next;
-		}
-		current_a = *a;
-		length = ps_find_length(a);
-		if (length - clock_wise > clock_wise)
-		{
-			while (current_b->value > current_a->value) 
-			{
-				ps_ra(a);
-				current_a = *a;
-			}
-		}
-		else
-		{
-			while (current_b->value > current_a->value) 
-			{
-				ps_rra(a);
-				current_a = *a;
-			}
-			if (current_a->value == max_a)
-			{
-				while (current_b->value < current_a->value) 
-				{
-					ps_rra(a);
-					current_a = *a;
-				}
-				ps_ra(a);
-			}
-
-		}
-		ps_pa(a, b);
-	}
-	else if (current_b->value > current_a->value && current_b->value > max_a)
-	{
-		sort_eff_a(a);
-		ps_pa(a, b);
-	}
-	else if (current_b->value < current_a->value && current_b->value < min_a)
-	{
-		do_edge2_nb(a, b);
-	}
-	else if (current_b->value < current_a->value && current_b->value > min_a)
-	{
-		clock_wise = 0;
-		while (current_b->value < current_a->value) 
-		{
-			clock_wise++;
-			current_a = current_a->next;
-		}
-		if (current_a->value == min_a)
-		{
-			while (current_b->value > current_a->value && current_a->next != NULL)
-			{
-				clock_wise++;
-				current_a = current_a->next;
-			}
-		}
-		current_a = *a;
-		length = ps_find_length(a);
-		if (length - clock_wise > clock_wise)
-		{
-			while (current_b->value < current_a->value) 
-			{
-				ps_ra(a);
-				current_a = *a;
-			}
-			if (current_a->value == min_a)
-			{
-				while (current_b->value > current_a->value) 
-				{
-					ps_ra(a);
-					current_a = *a;
-				}
-			}
-		}
-		else
-		{
-			while (current_b->value < current_a->value) 
-			{
-				ps_rra(a);
-				current_a = *a;
-			}
-			ps_ra(a);
-		}
-		ps_pa(a, b);
-	}
-}
-
 void	do_big_sort(t_stack **a, int median, int length)
 {
 	t_stack		*current_a;
 	t_stack		*current_b;
 	t_stack		*b;
 	int			times;
+	int			max_b;
 
-	// printf("median: %d\n\n", median);
-	
 	b = NULL;
-	while (ps_find_length(&b) < 2)
-	{
-		current_a = *a;
-		if (current_a->value < median)
-			ps_pb(a, &b);
-		else
-			ps_ra(a);
-	}
-
+	current_a = *a;
+	ps_pb(a, &b);
+	ps_pb(a, &b);
 	current_b = b;
 	if (current_b->value < current_b->next->value)
 		ps_rb(&b);
@@ -539,68 +377,41 @@ void	do_big_sort(t_stack **a, int median, int length)
 	while (times--)
 	{
 		current_a = *a;
-		current_b = b;
 		if (current_a->value < median)
 			do_first_half(a, &b);
 		else
 			ps_ra(a);
 	}
-
-	// printf("first half finished\n");
+	// printf("first half finished. stack 0 of a: %d\n", current_a->value);
 	// printf("===Printing Stack A===\n");
 	// ps_print_stack(*a);
 	// printf("===Printing Stack B===\n");
 	// ps_print_stack(b);
-	// sort_eff_b(&b);
-	// printf("b is sorted\n");
-	// printf("===Printing Stack B===\n");
-	// ps_print_stack(b);
-
-	sort_eff_b(&b);
-
 	length = ps_find_length(a);
-	times = length - 3;
+	times = length;
 	while (times--)
 	{
-		ps_pb(a, &b);
+		current_a = *a;
+		// do_second_half(a, &b);
+		do_first_half(a, &b);
 	}
-
-	// printf("sent to B except last 3\n");
-
-	median = find_median(a);
-	if (!ps_check_if_sorted(a))
-		do_for_three(a, median);
-
-	// printf("3 sorted\n");
+	// printf("time to sort B\n");
 	// printf("===Printing Stack A===\n");
 	// ps_print_stack(*a);
 	// printf("===Printing Stack B===\n");
 	// ps_print_stack(b);
-
-	times = length - 3;
-	while (times--)
+	current_b = b;
+	max_b = find_max(&current_b);
+	while (current_b->value != max_b)
 	{
+		ps_rb(&b);
 		current_b = b;
-		do_second_half(a, &b);
 	}
-
-	sort_eff_a(a);
-
-	// printf("A should be in order\n");
-	// printf("===Printing Stack A===\n");
-	// ps_print_stack(*a);
-	// printf("===Printing Stack B===\n");
-	// ps_print_stack(b);
-
-	sort_eff_b(&b);
-
-	// printf("B should be in order\n");
 	// printf("time to push back\n");
 	// printf("===Printing Stack A===\n");
 	// ps_print_stack(*a);
 	// printf("===Printing Stack B===\n");
 	// ps_print_stack(b);
-
 	while (b != NULL)
 		ps_pa(a, &b);
 }
@@ -655,130 +466,3 @@ void	do_big_sort(t_stack **a, int median, int length)
 // 	while (b != NULL)
 // 		ps_pa(a, &b);
 // }
-
-void	do_radix_sort(t_stack **a)
-{
-	t_stack	*b;
-	t_stack	*current_a;
-	t_stack	*current_b;
-	int		length;
-	// int		length2;
-	int		rest;
-	
-	current_a = *a;
-	b = NULL;
-	rest = 0;
-	while (rest < 10)
-	{
-		length = ps_find_length(a);
-		while (length-- && current_a != NULL)
-		{
-			if (current_a->value % 10 == rest)
-				ps_pb(a, &b);
-			else
-				ps_ra(a);
-			current_a = *a;
-		}
-		rest++;
-	}
-	rest = 10;
-	while (rest < 91)
-	{
-		length = ps_find_length(&b);
-		while (length--)
-		{
-			current_b = b;
-			if (current_b->value % 100 == rest)
-				ps_pa(a, &b);
-			else
-				ps_rb(&b);
-		}
-		rest += 10;
-	}
-	rest = 100;
-	while (length-- && rest < 901)
-	{
-		length = ps_find_length(a);
-		while (length--)
-		{
-			current_a = *a;
-			if (current_a->value % 1000 == rest)
-				ps_pb(a, &b);
-			else
-				ps_ra(a);
-		}
-		rest += 100;
-	}
-	length = ps_find_length(&b);
-	while (length--)
-	{
-		ps_pa(a, &b);
-	}
-}
-
-
-void	sort_eff_a(t_stack **a)
-{
-	t_stack	*current_a;
-	int		clock_wise;
-	int		min_a;
-	int		length;
-
-	clock_wise = 0;
-	current_a = *a;
-	min_a = find_min(a);
-	length = ps_find_length(a);
-	while (current_a->value != min_a)
-	{
-		clock_wise++;
-		current_a = current_a->next;
-	}
-	current_a = *a;
-	if (length - clock_wise > clock_wise)
-	{
-		while (current_a->value != min_a)
-		{
-			ps_ra(a);
-			current_a = *a;
-		}
-	}
-	else
-		while (current_a->value != min_a)
-		{
-			ps_rra(a);
-			current_a = *a;
-		}
-}
-
-void	sort_eff_b(t_stack **b)
-{
-	t_stack	*current_b;
-	int		clock_wise;
-	int		max_b;
-	int		length;
-
-	clock_wise = 0;
-	current_b = *b;
-	max_b = find_max(b);
-	length = ps_find_length(b);
-	while (current_b->value != max_b)
-	{
-		clock_wise++;
-		current_b = current_b->next;
-	}
-	current_b = *b;
-	if (length - clock_wise > clock_wise)
-	{
-		while (current_b->value != max_b)
-		{
-			ps_rb(b);
-			current_b = *b;
-		}
-	}
-	else
-		while (current_b->value != max_b)
-		{
-			ps_rrb(b);
-			current_b = *b;
-		}
-}
