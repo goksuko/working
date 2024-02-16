@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/16 11:10:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/16 11:10:39 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ int	ps_check_digit(char *string)
 	i = 0;
 	while (string[i])
 	{
-		if (string[i] < '0' || string[i] > '9' )
+		if (string[i] == '-')
+		{
+			if (string[i+1] < '0' || string[i+1] > '9' )
+				return (0);
+		}
+		else if (string[i] < '0' || string[i] > '9' )
 			return (0);
+			
 		i++;
 	}
 	return (1);
@@ -46,7 +52,6 @@ int	ps_check_digit(char *string)
 // 	return (1);
 // }
 
-
 // ===Printing Stack A===
 // Stack 0: 1
 // Stack 1: 2
@@ -57,8 +62,6 @@ int	ps_check_if_sorted(t_stack **a)
 	t_stack	*temp;
 
 	current = *a;
-	if (current == NULL)
-		return (1);
 	while (current->next != NULL)
 	{
 		temp = current->next;
