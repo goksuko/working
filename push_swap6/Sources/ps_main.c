@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:44:29 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/17 16:10:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	main(int argc, char *argv[])
 	// printf("T1\n");
 	a = NULL;
 	ps_take_numbers(&a, argc, argv);
+	give_index(&a);
+	// printf("index of first %d\n", a->index);
 	// printf("T2\n");
 	length = ps_find_length(&a);
 	if (length <= 2)

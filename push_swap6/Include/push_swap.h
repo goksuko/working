@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/16 10:57:48 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/17 20:42:05 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,21 @@
 # include <stddef.h>
 # include <limits.h>
 
+// typedef struct s_stack
+// {
+// 	int				value;
+// 	int				index;
+// 	struct s_stack	*next;
+// }	t_stack;
+
+
 typedef struct s_stack
 {
 	int				value;
+	int				index;
 	struct s_stack	*next;
 }	t_stack;
+
 
 t_stack	*ps_one_arg_to_stack_a(char *string, t_stack **a);
 t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a);
@@ -55,6 +65,7 @@ void	sort_eff_b(t_stack **b);
 void	ps_push(t_stack **src, t_stack **dest, char *str);
 void	ps_rotate(t_stack **stack, char *str);
 void	ps_reverse_rotate(t_stack **stack, char *str);
+void	ps_reverse_rotate_both(t_stack **a, t_stack **b);
 void	ps_swap(t_stack **stack, char *str);
 int		clck_while_nb_edge(t_stack **stack, int edge);
 int		clck_while_nb_small(t_stack **stack, int big);
@@ -73,5 +84,8 @@ void	do_radix_sort(t_stack **a);
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_char_in_set(char c, char const *set);
 t_stack	*ps_write_in_stack_a(t_stack **a, int nb);
+void	give_index(t_stack **a);
+long	*fill_array(int length, t_stack **a);
+int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b);
 
 #endif

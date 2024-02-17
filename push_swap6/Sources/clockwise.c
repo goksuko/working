@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/15 23:31:40 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 23:31:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/17 19:43:26 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	clck_while_nb_edge(t_stack **stack, int edge)
 
 	clock_wise = 0;
 	current = *stack;
-	while (current->value != edge)
+	while (current->value != edge && current)
 	{
 		clock_wise++;
 		current = current->next;
@@ -34,7 +34,7 @@ int	clck_while_nb_small(t_stack **stack, int big)
 
 	clock_wise = 0;
 	current = *stack;
-	while (current->value < big)
+	while (current->value < big && current)
 	{
 		clock_wise++;
 		current = current->next;
@@ -49,7 +49,7 @@ int	clck_while_nb_big(t_stack **stack, int small)
 
 	clock_wise = 0;
 	current = *stack;
-	while (current->value > small)
+	while (current->value > small && current)
 	{
 		clock_wise++;
 		current = current->next;

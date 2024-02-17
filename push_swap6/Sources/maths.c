@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 20:26:16 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/14 22:38:39 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/17 16:16:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,11 @@ long	*sort_array(long *array)
 	return (array);
 }
 
-int	find_median(t_stack **a)
+long *fill_array(int length, t_stack **a)
 {
 	long	*array;
-	int		nb;
-	int		length;
 	int		i;
 
-	length = ps_find_length(a);
 	array = malloc((length + 1) * sizeof(long));
 	if (array == NULL)
 	{
@@ -109,6 +106,18 @@ int	find_median(t_stack **a)
 		array[i] = LONG_MAX;
 		i++;
 	}
+	return (array);
+}
+
+int	find_median(t_stack **a)
+{
+	long	*array;
+	int		nb;
+	int		length;
+	// int		i;
+
+	length = ps_find_length(a);
+	array = fill_array(length, a);
 	array = stack_to_array(a, array);
 	array = sort_array(array);
 	nb = (int)array[length / 2];

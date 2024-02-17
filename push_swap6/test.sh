@@ -2,8 +2,9 @@
 
 make && make bonus
 ARG2=$(shuf -i 1-100 -n 1)
-ARG3=$(shuf -i 5-20 -n 7)
-ARG="9 10 15 19 5 18 6 -9 -10 -15 -19 -5 -18 -6"
+ARG3=$(shuf -i 5-2000 -n $ARG2)
+ARG=$(shuf -i 5-2000 -n 100)
+ARG4="9 10 15 19 5 18 6 -9 -10 -15 -19 -5 -18 -6"
 
 #angle=$(seq -3000 30000 | shuf -n 100) 
 #MIN=-10001

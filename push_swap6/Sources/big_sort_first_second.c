@@ -6,11 +6,38 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/15 23:33:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 23:47:14 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/17 20:39:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
+
+int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b)
+{
+	t_stack		*current_a;
+	t_stack		*current_b;
+	int			clock_wise;
+
+	current_a = *a;
+	current_b = *b;
+	clock_wise = clck_while_nb_small(b, current_a->value);
+	current_b = *b;
+	if (current_b->value == max_b)
+		clock_wise += clck_while_nb_big(b, current_a->value);
+	return (clock_wise);
+}
+
+// int		calculate_big_min_b(t_stack **a, t_stack **b, int min_b)
+// {
+// 	t_stack		*current_a;
+// 	t_stack		*current_b;
+// 	int			clock_wise;
+
+// 	current_a = *a;
+// 	current_b = *b;
+// 	clock_wise = clck_while_nb_big(b, current_a->value);
+// 	return (clock_wise);
+// }
 
 void	do_first_first(t_stack **a, t_stack **b, int max_b)
 {
@@ -22,10 +49,11 @@ void	do_first_first(t_stack **a, t_stack **b, int max_b)
 	current_a = *a;
 	current_b = *b;
 	length = ps_find_length(b);
-	clock_wise = clck_while_nb_small(b, current_a->value);
-	current_b = *b;
-	if (current_b->value == max_b)
-		clock_wise += clck_while_nb_big(b, current_a->value);
+	clock_wise = calculate_small_max_b(a, b, max_b);
+	// clock_wise = clck_while_nb_small(b, current_a->value);
+	// current_b = *b;
+	// if (current_b->value == max_b)
+	// 	clock_wise += clck_while_nb_big(b, current_a->value);
 	if (length - clock_wise > clock_wise)
 	{
 		rotate_still_small(b, current_a->value, 'b');
@@ -49,9 +77,9 @@ void	do_first_second(t_stack **a, t_stack **b, int min_b)
 	int			length;
 
 	current_a = *a;
-	clock_wise = clck_while_nb_big(b, current_a->value);
 	current_b = *b;
 	length = ps_find_length(b);
+	clock_wise = clck_while_nb_big(b, current_a->value);
 	if (length - clock_wise > clock_wise)
 		rotate_still_big(b, current_a->value, 'b');
 	else

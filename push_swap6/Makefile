@@ -16,6 +16,7 @@ SRCS_2 = \
 			big_sort.c \
 			checks.c \
 			clockwise.c \
+			index.c \
 			maths.c	\
 			oper_swap.c \
 			oper_push.c \
