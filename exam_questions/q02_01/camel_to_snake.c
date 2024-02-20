@@ -1,32 +1,32 @@
-// #include <unistd.h>
-// // #include <stdlib.h>
+#include <unistd.h>
+// #include <stdlib.h>
 
-// int main(int argc, char *argv[])
-// {
-// 	int i;
-// 	char *org;
-// 	char c;
+int main(int argc, char *argv[])
+{
+	int i;
+	char *org;
+	char c;
 
-// 	i = 0;
-// 	org = argv[1];
-// 	if (argc == 2)
-// 	{
-// 		while (org[i])
-// 		{
-// 			if(org[i] >= 'a' && org[i] <= 'z')
-// 				write(1, &org[i], 1);
-// 			if (org[i] >= 'A' && org[i] <= 'Z')
-// 			{
-// 				c = org[i] + 32;
-// 				write(1, "_", 1);
-// 				write(1, &c, 1);
-// 			}
-// 			i++;
-// 		}
-// 	}
-// 	write(1, "\n", 1);
-// 	return (0);
-// }
+	i = 0;
+	org = argv[1];
+	if (argc == 2)
+	{
+		while (org[i])
+		{
+			if(org[i] >= 'a' && org[i] <= 'z')
+				write(1, &org[i], 1);
+			if (org[i] >= 'A' && org[i] <= 'Z')
+			{
+				c = org[i] + 32;
+				write(1, "_", 1);
+				write(1, &c, 1);
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
+	return (0);
+}
 
 // // Assignment name  : camel_to_snake
 // // Expected files   : camel_to_snake.c
