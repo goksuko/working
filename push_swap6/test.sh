@@ -2,9 +2,10 @@
 
 make && make bonus
 ARG2=$(shuf -i 1-100 -n 1)
-ARG3=$(shuf -i 5-2000 -n $ARG2)
-ARG=$(shuf -i 5-2000 -n 100)
-ARG4="9 10 15 19 5 18 6 -9 -10 -15 -19 -5 -18 -6"
+ARG=$(shuf -i 5-2000 -n $ARG2)
+ARG3=$(shuf -i 5-2000 -n 100)
+ARG4="9 10 15 19 5 18 6 -9 -10 -15 -19     -5 -18 -6"
+ARG5="0 9 1 8 2 7 3 6 4 5 sa, pb, rrr"
 
 #angle=$(seq -3000 30000 | shuf -n 100) 
 #MIN=-10001
@@ -30,15 +31,15 @@ ARG4="9 10 15 19 5 18 6 -9 -10 -15 -19 -5 -18 -6"
 #./push_swap $angle
 ./push_swap $ARG
 #./push_swap "-5 12 -85 -45 6 -97 4 -58 65 87 99 13"
+echo " "
 echo "line number: "
 ./push_swap $ARG | wc -l
-#./push_swap $angle | wc -l
-echo "result: "
+echo " "
+echo "*****org check: "
 ./push_swap $ARG | ./checker_linux $ARG
-#./push_swap $angle | ./checker_linux $angle
-echo "my check: "
+echo "******my check: "
 ./push_swap $ARG | ./checker $ARG
-#./push_swap $angle | ./checker $angle
+./checker [sa, pb, rrr]
+echo " "
 echo "numbers: "
-#echo $angle
 echo $ARG

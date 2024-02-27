@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/16 10:57:30 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/02/27 10:46:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_stack	*ps_one_arg_to_stack_a(char *string, t_stack **a)
 				// printf("T4\n");
 				free_matrix(array);
 				ps_write_error();
+				return (NULL);
 			}
 			// printf("T5\n");
 			nb = (int)ps_atoi_matrix(array[i], array, a);
@@ -113,6 +114,7 @@ t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a)
 	if (!ps_check_digit(string))
 	{
 		ps_write_error();
+		return (NULL);
 	}
 	nb = (int)ps_atoi(string);
 	*a = ps_write_in_stack_a(a, nb);
