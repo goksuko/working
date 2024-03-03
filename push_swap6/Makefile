@@ -22,7 +22,7 @@ SRCS_2 = \
 			oper_push.c \
 			oper_rotate.c \
 			oper_reverse.c \
-			radix_sort.c \
+			new_radix_sort.c \
 			sort.c \
 			utils.c \
 			utils2.c \

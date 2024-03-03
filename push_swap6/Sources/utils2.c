@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:44:00 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/12 11:27:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/03 16:32:54 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	ps_print_stack(t_stack *a)
 	{
 		while (current != NULL)
 		{
-			ft_printf("Stack %d: %d\n", i, current->value);
+			// ft_printf("Stack %d: %d\n", i, current->value);
+			ft_printf("%d ", current->value);
 			i++;
 			current = current->next;
 		}

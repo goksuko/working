@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/02 23:37:46 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/03 15:19:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	do_big_sort(t_stack **a, int median, int length);
 void	ps_make_bubble_sort(t_stack **a);
 int		ps_take_numbers(t_stack **a, int argc, char *argv[]);
 int		ft_printf(const char *format, ...);
-void	do_radix_sort(t_stack **a);
 void	sort_eff_a(t_stack **a);
 void	sort_eff_b(t_stack **b);
 void	ps_push(t_stack **src, t_stack **dest, char *str);
@@ -80,7 +79,7 @@ void	do_first_first(t_stack **a, t_stack **b, int max_b);
 void	do_first_second(t_stack **a, t_stack **b, int min_b);
 void	do_second_first(t_stack **a, t_stack **b, int max_a);
 void	do_second_second(t_stack **a, t_stack **b, int min_a);
-void	do_radix_sort(t_stack **a, int length);
+void	do_radix_sort(t_stack **a);
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_char_in_set(char c, char const *set);
 t_stack	*ps_write_in_stack_a(t_stack **a, int nb);

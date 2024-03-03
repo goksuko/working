@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/15 14:39:00 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/03 16:30:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -591,11 +591,11 @@ void	do_radix_sort(t_stack **a)
 		}
 		power++;
 
-		printf("power is %d\n", power);
-		printf("===Printing Stack A===\n");
-		ps_print_stack(*a);
-		printf("===Printing Stack B===\n");
-		ps_print_stack(b);
+		// printf("power is %d\n", power);
+		// printf("===Printing Stack A===\n");
+		// ps_print_stack(*a);
+		// printf("===Printing Stack B===\n");
+		// ps_print_stack(b);
 
 		rest = 9;
 		while (rest >= 0)
