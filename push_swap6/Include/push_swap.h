@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/27 10:49:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/02 23:37:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	do_first_first(t_stack **a, t_stack **b, int max_b);
 void	do_first_second(t_stack **a, t_stack **b, int min_b);
 void	do_second_first(t_stack **a, t_stack **b, int max_a);
 void	do_second_second(t_stack **a, t_stack **b, int min_a);
-void	do_radix_sort(t_stack **a);
+void	do_radix_sort(t_stack **a, int length);
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_char_in_set(char c, char const *set);
 t_stack	*ps_write_in_stack_a(t_stack **a, int nb);

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:40:57 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/02 23:37:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ps_sort(t_stack **a, int median)
 		do_for_five(a, median, length);
 	else
 		do_big_sort(a, median, length);
-		// do_radix_sort(a);
+		// do_radix_sort(a, length);
 	return ;
 }
 
