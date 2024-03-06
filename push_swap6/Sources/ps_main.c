@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/03 16:58:14 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 10:50:01 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
-	int		median;
-	int		length;
+	// int		median;
+	// int		length;
 
 	// printf("T1\n");
 	// if (argc != 2)
@@ -89,18 +89,18 @@ int	main(int argc, char *argv[])
 	// printf("index of first %d\n", a->index);
 	// printf("T2\n");
 
-	length = ps_find_length(&a);
-	if (length <= 2)
-		median = 0;
-	else
-		median = find_median(&a);
+	// length = ps_find_length(&a);
+	// if (length <= 2)
+	// 	median = 0;
+	// else
+	// 	median = find_median(&a);
 
 	// printf("===Printing Stack A BEFORE SORT===\n");
 	// ps_print_stack(a);
 
 
 	if (a && !ps_check_if_sorted(&a))
-		ps_sort(&a, median);
+		ps_sort(&a);
 
 	// printf("===Printing Stack A AFTER SORT===\n");
 	// ps_print_stack(a);

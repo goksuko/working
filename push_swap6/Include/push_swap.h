@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/03 15:19:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 10:52:40 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int		ps_check_if_sorted(t_stack **a);
 void	*free_matrix(char **string);
 void	ps_print_stack(t_stack *a);
 int		ps_find_length(t_stack **a);
-void	ps_sort(t_stack **a, int median);
+void	ps_sort(t_stack **a);
 int		find_max(t_stack **a);
 int		find_min(t_stack **a);
 int		find_median(t_stack **a);
-void	do_for_three(t_stack **a, int median);
+void	do_for_three(t_stack **a);
 void	do_for_four(t_stack **a, int length);
-void	do_for_five(t_stack **a, int median, int length);
-void	do_big_sort(t_stack **a, int median, int length);
+void	do_for_five(t_stack **a, int length);
+void	do_big_sort(t_stack **a, int length);
 void	ps_make_bubble_sort(t_stack **a);
 int		ps_take_numbers(t_stack **a, int argc, char *argv[]);
 int		ft_printf(const char *format, ...);
