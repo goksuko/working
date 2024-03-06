@@ -6,76 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/05 13:53:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 23:46:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/07 00:36:31 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
-
-void	give_position_index(t_stack **a)
-{
-	t_stack	*current;
-	int		index_no;
-
-	index_no = 0;
-	current = *a;
-	while (current)
-	{
-		current->index = index_no;
-		index_no++;
-		current = current->next;
-	}
-}
-
-bool	find_index_a(t_stack **a, t_stack **b)
-{
-	t_stack		*current_a;
-	t_stack		*current_b;
-	int			length_a;
-	int			max_a;
-	int			min_a;
-	bool		second_half_a;
-
-	max_a = find_max(a);
-	min_a = find_min(a);
-	length_a = ps_find_length(a);
-	current_a = *a;
-	current_b = *b;
-	second_half_a = 0;
-	if (current_b->value > max_a || current_b->value < min_a)
-	{
-		while (current_a->value != max_a && current_a->next)
-			current_a = current_a->next;
-		current_b->index_a = current_a->index + 1;
-		if (current_b->index_a == length_a)
-			current_b->index_a = 0;
-	}
-	else
-	{
-		while (current_b->value < current_a->value && current_a->next)
-			current_a = current_a->next;
-		while (current_b->value > current_a->value && current_a->next)
-			current_a = current_a->next;
-		current_b->index_a = current_a->index;
-	}
-	if (2 * current_b->index_a > length_a)
-		second_half_a = 1;
-	return (second_half_a);
-}
-
-bool	find_index_b(t_stack **b)
-{
-	t_stack		*current_b;
-	int			length_b;
-	bool		second_half_b;
-
-	second_half_b = 0;
-	length_b = ps_find_length(b);
-	current_b = *b;
-	if (2 * current_b->index > length_b)
-		second_half_b = 1;
-	return (second_half_b);
-}
 
 int	make_pos(int nb)
 {
@@ -92,115 +27,25 @@ int	find_big(int a, int b)
 		return (b);
 }
 
-void	rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b)
+void	do_cash_job(t_stack **a, t_stack **b, t_stack *best_b)
 {
-	int		i;
+	bool		second_half_a;
+	bool		second_half_b;
 
-	i = 0;
-	while (i < best_b->index && i < best_b->index_a)
-	{
-		ps_rotate_both(a, b);
-		// ps_rotate(a, "a");
-		// ps_rotate(b, "b");
-		i++;
-	}
-	while (i < best_b->index_a)
-	{
-		ps_rotate(a, "a");
-		i++;
-	}
-	while (i < best_b->index)
-	{
-		ps_rotate(b, "b");
-		i++;
-	}
+	second_half_a = find_index_a(a, &best_b);
+	second_half_b = find_index_b(&best_b);
+	if (!second_half_a && !second_half_b)
+		rotate_and_finish(a, b, best_b);
+	else if (!second_half_a && second_half_b)
+		a_first_b_second(a, b, best_b);
+	else if (second_half_a && !second_half_b)
+		a_second_b_first(a, b, best_b);
+	else if (second_half_a && second_half_b)
+		reverse_rotate_and_finish(a, b, best_b);
+	ps_push(b, a, "a");
 }
 
-void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b)
-{
-	int		length_a;
-	int		length_b;
-	int		i;
-
-	i = 0;
-	length_a = ps_find_length(a);
-	length_b = ps_find_length(b);
-	while (i < (length_b - best_b->index) && i < (length_a - best_b->index_a))
-	{
-		ps_reverse_rotate_both(a, b);
-		i++;
-	}
-	while (i < (length_a - best_b->index_a))
-	{
-		ps_reverse_rotate(b, "b");
-		i++;
-	}
-	while (i < (length_b - best_b->index))
-	{
-		ps_reverse_rotate(a, "a");
-		i++;
-	}
-}
-
-void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b)
-{
-	int		length_b;
-	int		i;
-
-	i = 0;
-	length_b = ps_find_length(b);
-	while (i < best_b->index_a)
-	{
-		ps_rotate(a, "a");
-		i++;
-	}
-	i = 0;
-	while (i < (length_b - best_b->index))
-	{
-		ps_reverse_rotate(b, "b");
-		i++;
-	}
-}
-
-void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b)
-{
-	int		length_a;
-	int		max_a;
-	int		i;
-
-	i = 0;
-	length_a = ps_find_length(a);
-	max_a = find_max(a);
-
-	while (i < (length_a - best_b->index_a))
-	{
-		ps_reverse_rotate(a, "a");
-		i++;
-	}
-	i = 0;
-	while (i < best_b->index)
-	{
-		ps_rotate(b, "b");
-		i++;
-	}
-	if ((*a)->value < (*b)->value && (*b)->value < max_a)
-		ps_rotate(a, "a");
-}
-
-void	do_cash_job(t_stack **a, t_stack **b, t_stack *best_b, bool second_half_a, bool second_half_b)
-{
-		if (!second_half_a && !second_half_b)
-			rotate_and_finish(a, b, best_b);
-		else if (!second_half_a && second_half_b)
-			a_first_b_second(a, b, best_b);
-		else if (second_half_a && !second_half_b)
-			a_second_b_first(a, b, best_b);
-		else if (second_half_a && second_half_b)
-			reverse_rotate_and_finish(a, b, best_b);
-		ps_push(b, a, "a");
-}
-
-void	find_best_b(t_stack **a, t_stack **b)
+void	find_best_and_cash(t_stack **a, t_stack **b)
 {
 	t_stack		*current_b;
 	int			length_a;
@@ -233,9 +78,7 @@ void	find_best_b(t_stack **a, t_stack **b)
 		}
 		current_b = current_b->next;
 	}
-	second_half_a = find_index_a(a, &best_b);
-	second_half_b = find_index_b(&best_b);
-	do_cash_job(a, b, best_b, second_half_a, second_half_b);
+	do_cash_job(a, b, best_b);
 }
 
 void	do_new_sort(t_stack **a, int length)
@@ -254,7 +97,7 @@ void	do_new_sort(t_stack **a, int length)
 		give_position_index(a);
 		give_position_index(&b);
 		find_index_a(a, &b);
-		find_best_b(a, &b);
+		find_best_and_cash(a, &b);
 	}
 	sort_eff_a(a);
 }

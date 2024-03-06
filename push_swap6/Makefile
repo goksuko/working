@@ -16,12 +16,14 @@ SRCS_2 = \
 			big_sort.c \
 			checks.c \
 			clockwise.c \
+			find_index.c \
 			maths.c	\
 			oper_swap.c \
 			oper_push.c \
 			oper_rotate.c \
 			oper_reverse.c \
 			new_sort.c \
+			new_sort_utils.c \
 			sort.c \
 			utils.c \
 			utils2.c \

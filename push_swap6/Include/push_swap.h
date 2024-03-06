@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 23:42:48 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/07 00:18:20 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,12 @@ void	give_index(t_stack **a);
 long	*fill_array(int length, t_stack **a);
 int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b);
 void	do_new_sort(t_stack **a, int length);
+void	give_position_index(t_stack **a);
+bool	find_index_a(t_stack **a, t_stack **b);
+bool	find_index_b(t_stack **b);
+void	rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b);
+void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b);
+void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b);
+void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b);
 
 #endif
