@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 16:51:51 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 23:42:48 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	sort_eff_a(t_stack **a);
 void	sort_eff_b(t_stack **b);
 void	ps_push(t_stack **src, t_stack **dest, char *str);
 void	ps_rotate(t_stack **stack, char *str);
+void	ps_rotate_both(t_stack **a, t_stack **b);
 void	ps_rotate_both(t_stack **a, t_stack **b);
 void	ps_reverse_rotate(t_stack **stack, char *str);
 void	ps_reverse_rotate_both(t_stack **a, t_stack **b);

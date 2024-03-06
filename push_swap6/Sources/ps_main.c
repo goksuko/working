@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 22:55:13 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 23:40:58 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 	}
 	else if (argc == 2)
 	{
-		// if (*argv[1] == '\0')
-		// 	ps_write_error();
-		// else if (!ft_char_in_set(' ', argv[1]) && !ps_check_digit(argv[1]))
 		if (!ft_char_in_set(' ', argv[1]) && !ps_check_digit(argv[1]))
 		{
 			temp = ft_strtrim(argv[1], "\"");
-			// printf("%s\n", temp);
 			if (!ps_check_digit(temp))
 			{
 				ps_write_error();
@@ -65,15 +61,7 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
-	// int		median;
-	// int		length;
 
-	// printf("T1\n");
-	// if (argc != 2)
-	// {
-	// 	ps_write_error();
-	// 	return (0);
-	// }
 	a = NULL;
 	if (ps_take_numbers(&a, argc, argv))
 	{
@@ -82,29 +70,11 @@ int	main(int argc, char *argv[])
 			ps_write_error();
 			return (0);
 		}
-		// give_index(&a);
 	}
 	else
 		return (0);
-	// printf("index of first %d\n", a->index);
-	// printf("T2\n");
-
-	// length = ps_find_length(&a);
-	// if (length <= 2)
-	// 	median = 0;
-	// else
-	// 	median = find_median(&a);
-
-	// printf("===Printing Stack A BEFORE SORT===\n");
-	// ps_print_stack(a);
-
-
 	if (a && !ps_check_if_sorted(&a))
 		ps_sort(&a);
-
-	// printf("===Printing Stack A AFTER SORT===\n");
-	// ps_print_stack(a);
-
 	if (a)
 		a = ps_free_list(a);
 	return (0);

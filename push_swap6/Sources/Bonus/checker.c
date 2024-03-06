@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/10 23:47:15 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/27 22:57:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 23:44:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ char	*do_operation2(t_stack **a, t_stack **b, char *line)
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b'
 		&& line[3] == '\n')
 		ps_reverse_rotate(b, "");
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r'
+		&& line[3] == '\n')
+	{
+		ps_reverse_rotate(a, "");
+		ps_reverse_rotate(b, "");
+	}
 	else
 		ps_write_error();
 	return (get_next_line(0));
@@ -61,6 +67,11 @@ char	*do_operation(t_stack **a, t_stack **b, char *line)
 		ps_rotate(a, "");
 	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
 		ps_rotate(b, "");
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
+	{
+		ps_rotate(a, "");
+		ps_rotate(b, "");
+	}
 	else
 		return (do_operation2(a, b, line));
 	return (get_next_line(0));

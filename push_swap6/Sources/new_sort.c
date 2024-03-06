@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/05 13:53:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 22:55:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 23:46:18 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	give_position_index(t_stack **a)
 {
 	t_stack	*current;
 	int		index_no;
-	
+
 	index_no = 0;
 	current = *a;
 	while (current)
@@ -97,12 +97,11 @@ void	rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b)
 	int		i;
 
 	i = 0;
-	// printf("rotate_and_finish\n");
 	while (i < best_b->index && i < best_b->index_a)
 	{
-		// ps_rotate_both(a, b);
-		ps_rotate(a, "a");
-		ps_rotate(b, "b");
+		ps_rotate_both(a, b);
+		// ps_rotate(a, "a");
+		// ps_rotate(b, "b");
 		i++;
 	}
 	while (i < best_b->index_a)
@@ -126,8 +125,6 @@ void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b)
 	i = 0;
 	length_a = ps_find_length(a);
 	length_b = ps_find_length(b);
-	// printf("reverse_rotate_and_finish\n");
-	// while (i < best_b->index && i < best_b->index_a)
 	while (i < (length_b - best_b->index) && i < (length_a - best_b->index_a))
 	{
 		ps_reverse_rotate_both(a, b);
@@ -152,7 +149,6 @@ void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b)
 
 	i = 0;
 	length_b = ps_find_length(b);
-	// printf("a_first_b_second\n");
 	while (i < best_b->index_a)
 	{
 		ps_rotate(a, "a");
@@ -160,7 +156,6 @@ void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b)
 	}
 	i = 0;
 	while (i < (length_b - best_b->index))
-	// while (i < best_b->index)
 	{
 		ps_reverse_rotate(b, "b");
 		i++;
@@ -176,7 +171,6 @@ void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b)
 	i = 0;
 	length_a = ps_find_length(a);
 	max_a = find_max(a);
-	// printf("a_second_b_first\n");
 
 	while (i < (length_a - best_b->index_a))
 	{
@@ -241,26 +235,8 @@ void	find_best_b(t_stack **a, t_stack **b)
 	}
 	second_half_a = find_index_a(a, &best_b);
 	second_half_b = find_index_b(&best_b);
-	// printf("best_b->value = %d\n", best_b->value);
-	// printf("best_b->index_a = %d\n", best_b->index_a);
-	// printf("second_half_a: %d\n", second_half_a);
-	// printf("second_half_b: %d\n", second_half_b);
 	do_cash_job(a, b, best_b, second_half_a, second_half_b);
 }
-
-// void	do_cash_calculation(t_stack **a, t_stack **b)
-// {
-// 	t_stack		*current_a;
-// 	t_stack		*current_b;
-// 	t_stack		*best_b;
-// 	int			from_begin;
-// 	int			from_end;
-
-// 	current_a = *a;
-// 	current_b = *b;
-
-// }
-
 
 void	do_new_sort(t_stack **a, int length)
 {
@@ -271,26 +247,14 @@ void	do_new_sort(t_stack **a, int length)
 	times = length - 3;
 	while (times--)
 		ps_push(a, &b, "b");
-
-	// printf("===Printing Stack A===\n");
-	// ps_print_stack(*a);
-	// printf("===Printing Stack B===\n");
-	// ps_print_stack(b);
-	
 	if(!ps_check_if_sorted(a))
 		do_for_three(a);
-
-	// printf("===Printing Stack A===\n");
-	// ps_print_stack(*a);
-
 	while (b)
 	{
 		give_position_index(a);
 		give_position_index(&b);
 		find_index_a(a, &b);
 		find_best_b(a, &b);
-
-		// do_cash_calculation(a, &b);
 	}
 	sort_eff_a(a);
 }

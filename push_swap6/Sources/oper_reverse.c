@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/17 16:00:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 23:41:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	ps_reverse_rotate_both(t_stack **a, t_stack **b)
 {
 	ps_reverse_rotate(a, "");
 	ps_reverse_rotate(b, "");
-	write(1, "rr\n", 4);
+	write(1, "rrr\n", 4);
 }

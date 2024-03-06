@@ -16,13 +16,11 @@ SRCS_2 = \
 			big_sort.c \
 			checks.c \
 			clockwise.c \
-			index.c \
 			maths.c	\
 			oper_swap.c \
 			oper_push.c \
 			oper_rotate.c \
 			oper_reverse.c \
-			new_radix_sort.c \
 			new_sort.c \
 			sort.c \
 			utils.c \
@@ -85,6 +83,9 @@ clean:
 
 fclean:
 	rm -f $(NAME) $(BONUS_NAME)
+	rm -f ./a.out
+	rm -f ./Sources/a.out
+	rm -f ./push_swap
 	rm -rf $(OBJS_DIR)
 	$(MAKE) fclean -C ./Libft
 	$(MAKE) fclean -C ./ft_printf

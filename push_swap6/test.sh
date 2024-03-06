@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make && make bonus
+make re && make bonus
 ARG2=$(shuf -i 1-100 -n 1)
 #ARG=$(shuf -i 5-2000 -n $ARG2)
 ARG=$(shuf -i 1-500 -n 100)
