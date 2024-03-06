@@ -1,9 +1,9 @@
 #!/bin/bash
 
 make && make bonus
-ARG2=$(shuf -i 1-1000 -n 1)
-ARG=$(shuf -i 5-2000 -n $ARG2)
-#ARG=$(shuf -i 5-2000 -n 20)
+ARG2=$(shuf -i 1-100 -n 1)
+#ARG=$(shuf -i 5-2000 -n $ARG2)
+ARG=$(shuf -i 1-500 -n 100)
 ARG10="1457 1150 1729 178 1298 949 -1800 -1396 -1071 -989 -879 -773 -713 76 1627 781 1487 527 1676 405 1145 281 1902 1266 0 -1935 -1933  -1792 -1670 104 1801 988 -1606 -1575 -1524 -660 -339 -190 -177 -93 -75"
 #ARG+=$ARG10
 ARG4="9 10 15 19 5 18 6 -9 -10 -15 -19     -5 -18 -6"
@@ -45,5 +45,5 @@ echo "*****org check: "
 echo "******my check: "
 ./push_swap $ARG | ./checker $ARG
 echo " "
-echo "$ARG2 numbers: "
-#echo $ARG
+#echo "$ARG2 numbers: "
+echo $ARG

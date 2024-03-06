@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 10:50:01 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 22:55:13 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char *argv[])
 			ps_write_error();
 			return (0);
 		}
-		give_index(&a);
+		// give_index(&a);
 	}
 	else
 		return (0);

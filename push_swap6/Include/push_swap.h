@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 10:52:40 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 16:51:51 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdbool.h>
 
 // typedef struct s_stack
 // {
@@ -31,6 +32,7 @@ typedef struct s_stack
 {
 	int				value;
 	int				index;
+	int				index_a;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -55,7 +57,7 @@ int		find_median(t_stack **a);
 void	do_for_three(t_stack **a);
 void	do_for_four(t_stack **a, int length);
 void	do_for_five(t_stack **a, int length);
-void	do_big_sort(t_stack **a, int length);
+void	do_big_sort(t_stack **a, int median, int length);
 void	ps_make_bubble_sort(t_stack **a);
 int		ps_take_numbers(t_stack **a, int argc, char *argv[]);
 int		ft_printf(const char *format, ...);
@@ -63,6 +65,7 @@ void	sort_eff_a(t_stack **a);
 void	sort_eff_b(t_stack **b);
 void	ps_push(t_stack **src, t_stack **dest, char *str);
 void	ps_rotate(t_stack **stack, char *str);
+void	ps_rotate_both(t_stack **a, t_stack **b);
 void	ps_reverse_rotate(t_stack **stack, char *str);
 void	ps_reverse_rotate_both(t_stack **a, t_stack **b);
 void	ps_swap(t_stack **stack, char *str);
@@ -86,5 +89,6 @@ t_stack	*ps_write_in_stack_a(t_stack **a, int nb);
 void	give_index(t_stack **a);
 long	*fill_array(int length, t_stack **a);
 int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b);
+void	do_new_sort(t_stack **a, int length);
 
 #endif

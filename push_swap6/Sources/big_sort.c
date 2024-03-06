@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:50:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/27 23:50:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/06 16:52:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ void	do_second_half(t_stack **a, t_stack **b)
 	// 	do_second_second(a, b, min_a);
 }
 
+// void	do_big_sort(t_stack **a, int length)
 void	do_big_sort(t_stack **a, int median, int length)
 {
 	t_stack		*current_a;
@@ -289,7 +290,7 @@ void	do_big_sort(t_stack **a, int median, int length)
 	//sort 3 in a
 	median = find_median(a);
 	if (!ps_check_if_sorted(a))
-		do_for_three(a, median);
+		do_for_three(a);
 
 	// printf("3 sorted\n");
 	// printf("===Printing Stack A===\n");
