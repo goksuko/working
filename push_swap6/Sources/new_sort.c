@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/05 13:53:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/07 00:36:31 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 12:27:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,29 @@ void	do_cash_job(t_stack **a, t_stack **b, t_stack *best_b)
 	ps_push(b, a, "a");
 }
 
+int	find_price(t_stack **a, t_stack **b, bool second_half_a, bool second_half_b)
+{
+	int			price;
+	int			length_a;
+	int			length_b;
+	t_stack		*current_b;
+
+	current_b = *b;
+	price = 0;
+	length_a = ps_find_length(a);
+	length_b = ps_find_length(b);
+	if ((!second_half_a && !second_half_b) || (second_half_a && second_half_b))
+		price = find_big(current_b->index, current_b->index_a);
+	else if (!second_half_a && second_half_b)
+		price = make_pos((length_b - current_b->index) + current_b->index_a);
+	else if (second_half_a && !second_half_b)
+		price = make_pos(current_b->index + (length_a - current_b->index_a));
+	return(price);
+}
+
 void	find_best_and_cash(t_stack **a, t_stack **b)
 {
 	t_stack		*current_b;
-	int			length_a;
-	int			length_b;
 	t_stack		*best_b;
 	bool		second_half_a;
 	bool		second_half_b;
@@ -58,19 +76,12 @@ void	find_best_and_cash(t_stack **a, t_stack **b)
 
 	old_price = INT_MAX;
 	current_b = *b;
-	length_a = ps_find_length(a);
-	length_b = ps_find_length(b);
 	best_b = NULL;
 	while (current_b)
 	{
 		second_half_a = find_index_a(a, &current_b);
 		second_half_b = find_index_b(&current_b);
-		if ((!second_half_a && !second_half_b) || (second_half_a && second_half_b))
-			price = find_big(current_b->index, current_b->index_a);
-		else if (!second_half_a && second_half_b)
-			price = make_pos((length_b - current_b->index) + current_b->index_a);
-		else if (second_half_a && !second_half_b)
-			price = make_pos(current_b->index + (length_a - current_b->index_a));
+		price = find_price(a, &current_b, second_half_a, second_half_b);
 		if (price < old_price)
 		{
 			old_price = price;

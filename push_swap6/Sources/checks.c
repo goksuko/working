@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/27 10:48:19 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 12:18:53 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	ps_check_digit(char *string)
 	{
 		if (string[i] == '-' || string[i] == '+')
 		{
-			if (string[i+1] < '0' || string[i+1] > '9' )
+			if (string[i + 1] < '0' || string[i + 1] > '9')
 				return (0);
 		}
 		else if (string[i] < '0' || string[i] > '9' )
 			return (0);
-			
 		i++;
 	}
 	return (1);

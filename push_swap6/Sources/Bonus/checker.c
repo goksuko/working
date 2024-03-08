@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/10 23:47:15 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 23:44:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 11:51:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ t_stack	*ps_take_numbers(int argc, char *argv[])
 
 	a = NULL;
 	i = 1;
-	// if (argc < 2)
-	// 	ps_write_error();
-	// else
 	if (argc == 2)
 		a = ps_one_arg_to_stack_a(argv[1], &a);
 	else if (argc > 2)

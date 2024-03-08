@@ -6,13 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/15 23:33:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/17 20:39:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 12:19:27 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b)
+int	calculate_small_max_b(t_stack **a, t_stack **b, int max_b)
 {
 	t_stack		*current_a;
 	t_stack		*current_b;
@@ -50,10 +50,6 @@ void	do_first_first(t_stack **a, t_stack **b, int max_b)
 	current_b = *b;
 	length = ps_find_length(b);
 	clock_wise = calculate_small_max_b(a, b, max_b);
-	// clock_wise = clck_while_nb_small(b, current_a->value);
-	// current_b = *b;
-	// if (current_b->value == max_b)
-	// 	clock_wise += clck_while_nb_big(b, current_a->value);
 	if (length - clock_wise > clock_wise)
 	{
 		rotate_still_small(b, current_a->value, 'b');

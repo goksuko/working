@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/07 00:18:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 12:20:26 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 // 	struct s_stack	*next;
 // }	t_stack;
 
-
 typedef struct s_stack
 {
 	int				value;
@@ -35,7 +34,6 @@ typedef struct s_stack
 	int				index_a;
 	struct s_stack	*next;
 }	t_stack;
-
 
 t_stack	*ps_one_arg_to_stack_a(char *string, t_stack **a);
 t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a);

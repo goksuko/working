@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 00:16:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/07 00:18:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 12:15:10 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b)
 	i = 0;
 	length_a = ps_find_length(a);
 	max_a = find_max(a);
-
 	while (i < (length_a - best_b->index_a))
 	{
 		ps_reverse_rotate(a, "a");
