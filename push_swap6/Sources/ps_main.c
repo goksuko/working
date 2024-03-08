@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/07 00:15:06 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 23:03:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,15 @@
 int	ps_two_arguments(t_stack **a, char *str)
 {
 	char		*temp;
-	int			nb;
 
-	if (!ft_char_in_set(' ', str) && !ps_check_digit(str))
+	if (!ft_char_in_set(' ', str))
 	{
 		temp = ft_strtrim(str, "\"");
 		if (!ps_check_digit(temp))
-		{
 			ps_write_error();
-			return (0);
-		}
-		nb = (int)ps_atoi(temp);
-		*a = ps_write_in_stack_a(a, nb);
 		free(temp);
 		temp = NULL;
-	}
-	else if (!ft_char_in_set(' ', str) && ps_check_digit(str))
-	{
-		nb = (int)ps_atoi(str);
-		*a = ps_write_in_stack_a(a, nb);
+		return (1);
 	}
 	else
 		*a = ps_one_arg_to_stack_a(str, a);

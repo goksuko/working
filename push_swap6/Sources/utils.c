@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/27 10:46:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/08 23:04:48 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_stack	*ps_write_in_stack_a(t_stack **a, int nb)
 	t_stack		*new_t_stack;
 	t_stack		*current;
 
-	new_t_stack = calloc(1, sizeof(t_stack));
+	new_t_stack = malloc(1 * sizeof(t_stack));
 	if (new_t_stack == NULL)
 		return (NULL);
 	new_t_stack->value = nb;
