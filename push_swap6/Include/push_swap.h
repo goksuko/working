@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/08 12:20:26 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 14:09:10 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_stack
 	int				value;
 	int				index;
 	int				index_a;
+	int				price;
+	bool			second_half;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -90,11 +92,11 @@ long	*fill_array(int length, t_stack **a);
 int		calculate_small_max_b(t_stack **a, t_stack **b, int max_b);
 void	do_new_sort(t_stack **a, int length);
 void	give_position_index(t_stack **a);
-bool	find_index_a(t_stack **a, t_stack **b);
-bool	find_index_b(t_stack **b);
+void	find_index_a(t_stack **a, t_stack **b);
 void	rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b);
 void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b);
 void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b);
 void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b);
+void	give_price(t_stack **stack);
 
 #endif

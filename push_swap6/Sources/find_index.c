@@ -6,23 +6,47 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/06 23:48:19 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/07 00:07:33 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 14:16:50 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-void	give_position_index(t_stack **a)
+void	give_position_index(t_stack **stack)
 {
 	t_stack	*current;
 	int		index_no;
 
 	index_no = 0;
-	current = *a;
+	current = *stack;
 	while (current)
 	{
 		current->index = index_no;
 		index_no++;
+		current = current->next;
+	}
+}
+
+void	give_price(t_stack **stack)
+{
+	t_stack	*current;
+	int		length;
+
+	current = *stack;
+	length = ps_find_length(stack);
+	current = *stack;
+	while (current)
+	{
+		if(2 * current->index < length)
+		{
+			current->price = current->index;
+			current->second_half = 0;
+		}
+		else
+		{
+			current->price = length - current->index;
+			current->second_half = 1;
+		}
 		current = current->next;
 	}
 }
@@ -54,23 +78,20 @@ int	find_index_a_helper(t_stack **a, t_stack **b, int max_a, int min_a)
 	return (temp);
 }
 
-bool	find_index_a(t_stack **a, t_stack **b)
+void	find_index_a(t_stack **a, t_stack **b)
 {
 	t_stack		*current_b;
 	int			max_a;
 	int			min_a;
-	bool		second_half_a;
-	int			length_a;
 
-	length_a = ps_find_length(a);
 	max_a = find_max(a);
 	min_a = find_min(a);
 	current_b = *b;
-	second_half_a = 0;
-	current_b->index_a = find_index_a_helper(a, b, max_a, min_a);
-	if (2 * current_b->index_a > length_a)
-		second_half_a = 1;
-	return (second_half_a);
+	while (current_b)
+	{
+		current_b->index_a = find_index_a_helper(a, b, max_a, min_a);
+		current_b = current_b->next;
+	}
 }
 
 bool	find_index_b(t_stack **b)
