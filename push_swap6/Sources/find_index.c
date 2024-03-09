@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/06 23:48:19 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 14:16:50 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 16:15:42 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	give_price(t_stack **stack)
 	}
 }
 
-int	find_index_a_helper(t_stack **a, t_stack **b, int max_a, int min_a)
+int	find_index_a_helper(t_stack **a, t_stack *current_b, int max_a, int min_a)
 {
 	int			temp;
 	t_stack		*current_a;
@@ -59,22 +59,24 @@ int	find_index_a_helper(t_stack **a, t_stack **b, int max_a, int min_a)
 
 	current_a = *a;
 	length_a = ps_find_length(a);
-	if ((*b)->value > max_a || (*b)->value < min_a)
+	if (current_b->value > max_a || current_b->value < min_a)
 	{
 		while (current_a->value != max_a && current_a->next)
 			current_a = current_a->next;
 		temp = current_a->index + 1;
-		if (temp == length_a)
-			temp = 0;
 	}
 	else
 	{
-		while ((*b)->value < current_a->value && current_a->next)
+		while (current_b->value < current_a->value && current_a->next)
 			current_a = current_a->next;
-		while ((*b)->value > current_a->value && current_a->next)
+		while (current_b->value > current_a->value && current_a->next)
 			current_a = current_a->next;
 		temp = current_a->index;
+		if (current_b->value > current_a->value)
+			temp = 0;
 	}
+	if (temp == length_a)
+		temp = 0;
 	return (temp);
 }
 
@@ -89,7 +91,7 @@ void	find_index_a(t_stack **a, t_stack **b)
 	current_b = *b;
 	while (current_b)
 	{
-		current_b->index_a = find_index_a_helper(a, b, max_a, min_a);
+		current_b->index_a = find_index_a_helper(a, current_b, max_a, min_a);
 		current_b = current_b->next;
 	}
 }

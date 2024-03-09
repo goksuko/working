@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 00:16:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/08 12:15:10 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 16:24:23 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b)
 	}
 	while (i < (length_a - best_b->index_a))
 	{
-		ps_reverse_rotate(b, "b");
+		ps_reverse_rotate(a, "a");
 		i++;
 	}
 	while (i < (length_b - best_b->index))
 	{
-		ps_reverse_rotate(a, "a");
+		ps_reverse_rotate(b, "b");
 		i++;
 	}
 }
