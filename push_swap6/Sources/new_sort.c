@@ -6,35 +6,20 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/05 13:53:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 16:24:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 16:40:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-int	make_pos(int nb)
-{
-	if (nb < 0)
-		nb *= -1;
-	return (nb);
-}
-
-int	find_big(int a, int b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
-}
-
-t_stack *find_best_a(t_stack **a, t_stack *best_b)
+t_stack	*find_best_a(t_stack **a, t_stack *best_b)
 {
 	t_stack	*current_a;
 	int		times;
 
 	current_a = *a;
 	times = best_b->index_a;
-	while(times--)
+	while (times--)
 		current_a = current_a->next;
 	return (current_a);
 }
@@ -64,18 +49,13 @@ void	find_total_price(t_stack **a, t_stack **b)
 	int			times;
 
 	current_b = *b;
-	while(current_b)
+	while (current_b)
 	{
 		current_a = *a;
 		times = current_b->index_a;
-		// printf("******price of %d = %d\n", current_b->value, current_b->price);
-		// printf("****index_a of %d = %d<-\n", current_b->value, current_b->index_a);
 		while (times--)
 			current_a = current_a->next;
-		// printf("******price of %d = %d\n", current_a->value, current_a->price);
-		// printf("******index of %d = %d<-\n", current_a->value, current_a->index);
 		current_b->price += current_a->price;
-		// printf("total price of %d = %d\n", current_b->value, current_b->price);
 		current_b = current_b->next;
 	}
 }
@@ -102,7 +82,6 @@ void	find_best_and_cash(t_stack **a, t_stack **b)
 		current_b = current_b->next;
 	}
 	best_a = find_best_a(a, best_b);
-	// printf("total price of best_b = %d, best_b = %d, best_a = %d\n", best_b->price, best_b->value, best_a->value);
 	do_cash_job(a, b, best_a, best_b);
 }
 
@@ -115,7 +94,7 @@ void	do_new_sort(t_stack **a, int length)
 	times = length - 3;
 	while (times--)
 		ps_push(a, &b, "b");
-	if(!ps_check_if_sorted(a))
+	if (!ps_check_if_sorted(a))
 		do_for_three(a);
 	while (b)
 	{

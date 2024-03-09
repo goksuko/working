@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/06 23:48:19 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 16:15:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 16:39:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	give_price(t_stack **stack)
 	current = *stack;
 	while (current)
 	{
-		if(2 * current->index < length)
+		if (2 * current->index < length)
 		{
 			current->price = current->index;
 			current->second_half = 0;

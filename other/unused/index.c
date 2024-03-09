@@ -6,11 +6,26 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/17 14:42:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/02/17 15:13:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/09 16:38:52 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
+
+int	make_pos(int nb)
+{
+	if (nb < 0)
+		nb *= -1;
+	return (nb);
+}
+
+int	find_big(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
 
 int		find_next_min(t_stack **a, int min_a)
 {
