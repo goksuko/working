@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 16:30:59 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/25 11:46:41 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ps_two_arguments(t_stack **a, char *str)
 {
 	char		*temp;
 
+	if (!ps_check_digit_or_space(str))
+		return (0);
 	if (!ft_char_in_set(' ', str))
 	{
 		temp = ft_strtrim(str, "\"");
@@ -37,11 +39,13 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 
 	i = 1;
 	if (argc < 2)
-	{
 		return (0);
-	}
 	else if (argc == 2)
 	{
+		if (argv[1][0] == '\0')
+			return (1);
+		if (argv[1][0] == ' ' && argv[1][1] == '\0')
+			return (1);
 		test = ps_two_arguments(a, argv[1]);
 		if (test)
 			return (0);

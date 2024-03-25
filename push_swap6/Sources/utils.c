@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 16:39:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/25 11:43:13 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a)
 {
 	int			nb;
 
+	if (!ps_check_digit_or_space(string))
+	{
+		ps_write_error();
+		return (NULL);
+	}
 	if (!ps_check_digit(string))
 	{
 		ps_write_error();

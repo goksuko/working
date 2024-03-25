@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/09 14:09:10 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/25 11:47:01 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	reverse_rotate_and_finish(t_stack **a, t_stack **b, t_stack *best_b);
 void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b);
 void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b);
 void	give_price(t_stack **stack);
+int		ps_check_digit_or_space(char *string);
 
 #endif

@@ -6,11 +6,34 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/08 12:18:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/25 11:44:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
+
+int	ps_check_digit_or_space(char *string)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '-' || string[i] == '+' || string[i] == ' '
+			|| (string[i] >= '0' && string[i] <= '9'))
+		{
+			if (string[i] == '-' || string[i] == '+')
+			{
+				if (string[i - 1] >= '0' && string[i - 1] <= '9')
+					return (0);
+			}
+		}
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ps_check_digit(char *string)
 {
