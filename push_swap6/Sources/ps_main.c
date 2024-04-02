@@ -6,18 +6,18 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/25 11:46:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/27 15:36:43 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-int	ps_two_arguments(t_stack **a, char *str)
+t_stack	*ps_two_arguments(t_stack **a, char *str)
 {
 	char		*temp;
 
 	if (!ps_check_digit_or_space(str))
-		return (0);
+		return (NULL);
 	if (!ft_char_in_set(' ', str))
 	{
 		temp = ft_strtrim(str, "\"");
@@ -25,19 +25,26 @@ int	ps_two_arguments(t_stack **a, char *str)
 			ps_write_error();
 		free(temp);
 		temp = NULL;
-		return (1);
+		return (*a);
 	}
 	else
 		*a = ps_one_arg_to_stack_a(str, a);
-	return (1);
+	if (ps_check_duplicates(a)) ///eklendi
+	{
+		ps_write_error();
+		*a = ps_free_list(*a);
+		return (NULL);
+	}
+	return (*a);
 }
 
 int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 {
 	int			i;
-	int			test;
+	// int			test;
 
 	i = 1;
+	ft_printf("test2\n"); //eklendi
 	if (argc < 2)
 		return (0);
 	else if (argc == 2)
@@ -46,8 +53,9 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 			return (1);
 		if (argv[1][0] == ' ' && argv[1][1] == '\0')
 			return (1);
-		test = ps_two_arguments(a, argv[1]);
-		if (test)
+		ft_printf("test3\n"); //eklendi
+		*a = ps_two_arguments(a, argv[1]);
+		if (*a)
 			return (0);
 	}
 	else if (argc > 2)
@@ -61,6 +69,19 @@ int	ps_take_numbers(t_stack **a, int argc, char *argv[])
 	return (1);
 }
 
+// int main()
+// {
+// 	char *str = "Hello world!  !  !";
+// 	char **array;
+
+// 	array = ft_split(str, ' ');
+// 	printf("==%s==\n", array[0]);
+// 	printf("==%s==\n", array[1]);
+// 	printf("==%s==\n", array[2]);
+// 	free_matrix(array);
+// 	return (0);
+// }
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -68,7 +89,15 @@ int	main(int argc, char *argv[])
 	a = NULL;
 	if (ps_take_numbers(&a, argc, argv))
 	{
-		if (!a || ps_check_duplicates(&a))
+		ft_printf("test\n"); //eklendi
+		ps_print_stack(a); ///eklendi
+		if (ps_check_duplicates(&a)) ///degisti
+		{
+			ps_write_error();
+			a = ps_free_list(a);
+			return (0);
+		}
+		if (!a)
 		{
 			ps_write_error();
 			return (0);

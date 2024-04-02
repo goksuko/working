@@ -6,16 +6,12 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/25 11:43:13 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/03/27 15:38:50 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-// ===Printing Stack A===
-// Stack 0: 1
-// Stack 1: 2
-// Stack 2: 3
 t_stack	*ps_write_in_stack_a(t_stack **a, int nb)
 {
 	t_stack		*new_t_stack;
@@ -59,6 +55,8 @@ t_stack	*ps_one_arg_to_stack_a(char *string, t_stack **a)
 		i++;
 	}
 	free_matrix(array);
+	// ps_free_list(*a); //eklendi
+	// ps_print_stack(*a); //eklendi
 	return (*a);
 }
 
