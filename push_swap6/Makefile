@@ -15,6 +15,7 @@ SRCS_2 = \
 			big_sort_utils.c \
 			big_sort.c \
 			checks.c \
+			checks_new.c \
 			clockwise.c \
 			find_index.c \
 			maths.c	\
@@ -52,9 +53,9 @@ CFLAGS += -g
 all: $(NAME)
 
 $(NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-	$(CC) -g $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+#	$(CC) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(CFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-#	$(CC) $(CFLAGS) -g $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) -g $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C ./Libft

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/05 15:07:33 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 23:07:59 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_stack	*ps_two_arguments(t_stack **a, char *str)
 	}
 	else
 		*a = ps_one_arg_to_stack_a(str, a);
-	if (ps_check_duplicates(a)) ///eklendi
+	if (ps_check_duplicates(a))
 	{
 		ps_write_error();
 		*a = ps_free_list(*a);
@@ -55,23 +55,19 @@ bool	ps_check_probs(char **str)
 {
 	if (ps_check_non_num(str))
 		return (1);
-	if(ps_big_num(str))
+	if (ps_big_num(str))
 		return (1);
 	if (ps_check_dupp(str))
 		return (1);
-
 	return (0);
 }
-
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
 	char	**args;
 
-	if (argc < 2)
-		return (1);
-	if (argc == 2 && argv[1][0] == '\0')
+	if (ps_initial_probs(argc, argv))
 		return (1);
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
@@ -80,13 +76,12 @@ int	main(int argc, char *argv[])
 	if (ps_check_probs(args))
 	{
 		if (argc == 2)
-			free_matrix(args);	
+			free_matrix(args);
 		ps_write_error();
 		return (1);
 	}
 	a = NULL;
 	ps_take_numbers(&a, args);
-	// ps_print_stack(a);
 	if (a && !ps_check_if_sorted(&a))
 		ps_sort(&a);
 	if (a)

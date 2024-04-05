@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/05 14:57:13 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 23:07:44 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ bool	ps_check_in_array(long *array, long temp);
 bool	ps_check_dupp(char **str);
 bool	ps_check_non_num(char **str);
 bool	ps_big_num(char **str);
+bool	ps_initial_probs(int argc, char *argv[]);
 
 #endif
