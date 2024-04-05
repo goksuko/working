@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/25 11:44:12 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 14:57:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,86 @@ int	ps_check_duplicates(t_stack **a)
 			temp = temp->next;
 		}
 		current = current->next;
+	}
+	return (0);
+}
+
+bool	ps_check_in_array(long *array, long temp)
+{
+	int	i;
+
+	i = 0;
+	while (i < 1000)
+	{
+		if (temp == array[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+bool	ps_check_dupp(char **str)
+{
+	int		i;
+	long	temp;
+	long	array[1000];
+
+	i = 0;
+	while (i < 1000)
+	{
+		array[i] = LONG_MAX;
+		i++;
+	}
+	i = 1;
+	while (str[i])
+	{
+		temp = ps_atoi(str[i]);
+		if (ps_check_in_array(array, temp))
+			return (1);
+		array[i]  = temp;
+		i++;
+	}
+	return (0);
+}
+
+bool ps_check_non_num(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	while (str[i])
+	{
+		j = 0;
+		if (str[i][j] == '-')
+			j++;
+		if (str[i][j] == '\0')
+			return (1);		
+		while (str[i][j])
+		{
+			if (str[i][j] <= '9' && str[i][j] >= '0')
+				j++;
+			else
+				return (1);			
+		}
+		i++;
+	}
+	return (0);
+}
+
+bool ps_big_num(char **str)
+{
+	int		i;
+	long	temp;
+
+	i = 0;
+	while (str[i])
+	{
+		temp = ps_atoi(str[i]);
+		if (temp > INT_MAX || temp < INT_MIN)
+			return (1);
+		i++;
 	}
 	return (0);
 }

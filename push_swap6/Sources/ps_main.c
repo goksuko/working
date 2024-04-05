@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/27 15:36:43 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 15:07:33 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,77 +38,61 @@ t_stack	*ps_two_arguments(t_stack **a, char *str)
 	return (*a);
 }
 
-int	ps_take_numbers(t_stack **a, int argc, char *argv[])
+int	ps_take_numbers(t_stack **a, char **args)
 {
 	int			i;
-	// int			test;
 
-	i = 1;
-	ft_printf("test2\n"); //eklendi
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
+	i = 0;
+	while (args[i])
 	{
-		if (argv[1][0] == '\0')
-			return (1);
-		if (argv[1][0] == ' ' && argv[1][1] == '\0')
-			return (1);
-		ft_printf("test3\n"); //eklendi
-		*a = ps_two_arguments(a, argv[1]);
-		if (*a)
-			return (0);
-	}
-	else if (argc > 2)
-	{
-		while (i < argc)
-		{
-			*a = ps_arguments_to_stack_a(argv[i], a);
-			i++;
-		}
+		*a = ps_arguments_to_stack_a(args[i], a);
+		i++;
 	}
 	return (1);
 }
 
-// int main()
-// {
-// 	char *str = "Hello world!  !  !";
-// 	char **array;
+bool	ps_check_probs(char **str)
+{
+	if (ps_check_non_num(str))
+		return (1);
+	if(ps_big_num(str))
+		return (1);
+	if (ps_check_dupp(str))
+		return (1);
 
-// 	array = ft_split(str, ' ');
-// 	printf("==%s==\n", array[0]);
-// 	printf("==%s==\n", array[1]);
-// 	printf("==%s==\n", array[2]);
-// 	free_matrix(array);
-// 	return (0);
-// }
+	return (0);
+}
+
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
+	char	**args;
 
-	a = NULL;
-	if (ps_take_numbers(&a, argc, argv))
-	{
-		ft_printf("test\n"); //eklendi
-		ps_print_stack(a); ///eklendi
-		if (ps_check_duplicates(&a)) ///degisti
-		{
-			ps_write_error();
-			a = ps_free_list(a);
-			return (0);
-		}
-		if (!a)
-		{
-			ps_write_error();
-			return (0);
-		}
-	}
+	if (argc < 2)
+		return (1);
+	if (argc == 2 && argv[1][0] == '\0')
+		return (1);
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
 	else
-		return (0);
+		args = argv + 1;
+	if (ps_check_probs(args))
+	{
+		if (argc == 2)
+			free_matrix(args);	
+		ps_write_error();
+		return (1);
+	}
+	a = NULL;
+	ps_take_numbers(&a, args);
+	// ps_print_stack(a);
 	if (a && !ps_check_if_sorted(&a))
 		ps_sort(&a);
 	if (a)
 		a = ps_free_list(a);
+	if (argc == 2)
+		free_matrix(args);
 	return (0);
 }
 

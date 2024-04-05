@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/07 15:44:00 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/06 23:40:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 14:38:41 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*free_matrix(char **string)
 	int	i;
 
 	i = 0;
-	while (string[i])
+	while (string && string[i])
 	{
 		free(string[i]);
 		string[i] = NULL;
@@ -60,7 +60,7 @@ int	ps_find_length(t_stack **a)
 
 void	ps_write_error(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }
 

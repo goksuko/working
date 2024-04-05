@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/27 15:38:50 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 11:55:56 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ t_stack	*ps_one_arg_to_stack_a(char *string, t_stack **a)
 	i = 0;
 	while (array[i])
 	{
-		if (!ps_check_digit(array[i]))
-		{
-			free_matrix(array);
-			ps_write_error();
-			return (NULL);
-		}
+		// if (!ps_check_digit(array[i]))
+		// {
+		// 	free_matrix(array);
+		// 	ps_write_error();
+		// 	return (NULL);
+		// }
 		nb = (int)ps_atoi_matrix(array[i], array, a);
 		*a = ps_write_in_stack_a(a, nb);
 		i++;
@@ -64,16 +64,16 @@ t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a)
 {
 	int			nb;
 
-	if (!ps_check_digit_or_space(string))
-	{
-		ps_write_error();
-		return (NULL);
-	}
-	if (!ps_check_digit(string))
-	{
-		ps_write_error();
-		return (NULL);
-	}
+	// if (!ps_check_digit_or_space(string))
+	// {
+	// 	ps_write_error();
+	// 	return (NULL);
+	// }
+	// if (!ps_check_digit(string))
+	// {
+	// 	ps_write_error();
+	// 	return (NULL);
+	// }
 	nb = (int)ps_atoi(string);
 	*a = ps_write_in_stack_a(a, nb);
 	return (*a);

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:28:55 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/25 11:47:01 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/05 14:57:13 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	do_for_four(t_stack **a, int length);
 void	do_for_five(t_stack **a, int length);
 void	do_big_sort(t_stack **a, int median, int length);
 void	ps_make_bubble_sort(t_stack **a);
-int		ps_take_numbers(t_stack **a, int argc, char *argv[]);
+int		ps_take_numbers(t_stack **a, char *argv[]);
 int		ft_printf(const char *format, ...);
 void	sort_eff_a(t_stack **a);
 void	sort_eff_b(t_stack **b);
@@ -99,5 +99,9 @@ void	a_first_b_second(t_stack **a, t_stack **b, t_stack *best_b);
 void	a_second_b_first(t_stack **a, t_stack **b, t_stack *best_b);
 void	give_price(t_stack **stack);
 int		ps_check_digit_or_space(char *string);
+bool	ps_check_in_array(long *array, long temp);
+bool	ps_check_dupp(char **str);
+bool	ps_check_non_num(char **str);
+bool	ps_big_num(char **str);
 
 #endif
