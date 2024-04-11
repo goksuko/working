@@ -29,6 +29,7 @@ BONUS_OBJS_DIR = Objects/Bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS += -g
 
 all: $(NAME)
 
