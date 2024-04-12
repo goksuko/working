@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:48 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/05 23:08:27 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/12 15:23:22 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_stack	*ps_arguments_to_stack_a(char *string, t_stack **a)
 {
 	int			nb;
 
-	nb = (int)ps_atoi(string);
+	nb = (int)ps_string_to_long(string);
 	*a = ps_write_in_stack_a(a, nb);
 	return (*a);
 }

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/06 18:36:28 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/05 23:11:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/12 15:22:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	ps_check_dupp(char **str)
 	i = 0;
 	while (str[i])
 	{
-		temp = ps_atoi(str[i]);
+		temp = ps_string_to_long(str[i]);
 		if (ps_check_in_array(array, temp))
 			return (1);
 		array[i] = temp;
@@ -84,7 +84,7 @@ bool	ps_big_num(char **str)
 	i = 0;
 	while (str[i])
 	{
-		temp = ps_atoi(str[i]);
+		temp = ps_string_to_long(str[i]);
 		if (temp > INT_MAX || temp < INT_MIN)
 			return (1);
 		i++;

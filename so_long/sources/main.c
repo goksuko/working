@@ -7,8 +7,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <MLX42/MLX42.h>
-// #include <MLX42/MLX42_int.h>
+#include "../include/MLX42.h"
+// #include "../include/MLX42_int.h"
 
 #define WIDTH 512
 #define HEIGHT 512
@@ -90,3 +90,15 @@ int32_t main(void)
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
+
+
+// size_t size;
+
+// mlx_image_t	i1;
+// size = i1.count;
+
+// mlx_image_t	*i2;
+// size = i2->count;
+
+// mlx_image_t	**i3;
+// size = i3[0]->count;

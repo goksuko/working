@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <MLX42/MLX42.h>
-// #include <MLX42/MLX42_Int.h>
+#include "../include/MLX42.h"
+// #include "../include/MLX42_int.h"
+
 
 int32_t main(void)
 {
