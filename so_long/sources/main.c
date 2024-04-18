@@ -7,11 +7,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../include/MLX42.h"
 // #include "../include/MLX42_int.h"
 
-#define WIDTH 512
-#define HEIGHT 512
+#define WIDTH 2560
+#define HEIGHT 2560
+#define BPP sizeof(int32_t)
 
 static mlx_image_t* image;
 
@@ -61,29 +63,64 @@ void ft_hook(void* param)
 int32_t main(void)
 {
 	mlx_t* mlx;
+	//mlx_texture_t* mouth;
+	xpm_t* demo;
 
 	write(1, "Hello, World!\n", 14);
-	
-	// Gotta error check this stuff
+		
+	// Start mlx
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+/*
+	if(!(mouth = mlx_load_png("../textures/Jump.png")))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	*/
+
+	if(!(demo = mlx_load_xpm42("../xpm42s/demo.xpm42")))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+
+	/*
+	// Create a new image
 	if (!(image = mlx_new_image(mlx, 128, 128)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+	*/
+
+	if(!(image = mlx_texture_to_image(mlx, &demo->texture)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+
+	// Set every pixel to white
+	//memset(image->pixels, 255, image->width * image->height * BPP);
+	//mlx_put_pixel(image, 0, 0, 0xFF0000FF);
+
+	// Display an instance of the image
 	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	
-	mlx_loop_hook(mlx, ft_randomize, mlx);
+		
+	// Set the instance position
+	//image->instances[0].x = 50;
+	//image->instances[0].y = 50;
+
+	//mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
 	mlx_loop(mlx);
@@ -102,3 +139,5 @@ int32_t main(void)
 
 // mlx_image_t	**i3;
 // size = i3[0]->count;
+
+//endian => the order in which bytes are transmitted
