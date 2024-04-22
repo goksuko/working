@@ -5,7 +5,55 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "./MLX42.h"
+# include "../Libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
-bool	sl_check_map_probs(char *str);
+typedef struct s_game
+{
+	mlx_texture_t	*char_tx;
+	mlx_image_t		*char_img;
+	mlx_texture_t	*wall_tx;
+	mlx_image_t		*wall_img;
+	mlx_texture_t	*col_tx;
+	mlx_image_t		*col_img;
+	mlx_texture_t	*end_tx;
+	mlx_image_t		*end_img;
+	mlx_texture_t	*backgr_tx;
+	mlx_image_t		*backgr_img;
+	mlx_texture_t	*fire_tx;
+	mlx_image_t		*fire_img;
+	mlx_texture_t	*gameover_tx;
+	mlx_image_t		*gameover_img;
+	mlx_image_t		*steps_img;
+	int				char_y;
+	int				char_x;
+	int				steps;
+	int				dead;
+}	t_game;
+
+typedef struct s_map
+{
+	char	**content;
+	char	**dup_content;
+	int		length_x;
+	int		length_y;
+	int		e_count;
+	int		p_count;
+	int		c_count;
+	int		player_x;
+	int		player_y;
+	mlx_t	*mlx;
+	t_game	game;
+}	t_map;
+
+//map_check.c
+
+bool	sl_check_extension_prob(char *str);
+bool	sl_check_border_prob(t_map *my_map);
+
+//utils.c
+
+void	*free_matrix(char **string);
+
 
 #endif

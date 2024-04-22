@@ -11,6 +11,7 @@ SRCS_1 = \
 
 SRCS_2 = \
 			map_check.c \
+			utils.c \
 
 SRCS_DIR = sources
 
