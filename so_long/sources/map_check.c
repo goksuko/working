@@ -8,7 +8,7 @@ bool	sl_check_extension_prob(char *str)
 	int		j;
 	char	*ber;
 
-	len = ft_strlen(str);
+	len = sl_strlen(str);
 	ber = ".ber";
 	if (len < 5)
 		return (1);	
@@ -38,35 +38,51 @@ bool	sl_check_extension_prob(char *str)
 	return (0);
 }
 
-bool	sl_check_border_prob(t_map *my_map)
+bool	sl_check_side_wall_prob(t_map *my_map)
+{
+	int		y;
+
+	y = 0;
+	while (my_map->content[y])
+	{
+		if (my_map->content[y][0] != '1' || my_map->content[y][my_map->length_x - 1] != '1')
+			return (1);
+		y++;
+	}
+	return (0);
+}
+
+bool	sl_check_up_down_wall_prob(t_map *my_map)
+{
+	int		x;
+
+	x = 0;
+	while (my_map->content[0][x])
+	{
+		if (my_map->content[0][x] != '1')
+			return (1);
+		x++;
+	}
+	x = 0;
+	while (my_map->content[my_map->length_y - 1][x])
+	{
+		if (my_map->content[my_map->length_y - 1][x] != '1')
+			return (1);
+		x++;
+	}
+	return (0);
+}
+
+bool	sl_check_size_prob(t_map *my_map)
 {
 	int		i;
+	int		length;
 
 	i = 0;
-	while (i < my_map->length_x)
+	length = my_map->length_x;
+	while (my_map->content[i])
 	{
-		if (my_map->content[0][i] != '1')
-			return (1);
-		i++;
-	}
-	i = 0;
-	while (i < my_map->length_x)
-	{
-		if (my_map->content[my_map->length_y - 1][i] != '1')
-			return (1);
-		i++;
-	}
-	i = 0;
-	while (i < my_map->length_y)
-	{
-		if (my_map->content[i][0] != '1')
-			return (1);
-		i++;
-	}
-	i = 0;
-	while (i < my_map->length_y)
-	{
-		if (my_map->content[i][my_map->length_x - 1] != '1')
+		if (sl_strlen(my_map->content[i]) != length)
 			return (1);
 		i++;
 	}

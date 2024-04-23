@@ -49,11 +49,17 @@ typedef struct s_map
 //map_check.c
 
 bool	sl_check_extension_prob(char *str);
-bool	sl_check_border_prob(t_map *my_map);
+bool	sl_check_side_wall_prob(t_map *my_map);
+bool	sl_check_up_down_wall_prob(t_map *my_map);
+bool	sl_check_size_prob(t_map *my_map);
 
 //utils.c
 
 void	*free_matrix(char **string);
+int		sl_strlen(char *str);
+char	*sl_strjoin(char *s1, char *s2);
+void	free_maps(char **map, t_map *my_map);
+int		count_lines(char **matrix);
 
 
 #endif
