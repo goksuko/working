@@ -66,9 +66,16 @@ char	*sl_strjoin(char *s1, char *s2)
 void free_maps(char **map, t_map *my_map)
 {
 	free_matrix(map);
-	map = NULL;
-	free(my_map);
-	my_map = NULL;
+	if (!my_map)
+		return ;
+	else
+	{
+		free_matrix(my_map->content);
+		free_matrix(my_map->dup_content);
+		free(my_map);
+		my_map = NULL;	
+	}
+
 }
 
 int	count_lines(char **matrix)
@@ -76,6 +83,8 @@ int	count_lines(char **matrix)
 	int	i;
 
 	i = 0;
+	if (!matrix)
+		return (0);
 	while (matrix[i])
 		i++;
 	return (i);

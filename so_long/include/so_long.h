@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "./MLX42.h"
 # include "../Libft/libft.h"
 # include "../ft_printf/ft_printf.h"
@@ -33,10 +34,10 @@ typedef struct s_game
 
 typedef struct s_map
 {
-	char	**content;
-	char	**dup_content;
 	int		length_x;
 	int		length_y;
+	char	**content;
+	char	**dup_content;
 	int		e_count;
 	int		p_count;
 	int		c_count;
@@ -46,12 +47,31 @@ typedef struct s_map
 	t_game	game;
 }	t_map;
 
+// typedef struct s_pos
+// {
+// 	int		x;
+// 	int		y;
+// 	bool	visited;
+// }	t_pos;
+
+//main.c
+
+char	**sl_map_dup(char **map, int length_x, int length_y);
+t_map	*sl_map_init(char **map);
+
+
 //map_check.c
 
 bool	sl_check_extension_prob(char *str);
 bool	sl_check_side_wall_prob(t_map *my_map);
 bool	sl_check_up_down_wall_prob(t_map *my_map);
 bool	sl_check_size_prob(t_map *my_map);
+bool	sl_check_character_prob(t_map *my_map);
+bool	sl_map_empty_line_prob(t_map *my_map);
+
+//flood_fill.c
+
+bool sl_check_floodfill_prob(t_map *my_map);
 
 //utils.c
 
@@ -61,5 +81,7 @@ char	*sl_strjoin(char *s1, char *s2);
 void	free_maps(char **map, t_map *my_map);
 int		count_lines(char **matrix);
 
+//sl_split.c
+char	**sl_split(char const *s, char c);
 
 #endif

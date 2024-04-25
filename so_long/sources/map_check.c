@@ -43,7 +43,7 @@ bool	sl_check_side_wall_prob(t_map *my_map)
 	int		y;
 
 	y = 0;
-	while (my_map->content[y])
+	while (y < my_map->length_y && my_map->content[y])
 	{
 		if (my_map->content[y][0] != '1' || my_map->content[y][my_map->length_x - 1] != '1')
 			return (1);
@@ -57,14 +57,14 @@ bool	sl_check_up_down_wall_prob(t_map *my_map)
 	int		x;
 
 	x = 0;
-	while (my_map->content[0][x])
+	while (x < my_map->length_x && my_map->content[0][x])
 	{
 		if (my_map->content[0][x] != '1')
 			return (1);
 		x++;
 	}
 	x = 0;
-	while (my_map->content[my_map->length_y - 1][x])
+	while (x < my_map->length_x && my_map->content[my_map->length_y - 1][x])
 	{
 		if (my_map->content[my_map->length_y - 1][x] != '1')
 			return (1);
@@ -75,16 +75,60 @@ bool	sl_check_up_down_wall_prob(t_map *my_map)
 
 bool	sl_check_size_prob(t_map *my_map)
 {
-	int		i;
-	int		length;
+	int		y;
 
-	i = 0;
-	length = my_map->length_x;
-	while (my_map->content[i])
+	y = 0;
+	while (y < my_map->length_y && my_map->content[y])
 	{
-		if (sl_strlen(my_map->content[i]) != length)
+		if (sl_strlen(my_map->content[y]) != my_map->length_x)
 			return (1);
-		i++;
+		y++;
+	}
+	return (0);
+}
+
+bool sl_check_character_prob(t_map *my_map)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	x = 0;
+	while (y < my_map->length_y && my_map->content[y] && my_map->content[y][x])
+	{
+		while (x < my_map->length_x && my_map->content[y][x])
+		{
+			if (my_map->content[y][x] == 'P')
+			{
+				my_map->p_count++;
+				my_map->player_x = x;
+				my_map->player_y = y;
+			}
+			else if (my_map->content[y][x] == 'E')
+				my_map->e_count++;
+			else if (my_map->content[y][x] == 'C')
+				my_map->c_count++;
+			x++;
+		}	
+		y++;
+		x = 0;
+	}
+	if (my_map->p_count != 1 || my_map->e_count != 1 || my_map->c_count < 1)
+		return (1);
+	else
+		return (0);
+}
+
+bool sl_map_empty_line_prob(t_map *my_map)
+{
+	int		y;
+
+	y = 0;
+	while (y < my_map->length_y && my_map->content[y])
+	{
+		if (sl_strlen(my_map->content[y]) == 0)
+			return (1);
+		y++;
 	}
 	return (0);
 }
