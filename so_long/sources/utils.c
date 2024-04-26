@@ -6,44 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:08:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/25 13:08:11 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/26 20:08:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	*free_matrix(char **string)
-{
-	int	i;
-
-	i = 0;
-	while (string && string[i])
-	{
-		free(string[i]);
-		string[i] = NULL;
-		i++;
-	}
-	if (string)
-	{
-		free(string);
-		string = NULL;
-	}
-	return (NULL);
-}
-
-int sl_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*sl_strjoin(char *s1, char *s2)
+char	*sl_strjoin_without_free(char *s1, char *s2)
 {
 	char	*join;
 	size_t	i;
@@ -68,6 +37,14 @@ char	*sl_strjoin(char *s1, char *s2)
 		i++;
 	}
 	join[j] = '\0';
+	return (join);
+}
+
+char	*sl_strjoin(char *s1, char *s2)
+{
+	char	*join;
+
+	join = sl_strjoin_without_free(s1, s2);
 	free(s1);
 	s1 = NULL;
 	free(s2);
@@ -75,7 +52,7 @@ char	*sl_strjoin(char *s1, char *s2)
 	return (join);
 }
 
-void free_maps(char **map, t_map *my_map)
+void	free_maps(char **map, t_map *my_map)
 {
 	free_matrix(map);
 	if (!my_map)
@@ -85,9 +62,8 @@ void free_maps(char **map, t_map *my_map)
 		free_matrix(my_map->content);
 		free_matrix(my_map->dup_content);
 		free(my_map);
-		my_map = NULL;	
+		my_map = NULL;
 	}
-
 }
 
 int	count_lines(char **matrix)
@@ -100,4 +76,23 @@ int	count_lines(char **matrix)
 	while (matrix[i])
 		i++;
 	return (i);
+}
+
+void	*free_matrix(char **string)
+{
+	int	i;
+
+	i = 0;
+	while (string && string[i])
+	{
+		free(string[i]);
+		string[i] = NULL;
+		i++;
+	}
+	if (string)
+	{
+		free(string);
+		string = NULL;
+	}
+	return (NULL);
 }

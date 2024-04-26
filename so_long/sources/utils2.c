@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sl_split.c                                         :+:    :+:            */
+/*   utils2.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:08:03 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/25 13:08:04 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/26 20:09:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+int	sl_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
 
 static char	**clean(char **matrix, size_t string_no)
 {
@@ -53,14 +65,14 @@ static char	**sl_fill_matrix(char **matrix, const char *s, char c)
 	{
 		if (s[i] == c)
 			i++;
-        start = i;
-        while (s[i] != '\0' && s[i] != c)
-            i++;
-        string_len = i - start;
-        matrix[string_no] = ft_substr(s, start, string_len);
-        if (matrix[string_no] == NULL)
-            return (clean(matrix, string_no));
-        string_no++;
+		start = i;
+		while (s[i] != '\0' && s[i] != c)
+			i++;
+		string_len = i - start;
+		matrix[string_no] = ft_substr(s, start, string_len);
+		if (matrix[string_no] == NULL)
+			return (clean(matrix, string_no));
+		string_no++;
 	}
 	matrix[string_no] = NULL;
 	return (matrix);

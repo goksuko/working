@@ -12,9 +12,9 @@ SRCS_1 = \
 SRCS_2 = \
 			flood_fill.c \
 			map_check.c \
-			sl_split.c \
+			map_check2.c \
 			utils.c \
-
+			utils2.c \
 
 SRCS_DIR = sources
 

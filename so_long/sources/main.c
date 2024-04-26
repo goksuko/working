@@ -6,18 +6,18 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/25 13:07:49 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/26 20:03:51 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-char **sl_open_map(char *str)
+char	**sl_open_map(char *str)
 {
 	int		fd;
 	char	*line;
 	char	*temp;
-	char 	**map;
+	char	**map;
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
@@ -40,7 +40,7 @@ char **sl_open_map(char *str)
 	return (map);
 }
 
-char **sl_map_dup(char **map, int length_x, int length_y)
+char	**sl_map_dup(char **map, int length_x, int length_y)
 {
 	char	**dup_map;
 	int		y;
@@ -92,11 +92,29 @@ t_map	*sl_map_init(char **map)
 	return (my_map);
 }
 
+int	do_checks(char **map, t_map *my_map)
+{
+	if (sl_map_empty_line_prob(my_map))
+		return (ft_printf("Error\nMap empty line error.\n"),
+			free_maps(map, my_map), 5);
+	if (sl_check_side_wall_prob(my_map)
+		|| sl_check_up_down_wall_prob(my_map))
+		return (ft_printf("Error\nMap wall error.\n"),
+			free_maps(map, my_map), 6);
+	if (sl_check_character_prob(my_map))
+		return (ft_printf("Error\nMap character error.\n"),
+			free_maps(map, my_map), 7);
+	if (sl_check_floodfill_prob(my_map))
+		return (ft_printf("Error\nMap floodfill error.\n"),
+			free_maps(map, my_map), 8);
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	char	**map;
 	t_map	*my_map;
-	
+
 	map = NULL;
 	// argv[1] = "maps/empty_line_at_start.ber";
 	if (argc != 2)
@@ -112,16 +130,9 @@ int	main(int argc, char *argv[])
 			return (ft_printf("Error\nEmpty map.\n"), 3);
 		my_map = sl_map_init(map);
 		if (sl_check_size_prob(my_map))
-			return (ft_printf("Error\nMap size error.\n"), free_maps(map, my_map),  4);
-		if(sl_map_empty_line_prob(my_map))
-			return (ft_printf("Error\nMap empty line error.\n"), free_maps(map, my_map),  5);
-		if (sl_check_side_wall_prob(my_map) || sl_check_up_down_wall_prob(my_map))
-			return (ft_printf("Error\nMap wall error.\n"), free_maps(map, my_map), 6);
-		if (sl_check_character_prob(my_map))
-			return (ft_printf("Error\nMap character error.\n"), free_maps(map, my_map), 7);
-		if (sl_check_floodfill_prob(my_map))
-			return (ft_printf("Error\nMap floodfill error.\n"), free_maps(map, my_map), 8);
-		else
+			return (ft_printf("Error\nMap size error.\n"),
+				free_maps(map, my_map), 4);
+		if (!do_checks(map, my_map))
 			return (ft_printf("Fine.\n"), free_maps(map, my_map), 0);
 	}
 	return (0);

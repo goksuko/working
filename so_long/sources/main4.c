@@ -1,11 +1,11 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "../include/MLX42.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #define WIDTH 5120
 #define HEIGHT 2880
 
-static void error(void)
+static void	error(void)
 {
 	puts(mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -14,17 +14,17 @@ static void error(void)
 int32_t	main(void)
 {
 	// Start mlx
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Test", true);
+	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Test", true);
 	if (!mlx)
 		error();
 
 	// Try to load the file
-	xpm_t* xpm = mlx_load_xpm42("./xpms/right0.xpm42");
+	xpm_t *xpm = mlx_load_xpm42("./xpms/right0.xpm42");
 	if (!xpm)
 		error();
 
 	// Convert texture to a displayable image
-	mlx_image_t* img = mlx_texture_to_image(mlx, &xpm->texture);
+	mlx_image_t *img = mlx_texture_to_image(mlx, &xpm->texture);
 	if (!img)
 		error();
 
@@ -34,7 +34,8 @@ int32_t	main(void)
 
 	mlx_loop(mlx);
 
-	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
+	// Optional, terminate will clean up any leftovers,
+	//	this is just to demonstrate.
 	// mlx_delete_image(mlx, img);
 	// mlx_delete_xpm42(xpm);
 	mlx_terminate(mlx);
