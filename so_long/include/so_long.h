@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/26 20:22:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/27 22:54:47 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 # include "../Libft/libft.h"
 # include "../ft_printf/ft_printf.h"
-# include "./MLX42.h"
+// # include "./MLX42.h"
+// # include "./MLX42_Int.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+// # include "../MLX42/include/MLX42/MLX42_Int.h"
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 typedef struct s_game
 {

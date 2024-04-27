@@ -7,7 +7,7 @@ HEAD = ../include/MLX42.h
 HEAD2 = ../include/MLX42_int.h
 
 SRCS_1 = \
-			main.c \
+			main6.c \
 
 SRCS_2 = \
 			flood_fill.c \
@@ -59,12 +59,12 @@ $(MINILIBX):
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c 
+$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS) 
+$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS)
 	$(CC) $(CFLAGS) -g -fsanitize=address $(BONUS_OBJS) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(BONUS_NAME)
 
 $(BONUS_OBJS_DIR):
