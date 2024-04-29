@@ -34,11 +34,46 @@ void	do_parent_process(char *argv[], char **envp, int pipefd[])
 	start_exec(argv[3], envp);
 }
 
+//to be deleted later
+void	print_env(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+}
+
+int check_path(char **envp)
+{
+	int i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
 int main(int argc, char *argv[], char **envp)
 {
 	int		pipefd[2];
 	pid_t	pid;
+	int		path_no;
 
+	// print_env(envp);
+	path_no = check_path(envp);
+	if (envp[path_no] == NULL)
+	{
+		perror("Path not found\n");
+		return (1);
+	}
 	if (argc != 5)
 	{
 		perror("Please write 4 arguments!\n 1. file1\n 2. cmd1\n 3. cmd2\n 4. file2\n");

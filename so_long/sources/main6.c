@@ -70,37 +70,44 @@ int32_t	main(void)
 
 	// mlx_texture_t* mouth;
 	write(1, "Hello, World!\n", 14);
+
 	// Start mlx
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
+
+	// // Load a texture
 	// if(!(mouth = mlx_load_png("../textures/mouth2.png")))
 	// {
 	// 	puts(mlx_strerror(mlx_errno));
 	// 	return(EXIT_FAILURE);
 	// }
-	if (!(demo = mlx_load_xpm42("../xpm42s/demo.xpm42")))
+
+	// Load a texture
+	if (!(demo = mlx_load_xpm42("../xpms/demo.xpm42")))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	// // Create a new image
-	// if (!(image = mlx_new_image(mlx, 128, 128)))
-	// {
-	// 	mlx_close_window(mlx);
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	return(EXIT_FAILURE);
-	// }
+
+	// Create a new image
+	if (!(image = mlx_new_image(mlx, 128, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
 	if (!(image = mlx_texture_to_image(mlx, &demo->texture)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
+
 	// Set every pixel to white
-	// memset(image->pixels, 255, image->width * image->height * BPP);
-	// mlx_put_pixel(image, 0, 0, 0xFF0000FF);
+	memset(image->pixels, 255, image->width * image->height * BPP);
+	mlx_put_pixel(image, 0, 0, 0xFF0000FF);
 	// Display an instance of the image
 	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
 	{

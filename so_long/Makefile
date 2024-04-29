@@ -5,12 +5,14 @@ FT_PRINTF = ./ft_printf/ft_printf.a
 MINILIBX = ./include/libmlx42.a
 HEAD = ../include/MLX42.h
 HEAD2 = ../include/MLX42_int.h
+#SRCS = $(shell find ./src -iname "*.c")
 
 SRCS_1 = \
-			main6.c \
+			main.c \
 
 SRCS_2 = \
 			flood_fill.c \
+			game.c \
 			map_check.c \
 			map_check2.c \
 			utils.c \
@@ -34,17 +36,19 @@ BONUS_OBJS = $(BONUS_SRCS:%.c=$(BONUS_OBJS_DIR)/%.o)
 BONUS_OBJS_DIR = objects/bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g
 
-LFLAGS = -ldl -lglfw -pthread -lm
+LFLAGS = -ldl  -L/lib/x86_64-linux-gnu -lglfw -pthread -lm
 
 all: $(NAME)
 
 $(NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
 #	$(CC) $(LFLAGS) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-#	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-	$(CC) $(CFLAGS) $(LFLAGS) -g $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+#	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+#	$(CC) $(CFLAGS) $(LFLAGS) -g $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(LFLAGS) -g $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 
 $(LIBFT):

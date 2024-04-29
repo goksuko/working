@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/27 22:54:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/04/29 23:51:57 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ bool				sl_check_up_down_wall_prob(t_map *my_map);
 // flood_fill.c
 
 bool				sl_check_floodfill_prob(t_map *my_map);
+
+// game.c
+
+bool				sl_game(t_map *my_map);
 
 // utils.c
 
