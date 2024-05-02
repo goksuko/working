@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/02 23:09:37 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:16:05 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	sl_image_init(t_game *my_game, t_map *my_map)
 	my_game->backgr_tx = mlx_load_png("textures/backgr.png");
 	my_game->fire_tx = mlx_load_png("textures/fire.png");
 	my_game->gameover_tx = mlx_load_png("textures/gameover.png");
-	my_game->steps_img = mlx_new_image(my_map->mlx, 32, 32);
+	my_game->steps_img = mlx_new_image(my_map->mlx, 16, 16);
 	if (my_game->char_tx == NULL || my_game->wall_tx == NULL || my_game->col_tx == NULL
 		|| my_game->end_tx == NULL || my_game->backgr_tx == NULL
 		|| my_game->fire_tx == NULL || my_game->gameover_tx == NULL
@@ -97,25 +97,25 @@ bool	sl_place_images(t_map *my_map, t_game *my_game)
 		while (x < my_map->length_x)
 		{
 			if (my_map->content[y][x] == '1')
-				mlx_image_to_window(my_map->mlx, my_game->wall_img, x * 32, y
-					* 32);
+				mlx_image_to_window(my_map->mlx, my_game->wall_img, x * 16, y
+					* 16);
 			else if (my_map->content[y][x] == 'C')
-				mlx_image_to_window(my_map->mlx, my_game->col_img, x * 32, y * 32);
+				mlx_image_to_window(my_map->mlx, my_game->col_img, x * 16, y * 16);
 			else if (my_map->content[y][x] == 'E')
-				mlx_image_to_window(my_map->mlx, my_game->end_img, x * 32, y * 32);
+				mlx_image_to_window(my_map->mlx, my_game->end_img, x * 16, y * 16);
 			else if (my_map->content[y][x] == 'P')
 			{
 				my_game->char_y = y;
 				my_game->char_x = x;
-				mlx_image_to_window(my_map->mlx, my_game->char_img, x * 32, y
-					* 32);
+				mlx_image_to_window(my_map->mlx, my_game->char_img, x * 16, y
+					* 16);
 			}
 			else if (my_map->content[y][x] == 'F')
-				mlx_image_to_window(my_map->mlx, my_game->fire_img, x * 32, y
-					* 32);
+				mlx_image_to_window(my_map->mlx, my_game->fire_img, x * 16, y
+					* 16);
 			else
-				mlx_image_to_window(my_map->mlx, my_game->backgr_img, x * 32, y
-					* 32);
+				mlx_image_to_window(my_map->mlx, my_game->backgr_img, x * 16, y
+					* 16);
 			x++;
 		}
 		y++;
@@ -149,8 +149,8 @@ void	sl_clean_window(t_game *my_game, t_map *my_map)
 
 static void	remove_collectible(t_map *my_map)
 {
-	const int		x = my_map->game.char_x * 32;
-	const int		y = my_map->game.char_y * 32;
+	const int		x = my_map->game.char_x * 16;
+	const int		y = my_map->game.char_y * 16;
 	int				i;
 	mlx_instance_t	*check;
 
@@ -169,8 +169,8 @@ static void	remove_collectible(t_map *my_map)
 
 static void	game_over(t_map *my_map)
 {
-	const int		x = my_map->game.char_x * 32;
-	const int		y = my_map->game.char_y * 32;
+	const int		x = my_map->game.char_x * 16;
+	const int		y = my_map->game.char_y * 16;
 	mlx_instance_t	*player;
 
 	player = &my_map->game.char_img->instances[0];
@@ -203,7 +203,7 @@ bool	sl_create_window(t_game *my_game, t_map *my_map)
 {
 	mlx_t	*mlx;
 
-	mlx = mlx_init(my_map->length_x * 32, my_map->length_y * 32, "So_long",
+	mlx = mlx_init(my_map->length_x * 16, my_map->length_y * 16, "So_long",
 			false);
 	if (mlx == NULL)
 		return (false);
