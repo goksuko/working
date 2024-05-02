@@ -13,9 +13,11 @@ SRCS_1 = \
 SRCS_2 = \
 			flood_fill.c \
 			game.c \
+			images.c \
 			keyboard.c \
 			map_check.c \
 			map_check2.c \
+			utils_game.c \
 			utils.c \
 			utils2.c \
 
