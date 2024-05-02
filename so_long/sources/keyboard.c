@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/01 12:06:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/02 23:19:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:41:29 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	my_keyhook(mlx_key_data_t keydata, void *pointer)
 
 void	keyboard_down(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 {
-	if (keydata->key == MLX_KEY_DOWN && my_map->content[my_map->game.char_y + 1][my_map->game.char_x] != '1')
+	if (keydata->key == MLX_KEY_DOWN && my_map->content[my_map->game.char_y
+			+ 1][my_map->game.char_x] != '1')
 	{
 		my_map->game.steps++;
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
@@ -49,7 +50,8 @@ void	keyboard_down(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 
 void	keyboard_up(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 {
-	if (keydata->key == MLX_KEY_UP && my_map->content[my_map->game.char_y - 1][my_map->game.char_x] != '1')
+	if (keydata->key == MLX_KEY_UP && my_map->content[my_map->game.char_y
+			- 1][my_map->game.char_x] != '1')
 	{
 		my_map->game.steps++;
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
@@ -61,7 +63,8 @@ void	keyboard_up(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 
 void	keyboard_right(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 {
-	if (keydata->key == MLX_KEY_RIGHT && my_map->content[my_map->game.char_y][my_map->game.char_x + 1] != '1')
+	if (keydata->key == MLX_KEY_RIGHT
+		&& my_map->content[my_map->game.char_y][my_map->game.char_x + 1] != '1')
 	{
 		my_map->game.steps++;
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
@@ -73,7 +76,8 @@ void	keyboard_right(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 
 void	keyboard_left(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 {
-	if (keydata->key == MLX_KEY_LEFT && my_map->content[my_map->game.char_y][my_map->game.char_x - 1] != '1')
+	if (keydata->key == MLX_KEY_LEFT
+		&& my_map->content[my_map->game.char_y][my_map->game.char_x - 1] != '1')
 	{
 		my_map->game.steps++;
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);

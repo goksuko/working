@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 20:21:23 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/26 20:21:58 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:28:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ bool	sl_check_extension_prob(char *str)
 
 bool	sl_check_side_wall_prob(t_map *my_map)
 {
-	int		y;
+	int	y;
 
 	y = 0;
 	while (y < my_map->length_y && my_map->content[y])
 	{
-		if (my_map->content[y][0] != '1'
-			|| my_map->content[y][my_map->length_x - 1] != '1')
+		if (my_map->content[y][0] != '1' || my_map->content[y][my_map->length_x
+			- 1] != '1')
 			return (1);
 		y++;
 	}
@@ -53,7 +53,7 @@ bool	sl_check_side_wall_prob(t_map *my_map)
 
 bool	sl_check_up_down_wall_prob(t_map *my_map)
 {
-	int		x;
+	int	x;
 
 	x = 0;
 	while (x < my_map->length_x && my_map->content[0][x])

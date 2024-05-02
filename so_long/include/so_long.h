@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/02 16:53:40 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:57:50 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_game
 	mlx_image_t		*end_img;
 	mlx_texture_t	*backgr_tx;
 	mlx_image_t		*backgr_img;
-	mlx_texture_t	*fire_tx;
-	mlx_image_t		*fire_img;
+	mlx_texture_t	*wolf_tx;
+	mlx_image_t		*wolf_img;
 	mlx_texture_t	*gameover_tx;
 	mlx_image_t		*gameover_img;
 	mlx_image_t		*steps_img;
@@ -93,14 +93,23 @@ bool				sl_check_floodfill_prob(t_map *my_map);
 
 // game.c
 
-bool				sl_game(t_map *my_map);
+bool				sl_game(t_game *my_game, t_map *my_map);
 void				check_move(t_map *my_map);
+
+// images.c
+
+bool				sl_image_init(t_game *my_game, t_map *my_map);
+bool				sl_text_to_img(t_map *my_map, t_game *my_game);
+void				sl_place_wall_and_col(t_map *my_map, t_game *my_game);
+void				sl_place_end_and_char(t_map *my_map, t_game *my_game);
+void				sl_place_wolf_and_backgr(t_map *my_map, t_game *my_game);
 
 // keyboard.c
 
 // void keyboard_play(void *pointer);
-void	my_keyhook(mlx_key_data_t keydata, void *my_map);
-void	keyboard_down(mlx_key_data_t *key, t_map *my_map, char *steps_str);
+void				my_keyhook(mlx_key_data_t keydata, void *my_map);
+void				keyboard_down(mlx_key_data_t *key, t_map *my_map,
+						char *steps_str);
 void				keyboard_up(mlx_key_data_t *key, t_map *my_map,
 						char *steps_str);
 void				keyboard_right(mlx_key_data_t *key, t_map *my_map,

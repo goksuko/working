@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:57 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/26 20:21:45 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:28:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	sl_check_size_prob(t_map *my_map)
 {
-	int		y;
+	int	y;
 
 	y = 0;
 	while (y < my_map->length_y && my_map->content[y])
@@ -28,8 +28,8 @@ bool	sl_check_size_prob(t_map *my_map)
 
 void	sl_find_numbers(t_map *my_map)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = 0;
 	x = 0;
@@ -65,7 +65,7 @@ bool	sl_check_character_prob(t_map *my_map)
 
 bool	sl_map_empty_line_prob(t_map *my_map)
 {
-	int		y;
+	int	y;
 
 	y = 0;
 	while (y < my_map->length_y && my_map->content[y])

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/29 23:50:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:52:02 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,17 @@ t_map	*sl_map_init(char **map)
 int	do_checks(char **map, t_map *my_map)
 {
 	if (sl_map_empty_line_prob(my_map))
-		return (ft_printf("Error\nMap empty line error.\n"),
-			free_maps(map, my_map), 5);
-	if (sl_check_side_wall_prob(my_map)
-		|| sl_check_up_down_wall_prob(my_map))
-		return (ft_printf("Error\nMap wall error.\n"),
-			free_maps(map, my_map), 6);
+		return (ft_printf("Error\nMap empty line error.\n"), free_maps(map,
+				my_map), 5);
+	if (sl_check_side_wall_prob(my_map) || sl_check_up_down_wall_prob(my_map))
+		return (ft_printf("Error\nMap wall error.\n"), free_maps(map, my_map),
+			6);
 	if (sl_check_character_prob(my_map))
-		return (ft_printf("Error\nMap character error.\n"),
-			free_maps(map, my_map), 7);
+		return (ft_printf("Error\nMap character error.\n"), free_maps(map,
+				my_map), 7);
 	if (sl_check_floodfill_prob(my_map))
-		return (ft_printf("Error\nMap floodfill error.\n"),
-			free_maps(map, my_map), 8);
+		return (ft_printf("Error\nMap floodfill error.\n"), free_maps(map,
+				my_map), 8);
 	return (0);
 }
 
@@ -117,11 +116,8 @@ int	main(int argc, char *argv[])
 	int		error_check;
 
 	map = NULL;
-	// argv[1] = "maps/empty_line_at_start.ber";
 	if (argc != 2)
-	// if (argc == 5)
 		return (ft_printf("Error\nPlease provide 1 map.\n"), 1);
-		// ft_printf("Please provide 1 map.\n");
 	if (sl_check_extension_prob(argv[1]))
 		return (ft_printf("Error\nMap extension error.\n"), 2);
 	map = sl_open_map(argv[1]);
@@ -129,12 +125,12 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Error\nEmpty map.\n"), 3);
 	my_map = sl_map_init(map);
 	if (sl_check_size_prob(my_map))
-		return (ft_printf("Error\nMap size error.\n"),
-			free_maps(map, my_map), 4);
+		return (ft_printf("Error\nMap size error.\n"), free_maps(map, my_map),
+			4);
 	error_check = do_checks(map, my_map);
 	if (error_check > 0)
 		return (error_check);
-	if(!sl_game(my_map))
+	if (!sl_game(&my_map->game, my_map))
 		return (ft_printf("Error\nGame error.\n"), free_maps(map, my_map), 9);
 	free_maps(map, my_map);
 	return (0);
