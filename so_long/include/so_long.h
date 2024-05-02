@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/29 23:51:57 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 16:53:40 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 // # include "../MLX42/include/MLX42/MLX42_Int.h"
 # include <limits.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdbool.h>
 
 typedef struct s_game
 {
@@ -94,6 +94,19 @@ bool				sl_check_floodfill_prob(t_map *my_map);
 // game.c
 
 bool				sl_game(t_map *my_map);
+void				check_move(t_map *my_map);
+
+// keyboard.c
+
+// void keyboard_play(void *pointer);
+void	my_keyhook(mlx_key_data_t keydata, void *my_map);
+void	keyboard_down(mlx_key_data_t *key, t_map *my_map, char *steps_str);
+void				keyboard_up(mlx_key_data_t *key, t_map *my_map,
+						char *steps_str);
+void				keyboard_right(mlx_key_data_t *key, t_map *my_map,
+						char *steps_str);
+void				keyboard_left(mlx_key_data_t *key, t_map *my_map,
+						char *steps_str);
 
 // utils.c
 

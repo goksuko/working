@@ -6,86 +6,86 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/01 11:13:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/02 23:09:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	sl_free_textures(t_game *game)
+void	sl_free_textures(t_game *my_game)
 {
-	if (game->char_tx)
-		mlx_delete_texture(game->char_tx);
-	if (game->wall_tx)
-		mlx_delete_texture(game->wall_tx);
-	if (game->col_tx)
-		mlx_delete_texture(game->col_tx);
-	if (game->end_tx)
-		mlx_delete_texture(game->end_tx);
-	if (game->backgr_tx)
-		mlx_delete_texture(game->backgr_tx);
-	if (game->fire_tx)
-		mlx_delete_texture(game->fire_tx);
-	if (game->gameover_tx)
-		mlx_delete_texture(game->gameover_tx);
+	if (my_game->char_tx)
+		mlx_delete_texture(my_game->char_tx);
+	if (my_game->wall_tx)
+		mlx_delete_texture(my_game->wall_tx);
+	if (my_game->col_tx)
+		mlx_delete_texture(my_game->col_tx);
+	if (my_game->end_tx)
+		mlx_delete_texture(my_game->end_tx);
+	if (my_game->backgr_tx)
+		mlx_delete_texture(my_game->backgr_tx);
+	if (my_game->fire_tx)
+		mlx_delete_texture(my_game->fire_tx);
+	if (my_game->gameover_tx)
+		mlx_delete_texture(my_game->gameover_tx);
 }
 
-void	sl_free_images(t_game *game, t_map *my_map)
+void	sl_free_images(t_game *my_game, t_map *my_map)
 {
-	if (game->char_img)
-		mlx_delete_image(my_map->mlx, game->char_img);
-	if (game->wall_img)
-		mlx_delete_image(my_map->mlx, game->wall_img);
-	if (game->col_img)
-		mlx_delete_image(my_map->mlx, game->col_img);
-	if (game->end_img)
-		mlx_delete_image(my_map->mlx, game->end_img);
-	if (game->backgr_img)
-		mlx_delete_image(my_map->mlx, game->backgr_img);
-	if (game->fire_img)
-		mlx_delete_image(my_map->mlx, game->fire_img);
-	if (game->gameover_img)
-		mlx_delete_image(my_map->mlx, game->gameover_img);
-	if (game->steps_img)
-		mlx_delete_image(my_map->mlx, game->steps_img);
+	if (my_game->char_img)
+		mlx_delete_image(my_map->mlx, my_game->char_img);
+	if (my_game->wall_img)
+		mlx_delete_image(my_map->mlx, my_game->wall_img);
+	if (my_game->col_img)
+		mlx_delete_image(my_map->mlx, my_game->col_img);
+	if (my_game->end_img)
+		mlx_delete_image(my_map->mlx, my_game->end_img);
+	if (my_game->backgr_img)
+		mlx_delete_image(my_map->mlx, my_game->backgr_img);
+	if (my_game->fire_img)
+		mlx_delete_image(my_map->mlx, my_game->fire_img);
+	if (my_game->gameover_img)
+		mlx_delete_image(my_map->mlx, my_game->gameover_img);
+	if (my_game->steps_img)
+		mlx_delete_image(my_map->mlx, my_game->steps_img);
 }
 
-bool	sl_image_init(t_game *game, t_map *my_map)
+bool	sl_image_init(t_game *my_game, t_map *my_map)
 {
-	game->char_tx = mlx_load_png("textures/char.png");
-	game->wall_tx = mlx_load_png("textures/wall.png");
-	game->col_tx = mlx_load_png("textures/col.png");
-	game->end_tx = mlx_load_png("textures/end.png");
-	game->backgr_tx = mlx_load_png("textures/backgr.png");
-	game->fire_tx = mlx_load_png("textures/fire.png");
-	game->gameover_tx = mlx_load_png("textures/gameover.png");
-	game->steps_img = mlx_new_image(my_map->mlx, 64, 64);
-	if (game->char_tx == NULL || game->wall_tx == NULL || game->col_tx == NULL
-		|| game->end_tx == NULL || game->backgr_tx == NULL
-		|| game->fire_tx == NULL || game->gameover_tx == NULL
-		|| game->steps_img == NULL)
+	my_game->char_tx = mlx_load_png("textures/char.png");
+	my_game->wall_tx = mlx_load_png("textures/wall.png");
+	my_game->col_tx = mlx_load_png("textures/col.png");
+	my_game->end_tx = mlx_load_png("textures/end.png");
+	my_game->backgr_tx = mlx_load_png("textures/backgr.png");
+	my_game->fire_tx = mlx_load_png("textures/fire.png");
+	my_game->gameover_tx = mlx_load_png("textures/gameover.png");
+	my_game->steps_img = mlx_new_image(my_map->mlx, 32, 32);
+	if (my_game->char_tx == NULL || my_game->wall_tx == NULL || my_game->col_tx == NULL
+		|| my_game->end_tx == NULL || my_game->backgr_tx == NULL
+		|| my_game->fire_tx == NULL || my_game->gameover_tx == NULL
+		|| my_game->steps_img == NULL)
 		return (false);
 	return (true);
 }
 
-bool	sl_text_to_img(t_map *my_map, t_game *game)
+bool	sl_text_to_img(t_map *my_map, t_game *my_game)
 {
-	game->char_img = mlx_texture_to_image(my_map->mlx, game->char_tx);
-	game->wall_img = mlx_texture_to_image(my_map->mlx, game->wall_tx);
-	game->col_img = mlx_texture_to_image(my_map->mlx, game->col_tx);
-	game->end_img = mlx_texture_to_image(my_map->mlx, game->end_tx);
-	game->backgr_img = mlx_texture_to_image(my_map->mlx, game->backgr_tx);
-	game->fire_img = mlx_texture_to_image(my_map->mlx, game->fire_tx);
-	game->gameover_img = mlx_texture_to_image(my_map->mlx, game->gameover_tx);
-	if (game->char_img == NULL || game->wall_img == NULL
-		|| game->col_img == NULL || game->end_img == NULL
-		|| game->backgr_img == NULL || game->fire_img == NULL
-		|| game->gameover_img == NULL)
+	my_game->char_img = mlx_texture_to_image(my_map->mlx, my_game->char_tx);
+	my_game->wall_img = mlx_texture_to_image(my_map->mlx, my_game->wall_tx);
+	my_game->col_img = mlx_texture_to_image(my_map->mlx, my_game->col_tx);
+	my_game->end_img = mlx_texture_to_image(my_map->mlx, my_game->end_tx);
+	my_game->backgr_img = mlx_texture_to_image(my_map->mlx, my_game->backgr_tx);
+	my_game->fire_img = mlx_texture_to_image(my_map->mlx, my_game->fire_tx);
+	my_game->gameover_img = mlx_texture_to_image(my_map->mlx, my_game->gameover_tx);
+	if (my_game->char_img == NULL || my_game->wall_img == NULL
+		|| my_game->col_img == NULL || my_game->end_img == NULL
+		|| my_game->backgr_img == NULL || my_game->fire_img == NULL
+		|| my_game->gameover_img == NULL)
 		return (false);
 	return (true);
 }
 
-bool	sl_place_images(t_map *my_map, t_game *game)
+bool	sl_place_images(t_map *my_map, t_game *my_game)
 {
 	int	x;
 	int	y;
@@ -97,24 +97,24 @@ bool	sl_place_images(t_map *my_map, t_game *game)
 		while (x < my_map->length_x)
 		{
 			if (my_map->content[y][x] == '1')
-				mlx_image_to_window(my_map->mlx, game->wall_img, x * 32, y
+				mlx_image_to_window(my_map->mlx, my_game->wall_img, x * 32, y
 					* 32);
 			else if (my_map->content[y][x] == 'C')
-				mlx_image_to_window(my_map->mlx, game->col_img, x * 32, y * 32);
+				mlx_image_to_window(my_map->mlx, my_game->col_img, x * 32, y * 32);
 			else if (my_map->content[y][x] == 'E')
-				mlx_image_to_window(my_map->mlx, game->end_img, x * 32, y * 32);
+				mlx_image_to_window(my_map->mlx, my_game->end_img, x * 32, y * 32);
 			else if (my_map->content[y][x] == 'P')
 			{
-				game->char_y = y;
-				game->char_x = x;
-				mlx_image_to_window(my_map->mlx, game->char_img, x * 32, y
+				my_game->char_y = y;
+				my_game->char_x = x;
+				mlx_image_to_window(my_map->mlx, my_game->char_img, x * 32, y
 					* 32);
 			}
 			else if (my_map->content[y][x] == 'F')
-				mlx_image_to_window(my_map->mlx, game->fire_img, x * 32, y
+				mlx_image_to_window(my_map->mlx, my_game->fire_img, x * 32, y
 					* 32);
 			else
-				mlx_image_to_window(my_map->mlx, game->backgr_img, x * 32, y
+				mlx_image_to_window(my_map->mlx, my_game->backgr_img, x * 32, y
 					* 32);
 			x++;
 		}
@@ -123,10 +123,10 @@ bool	sl_place_images(t_map *my_map, t_game *game)
 	return (true);
 }
 
-void	sl_clean_window(t_game *game, t_map *my_map)
+void	sl_clean_window(t_game *my_game, t_map *my_map)
 {
-	sl_free_textures(game);
-	sl_free_images(game, my_map);
+	sl_free_textures(my_game);
+	sl_free_images(my_game, my_map);
 	mlx_terminate(my_map->mlx);
 }
 
@@ -147,7 +147,59 @@ void	sl_clean_window(t_game *game, t_map *my_map)
 // 		image->instances[0].x += 5;
 // }
 
-bool	sl_create_window(t_game *game, t_map *my_map)
+static void	remove_collectible(t_map *my_map)
+{
+	const int		x = my_map->game.char_x * 32;
+	const int		y = my_map->game.char_y * 32;
+	int				i;
+	mlx_instance_t	*check;
+
+	i = 0;
+	while (1)
+	{
+		check = &my_map->game.col_img->instances[i];
+		if (check->x == x && check->y == y)
+		{
+			check->enabled = false;
+			return ;
+		}
+		i++;
+	}
+}
+
+static void	game_over(t_map *my_map)
+{
+	const int		x = my_map->game.char_x * 32;
+	const int		y = my_map->game.char_y * 32;
+	mlx_instance_t	*player;
+
+	player = &my_map->game.char_img->instances[0];
+	player->enabled = false;
+	mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x, y);
+	my_map->game.steps = 0;
+	my_map->game.dead = 1;
+}
+
+void	check_move(t_map *my_map)
+{
+	if (my_map->content[my_map->game.char_y][my_map->game.char_x] == 'C')
+	{
+		my_map->c_count--;
+		my_map->content[my_map->game.char_y][my_map->game.char_x] = '0';
+		remove_collectible(my_map);
+	}
+	if (my_map->content[my_map->game.char_y][my_map->game.char_x] == 'E')
+	{
+		if (my_map->c_count != 0)
+			return ;
+		else
+			mlx_close_window(my_map->mlx);
+	}
+	if (my_map->content[my_map->game.char_y][my_map->game.char_x] == 'F')
+		game_over(my_map);
+}
+
+bool	sl_create_window(t_game *my_game, t_map *my_map)
 {
 	mlx_t	*mlx;
 
@@ -157,33 +209,37 @@ bool	sl_create_window(t_game *game, t_map *my_map)
 		return (false);
 	my_map->mlx = mlx;
 	my_map->game.steps = 0;
-	if (!sl_image_init(game, my_map))
-		return (sl_clean_window(game, my_map), false);
-	if (!sl_text_to_img(my_map, game))
-		return (sl_clean_window(game, my_map), false);
-	if (!sl_place_images(my_map, game))
-		return (sl_clean_window(game, my_map), false);
-	game->char_y = my_map->player_y;
-	game->char_x = my_map->player_x;
+	if (!sl_image_init(my_game, my_map))
+		return (sl_clean_window(my_game, my_map), false);
+	if (!sl_text_to_img(my_map, my_game))
+		return (sl_clean_window(my_game, my_map), false);
+	if (!sl_place_images(my_map, my_game))
+		return (sl_clean_window(my_game, my_map), false);
+	my_game->char_y = my_map->player_y;
+	my_game->char_x = my_map->player_x;
 	my_map->game.dead = 0;
-	// mlx_loop_hook(my_map->mlx, ft_hook, my_map->mlx);
+	// printf("my_map->content[0][0] = %c\n", my_map->content[0][0]);
+	// printf("my_map->content[0][1] = %c\n", my_map->content[0][1]);
+	// printf("my_map->content[1][0] = %c\n", my_map->content[1][0]);
+	// printf("my_map->content[1][1] = %c\n", my_map->content[1][1]);
+	// printf("my_map->content[2][0] = %c\n", my_map->content[2][0]);
+	// printf("my_map->player_x = %d\n", my_map->player_x);
+	// printf("my_map->player_y = %d\n", my_map->player_y);
+	// printf("my_map->game.char_y = %d\n", my_map->game.char_y);
+	// printf("my_map->game.char_x = %d\n", my_map->game.char_x);
+	mlx_key_hook(mlx, &my_keyhook, my_map);
 	mlx_loop(my_map->mlx);
-	sl_clean_window(game, my_map);
+	sl_clean_window(my_game, my_map);
 	return (true);
 }
 
 bool	sl_game(t_map *my_map)
 {
-	t_game	*game;
-
-	game = malloc(sizeof(t_game));
-	if (game == NULL)
-		return (false);
-	if (!sl_create_window(game, my_map))
+	if (!sl_create_window(&my_map->game, my_map))
 	{
-		free(game);
+		// free(my_game);
 		return (false);
 	}
-	free(game);
+	// free(my_game);
 	return (true);
 }
