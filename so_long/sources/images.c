@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/02 23:53:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/02 23:57:00 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/03 11:49:10 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	sl_place_wall_and_col(t_map *my_map, t_game *my_game)
 		while (x < my_map->length_x)
 		{
 			if (my_map->content[y][x] == '1')
-				mlx_image_to_window(my_map->mlx, my_game->wall_img, x * 16,
-					y * 16);
-			else if (my_map->content[y][x] == 'C')
-				mlx_image_to_window(my_map->mlx, my_game->col_img, x * 16,
-					y * 16);
+				mlx_image_to_window(my_map->mlx, my_game->wall_img, x * 16, y
+					* 16);
+			if (my_map->content[y][x] == 'C')
+				mlx_image_to_window(my_map->mlx, my_game->col_img, x * 16, y
+					* 16);
 			x++;
 		}
 		y++;
@@ -83,14 +83,14 @@ void	sl_place_end_and_char(t_map *my_map, t_game *my_game)
 		while (x < my_map->length_x)
 		{
 			if (my_map->content[y][x] == 'E')
-				mlx_image_to_window(my_map->mlx, my_game->end_img, x * 16,
-					y * 16);
-			else if (my_map->content[y][x] == 'P')
+				mlx_image_to_window(my_map->mlx, my_game->end_img, x * 16, y
+					* 16);
+			if (my_map->content[y][x] == 'P')
 			{
 				my_game->char_y = y;
 				my_game->char_x = x;
-				mlx_image_to_window(my_map->mlx, my_game->char_img, x * 16,
-					y * 16);
+				mlx_image_to_window(my_map->mlx, my_game->char_img, x * 16, y
+					* 16);
 			}
 			x++;
 		}
@@ -100,8 +100,8 @@ void	sl_place_end_and_char(t_map *my_map, t_game *my_game)
 
 void	sl_place_wolf_and_backgr(t_map *my_map, t_game *my_game)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
 	while (y < my_map->length_y)
@@ -110,11 +110,8 @@ void	sl_place_wolf_and_backgr(t_map *my_map, t_game *my_game)
 		while (x < my_map->length_x)
 		{
 			if (my_map->content[y][x] == 'F')
-				mlx_image_to_window(my_map->mlx, my_game->wolf_img, x * 16,
-					y * 16);
-			else
-				mlx_image_to_window(my_map->mlx, my_game->backgr_img, x * 16,
-					y * 16);
+				mlx_image_to_window(my_map->mlx, my_game->wolf_img, x * 16, y
+					* 16);
 			x++;
 		}
 		y++;
