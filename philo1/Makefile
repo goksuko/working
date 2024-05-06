@@ -7,6 +7,7 @@ SRCS_1 = \
 			main.c \
 
 SRCS_2 = \
+			table.c \
 			utils.c \
 
 SRCS_DIR = sources
@@ -19,7 +20,7 @@ OBJS_DIR = objects
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
-CFLAGS += -g
+CFLAGS += -g -phtread
 
 all: $(NAME)
 
