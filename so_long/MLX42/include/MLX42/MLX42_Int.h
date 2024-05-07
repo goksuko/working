@@ -6,17 +6,17 @@
 /*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/27 23:55:34 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2024/04/27 22:53:33 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2022/07/21 10:46:43 by sbos          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX42_INT_H
 # define MLX42_INT_H
 # define LODEPNG_NO_COMPILE_ALLOCATORS
-# include "./MLX42.h"
-# include "../lodepng/lodepng.h"
-# include "../glad/glad.h"
-# include "../KHR/khrplatform.h"
+# include "MLX42/MLX42.h"
+# include "lodepng/lodepng.h"
+# include "glad/glad.h"
+# include "KHR/khrplatform.h"
 # if defined(__APPLE__)
 #  define GL_SILENCE_DEPRECATION
 # endif

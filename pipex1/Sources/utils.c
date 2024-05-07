@@ -30,7 +30,7 @@ void	start_exec(char *argv, char **envp)
 	{
 		free_matrix(cmd);
 		perror("Command not found\n");
-		exit(1);
+		exit(127);
 	}
 	if (execve(path, cmd, envp) == -1)
 	{
@@ -48,6 +48,13 @@ char	*find_path(char *cmd, char **envp)
 	char 	*tmp;
 
 	i = 0;
+	if (!cmd)
+		return (NULL);
+	if (access(&cmd[0], F_OK) == 0)
+	{
+		// free(cmd);
+		return (&cmd[0]);
+	}
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	path_split = ft_split(envp[i] + 5, ':');
@@ -69,23 +76,23 @@ char	*find_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-void do_execution(char *argv, char **envp)
-{
-	char **cmd;
-	char *path;
+// void do_execution(char *argv, char **envp)
+// {
+// 	char **cmd;
+// 	char *path;
 
-	cmd = ft_split(argv, ' ');
-	path = find_path(cmd[0], envp);
-	if (!path)
-	{
-		free_matrix(cmd);
-		perror("Command not found\n");
-		exit(1);
-	}
-	if (execve(path, cmd, envp) == -1)
-	{
-		free_matrix(cmd);
-		perror("Error executing command\n");
-		exit(1);
-	}
-}
+// 	cmd = ft_split(argv, ' ');
+// 	path = find_path(cmd[0], envp);
+// 	if (!path)
+// 	{
+// 		free_matrix(cmd);
+// 		perror("Command not found\n");
+// 		exit(1);
+// 	}
+// 	if (execve(path, cmd, envp) == -1)
+// 	{
+// 		free_matrix(cmd);
+// 		perror("Error executing command\n");
+// 		exit(1);
+// 	}
+// }
