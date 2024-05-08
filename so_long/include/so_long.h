@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 22:18:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/09 00:15:41 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ typedef struct s_map
 char				**sl_map_dup(char **map, int length_x, int length_y);
 t_map				*sl_map_init(char **map);
 
+// map.c	
+
+char				**sl_open_map(char *str);
+char				**sl_map_dup(char **map, int length_x, int length_y);
+t_map				*sl_map_init(char **map);
+
 // map_check.c
 
 bool				sl_check_size_prob(t_map *my_map);
@@ -99,7 +105,6 @@ void				sl_place_wolf_and_backgr(t_map *my_map, t_game *my_game);
 
 // keyboard.c
 
-// void keyboard_play(void *pointer);
 void				my_keyhook(mlx_key_data_t keydata, void *my_map);
 void				keyboard_down(mlx_key_data_t *key, t_map *my_map,
 						char *steps_str);
@@ -120,7 +125,6 @@ char				*sl_strjoin(char *s1, char *s2);
 void				free_maps(char **map, t_map *my_map);
 int					count_lines(char **matrix);
 void				*free_matrix(char **string);
-void				ft_print_matrix(char **matrix);
 
 // utils2.c
 

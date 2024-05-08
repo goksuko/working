@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 23:26:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 23:53:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	game_over(t_map *my_map)
 	int				y;
 	mlx_instance_t	*player;
 
-	// const int		x = my_map->game.char_x * 64;
-	// const int		y = my_map->game.char_y * 64;
 	x = 0;
 	y = 0;
 	player = &my_map->game.char_img->instances[0];
@@ -66,7 +64,6 @@ static void	game_over(t_map *my_map)
 		}
 		x++;
 	}
-	// mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x, y);
 	my_map->game.steps = 0;
 	my_map->game.dead = 1;
 }

@@ -16,6 +16,7 @@ SRCS_2 = \
 			game.c \
 			images.c \
 			keyboard.c \
+			map.c \
 			map_check.c \
 			map_check2.c \
 			utils_game.c \

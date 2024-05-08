@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:08:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 22:17:55 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/09 00:14:44 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,4 @@ void	*free_matrix(char **string)
 		string = NULL;
 	}
 	return (NULL);
-}
-
-void	ft_print_matrix(char **matrix)
-{
-	int i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		ft_printf("%s\n", matrix[i]);
-		i++;
-	}
 }
