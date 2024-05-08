@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/01 12:06:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 13:31:50 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 23:31:55 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	my_keyhook(mlx_key_data_t keydata, void *pointer)
 
 	my_map = pointer;
 	steps_str = 0;
-	if (keydata.action != MLX_PRESS)
+	// if (keydata.action != MLX_PRESS || keydata.action != MLX_REPEAT)
+	if (keydata.action == MLX_RELEASE)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(my_map->mlx);
@@ -35,6 +36,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *pointer)
 	check_move(my_map);
 }
 
+// mlx_put_string: Draws a string on an image and then outputs it to the window.
 void	keyboard_down(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 {
 	if ((keydata->key == MLX_KEY_S || keydata->key == MLX_KEY_DOWN)

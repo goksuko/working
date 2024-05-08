@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 13:33:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 22:18:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,13 @@ void				keyboard_left(mlx_key_data_t *key, t_map *my_map,
 
 void				sl_clean_window(t_game *my_game, t_map *my_map);
 
-	// utils.c
+// utils.c
 
 char				*sl_strjoin(char *s1, char *s2);
 void				free_maps(char **map, t_map *my_map);
 int					count_lines(char **matrix);
 void				*free_matrix(char **string);
+void				ft_print_matrix(char **matrix);
 
 // utils2.c
 

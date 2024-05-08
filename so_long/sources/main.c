@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 13:44:03 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 23:18:36 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,30 @@ char	**sl_open_map(char *str)
 	if (fd < 0)
 		return (ft_printf("Error\nMap openning error.\n"), NULL);
 	temp = ft_strdup("");
+	if (temp == NULL)
+		return (ft_printf("Error\nMap start error.\n"), close(fd), NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+		if (*line == '\n')
+			return (ft_printf("Error\nEmpty line in map.\n"), close(fd),
+				free(temp), free(line), NULL);
 		temp = sl_strjoin(temp, line);
+		if (temp == NULL)
+			return (ft_printf("Error\nMap join error.\n"), close(fd), NULL);
 	}
 	if (temp == NULL)
 		return (ft_printf("Error\nFailed to read line.\n"), close(fd), NULL);
 	map = sl_split(temp, '\n');
 	if (map == NULL)
-		return (ft_printf("Error\nMap split error.\n"), free(temp), close(fd), NULL);
+		return (ft_printf("Error\nMap split error.\n"), free(temp), close(fd),
+			NULL);
 	close(fd);
 	free(temp);
+	// // to be deleted later
+	// ft_print_matrix(map);
 	return (map);
 }
 
@@ -74,10 +84,10 @@ t_map	*sl_map_init(char **map)
 	t_map	*my_map;
 
 	if (!map)
-		return (ft_printf("Map not found.\n"), NULL);
+		return (ft_printf("Error\nMap not found.\n"), NULL);
 	my_map = malloc(sizeof(t_map));
 	if (my_map == NULL)
-		return (ft_printf("Map init error.\n"), NULL);
+		return (ft_printf("Error\nMap init error.\n"), NULL);
 	my_map->length_x = sl_strlen(map[0]);
 	my_map->length_y = count_lines(map);
 	my_map->content = NULL;
@@ -101,11 +111,12 @@ int	do_checks(char **map, t_map *my_map)
 		return (ft_printf("Error\nMap wall error.\n"), free_maps(map, my_map),
 			6);
 	if (sl_check_character_prob(my_map))
-		return (ft_printf("Error\nMap character error.\n"), free_maps(map,
-				my_map), 7);
+		// return (ft_printf("Error\nMap character error.\n"), free_maps(map,
+		// my_map), 7);
+		return (free_maps(map, my_map), 7);
 	if (sl_check_floodfill_prob(my_map))
-		return (ft_printf("Error\nMap floodfill error.\n"), free_maps(map,
-				my_map), 8);
+		return (ft_printf("Error\nThere is an unreachable exit or collectable.\n"),
+			free_maps(map, my_map), 8);
 	return (0);
 }
 
@@ -123,10 +134,13 @@ int	main(int argc, char *argv[])
 	if (sl_check_extension_prob(argv[1]))
 		return (ft_printf("Error\nMap extension error.\n"), 2);
 	map = sl_open_map(argv[1]);
-	if (!map || map[0] == NULL)
-		// return (ft_printf("Error\nEmpty map.\n"), 3);
+	if (!map)
 		return (3);
+	if (map && map[0] == NULL)
+		return (ft_printf("Error\nEmpty map.\n"), 3);
 	my_map = sl_map_init(map);
+	if (!my_map)
+		return (3);
 	if (sl_check_size_prob(my_map))
 		return (ft_printf("Error\nMap size error.\n"), free_maps(map, my_map),
 			4);
@@ -139,10 +153,9 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-
-f0r3s24% echo $?
-1
-f0r3s24% ./so_long maps/invalid/empty_file.ber 
-f0r3s24% ./so_long maps/invalid/empty_file2.ber
-Error
-Map openning error.
+// f0r3s24% echo $?
+// 1
+// f0r3s24% ./so_long maps/invalid/empty_file.ber
+// f0r3s24% ./so_long maps/invalid/empty_file2.ber
+// Error
+// Map openning error.

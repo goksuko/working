@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:57 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/02 23:28:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 23:06:58 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,33 @@ void	sl_find_numbers(t_map *my_map)
 bool	sl_check_character_prob(t_map *my_map)
 {
 	sl_find_numbers(my_map);
-	if (my_map->p_count != 1 || my_map->e_count != 1 || my_map->c_count < 1)
+	// if (my_map->p_count != 1 || my_map->e_count != 1 || my_map->c_count < 1)
+	// 	return (1);
+	if (my_map->p_count == 0)
+	{
+		ft_printf("Error\nPlayer not found.\n");
 		return (1);
+	}
+	if (my_map->e_count == 0)
+	{
+		ft_printf("Error\nExit not found.\n");
+		return (1);
+	}
+	if (my_map->c_count == 0)
+	{
+		ft_printf("Error\nCollectible not found.\n");
+		return (1);
+	}
+	if (my_map->p_count > 1)
+	{
+		ft_printf("Error\nMultiple players found.\n");
+		return (1);
+	}
+	if (my_map->e_count > 1)
+	{
+		ft_printf("Error\nMultiple exits found.\n");
+		return (1);
+	}
 	else
 		return (0);
 }

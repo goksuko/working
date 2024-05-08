@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 13:31:32 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 23:26:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,28 @@ static void	remove_collectible(t_map *my_map)
 
 static void	game_over(t_map *my_map)
 {
-	const int		x = my_map->game.char_x * 64;
-	const int		y = my_map->game.char_y * 64;
+	int				x;
+	int				y;
 	mlx_instance_t	*player;
 
+	// const int		x = my_map->game.char_x * 64;
+	// const int		y = my_map->game.char_y * 64;
+	x = 0;
+	y = 0;
 	player = &my_map->game.char_img->instances[0];
 	player->enabled = false;
-	mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x, y);
+	while (x < my_map->length_x)
+	{
+		y = 0;
+		while (y < my_map->length_y)
+		{
+			mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x * 64,
+				y * 64);
+			y++;
+		}
+		x++;
+	}
+	// mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x, y);
 	my_map->game.steps = 0;
 	my_map->game.dead = 1;
 }
@@ -79,7 +94,7 @@ bool	sl_game(t_game *my_game, t_map *my_map)
 {
 	mlx_t	*mlx;
 
-	mlx = mlx_init(my_map->length_x * 64, my_map->length_y * 64, "So_long",
+	mlx = mlx_init(my_map->length_x * 64, my_map->length_y * 64, "so_long",
 			false);
 	if (mlx == NULL)
 		return (false);
