@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/01 12:06:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/03 11:42:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 13:31:50 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	keyboard_down(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
 		my_map->game.steps_img = mlx_put_string(my_map->mlx, steps_str, 1, 2);
 		my_map->game.char_y++;
-		my_map->game.char_img->instances[0].y += 16;
+		my_map->game.char_img->instances[0].y += 64;
 	}
 }
 
@@ -57,7 +57,7 @@ void	keyboard_up(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
 		my_map->game.steps_img = mlx_put_string(my_map->mlx, steps_str, 1, 2);
 		my_map->game.char_y--;
-		my_map->game.char_img->instances[0].y -= 16;
+		my_map->game.char_img->instances[0].y -= 64;
 	}
 }
 
@@ -70,7 +70,7 @@ void	keyboard_right(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
 		my_map->game.steps_img = mlx_put_string(my_map->mlx, steps_str, 1, 2);
 		my_map->game.char_x++;
-		my_map->game.char_img->instances[0].x += 16;
+		my_map->game.char_img->instances[0].x += 64;
 	}
 }
 
@@ -83,6 +83,6 @@ void	keyboard_left(mlx_key_data_t *keydata, t_map *my_map, char *steps_str)
 		mlx_delete_image(my_map->mlx, my_map->game.steps_img);
 		my_map->game.steps_img = mlx_put_string(my_map->mlx, steps_str, 1, 2);
 		my_map->game.char_x--;
-		my_map->game.char_img->instances[0].x -= 16;
+		my_map->game.char_img->instances[0].x -= 64;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/07 19:30:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 13:44:03 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**sl_open_map(char *str)
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("Map openning error.\n"), NULL);
+		return (ft_printf("Error\nMap openning error.\n"), NULL);
 	temp = ft_strdup("");
 	while (1)
 	{
@@ -31,10 +31,10 @@ char	**sl_open_map(char *str)
 		temp = sl_strjoin(temp, line);
 	}
 	if (temp == NULL)
-		return (ft_printf("Failed to read line.\n"), close(fd), NULL);
+		return (ft_printf("Error\nFailed to read line.\n"), close(fd), NULL);
 	map = sl_split(temp, '\n');
 	if (map == NULL)
-		return (ft_printf("Map split error.\n"), free(temp), close(fd), NULL);
+		return (ft_printf("Error\nMap split error.\n"), free(temp), close(fd), NULL);
 	close(fd);
 	free(temp);
 	return (map);
@@ -116,13 +116,16 @@ int	main(int argc, char *argv[])
 	int		error_check;
 
 	map = NULL;
-	if (argc != 2)
+	if (argc == 1)
+		return (ft_printf("Error\nPlease provide a map.\n"), 1);
+	if (argc > 2)
 		return (ft_printf("Error\nPlease provide 1 map.\n"), 1);
 	if (sl_check_extension_prob(argv[1]))
 		return (ft_printf("Error\nMap extension error.\n"), 2);
 	map = sl_open_map(argv[1]);
 	if (!map || map[0] == NULL)
-		return (ft_printf("Error\nEmpty map.\n"), 3);
+		// return (ft_printf("Error\nEmpty map.\n"), 3);
+		return (3);
 	my_map = sl_map_init(map);
 	if (sl_check_size_prob(my_map))
 		return (ft_printf("Error\nMap size error.\n"), free_maps(map, my_map),
@@ -135,3 +138,11 @@ int	main(int argc, char *argv[])
 	free_maps(map, my_map);
 	return (0);
 }
+
+
+f0r3s24% echo $?
+1
+f0r3s24% ./so_long maps/invalid/empty_file.ber 
+f0r3s24% ./so_long maps/invalid/empty_file2.ber
+Error
+Map openning error.

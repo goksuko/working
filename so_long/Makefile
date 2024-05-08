@@ -2,7 +2,8 @@ NAME = so_long
 #BONUS_NAME = checker
 LIBFT = ./Libft/libft.a
 FT_PRINTF = ./ft_printf/ft_printf.a
-MINILIBX = ./include/libmlx42.a
+MLX = ./MLX42
+MINILIBX = $(MLX)/build/libmlx42.a
 HEAD = ../include/MLX42.h
 HEAD2 = ../include/MLX42_int.h
 #SRCS = $(shell find ./src -iname "*.c")
@@ -42,9 +43,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g
 
-LFLAGS = -ldl  -L/lib/x86_64-linux-gnu -lglfw -pthread -lm
+LFLAGS = -ldl  -L/lib/x86_64-linux-gnu -lglfw -pthread -lm -L./MLX42/build/ -lmlx42
 
-all: $(NAME)
+all: mlx42 $(NAME)
+
+mlx42:
+	cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
 $(NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
 #	$(CC) $(LFLAGS) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
@@ -53,6 +57,8 @@ $(NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
 #	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(CFLAGS) $(LFLAGS) -g $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(LFLAGS) -g $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	@echo ""
+	@echo *******Completed********
 
 $(LIBFT):
 	$(MAKE) -C ./Libft
@@ -61,7 +67,7 @@ $(FT_PRINTF):
 	$(MAKE) -C ./ft_printf
 
 $(MINILIBX):
-	./include/libmlx42.a
+	${MAKE} -C ./MLX42/build
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)

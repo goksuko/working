@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/03 11:49:07 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/08 13:31:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ bool	sl_place_images(t_map *my_map, t_game *my_game)
 
 static void	remove_collectible(t_map *my_map)
 {
-	const int		x = my_map->game.char_x * 16;
-	const int		y = my_map->game.char_y * 16;
+	const int		x = my_map->game.char_x * 64;
+	const int		y = my_map->game.char_y * 64;
 	int				i;
 	mlx_instance_t	*check;
 
@@ -45,8 +45,8 @@ static void	remove_collectible(t_map *my_map)
 
 static void	game_over(t_map *my_map)
 {
-	const int		x = my_map->game.char_x * 16;
-	const int		y = my_map->game.char_y * 16;
+	const int		x = my_map->game.char_x * 64;
+	const int		y = my_map->game.char_y * 64;
 	mlx_instance_t	*player;
 
 	player = &my_map->game.char_img->instances[0];
@@ -79,7 +79,7 @@ bool	sl_game(t_game *my_game, t_map *my_map)
 {
 	mlx_t	*mlx;
 
-	mlx = mlx_init(my_map->length_x * 16, my_map->length_y * 16, "So_long",
+	mlx = mlx_init(my_map->length_x * 64, my_map->length_y * 64, "So_long",
 			false);
 	if (mlx == NULL)
 		return (false);
