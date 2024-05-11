@@ -6,30 +6,23 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/10 23:47:15 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/03/08 11:51:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/11 23:47:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-t_stack	*ps_take_numbers(int argc, char *argv[])
+void	ps_take_numbers(t_stack **a, char **args)
 {
-	t_stack		*a;
-	int			i;
+	int	i;
 
-	a = NULL;
-	i = 1;
-	if (argc == 2)
-		a = ps_one_arg_to_stack_a(argv[1], &a);
-	else if (argc > 2)
+	i = 0;
+	while (args[i])
 	{
-		while (i < argc)
-		{
-			a = ps_arguments_to_stack_a(argv[i], &a);
-			i++;
-		}
+		*a = ps_arguments_to_stack_a(args[i], a);
+		i++;
 	}
-	return (a);
+	return ;
 }
 
 char	*do_operation2(t_stack **a, t_stack **b, char *line)
@@ -98,16 +91,32 @@ int	main(int argc, char *argv[])
 	t_stack	*a;
 	t_stack	*b;
 	char	*line;
+	char	**args;
 
-	if (argc < 2)
-		return (0);
-	a = ps_take_numbers(argc, argv);
-	b = NULL;
-	if (!a || ps_check_duplicates(&a))
+	if (ps_initial_probs(argc, argv))
+		return (1);
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args = argv + 1;
+	if (ps_check_probs(args))
 	{
-		a = ps_free_list(a);
+		if (argc == 2)
+			free_matrix(args);
 		ps_write_error();
+		return (1);
 	}
+	a = NULL;
+	ps_take_numbers(&a, args);
+	// if (argc < 2)
+	// 	return (0);
+	// a = ps_take_numbers(argc, argv);
+	// b = NULL;
+	// if (!a || ps_check_duplicates(&a))
+	// {
+	// 	a = ps_free_list(a);
+	// 	ps_write_error();
+	// }
 	line = get_next_line(0);
 	if (!line && !ps_check_if_sorted(&a))
 		write(1, "KO\n", 3);

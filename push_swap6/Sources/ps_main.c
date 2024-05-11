@@ -6,41 +6,41 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/02 11:31:54 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/05 23:07:59 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/12 00:14:40 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/push_swap.h"
 
-t_stack	*ps_two_arguments(t_stack **a, char *str)
-{
-	char		*temp;
+// t_stack	*ps_two_arguments(t_stack **a, char *str)
+// {
+// 	char		*temp;
 
-	if (!ps_check_digit_or_space(str))
-		return (NULL);
-	if (!ft_char_in_set(' ', str))
-	{
-		temp = ft_strtrim(str, "\"");
-		if (!ps_check_digit(temp))
-			ps_write_error();
-		free(temp);
-		temp = NULL;
-		return (*a);
-	}
-	else
-		*a = ps_one_arg_to_stack_a(str, a);
-	if (ps_check_duplicates(a))
-	{
-		ps_write_error();
-		*a = ps_free_list(*a);
-		return (NULL);
-	}
-	return (*a);
-}
+// 	if (!ps_check_digit_or_space(str))
+// 		return (NULL);
+// 	if (!ft_char_in_set(' ', str))
+// 	{
+// 		temp = ft_strtrim(str, "\"");
+// 		if (!ps_check_digit(temp))
+// 			ps_write_error();
+// 		free(temp);
+// 		temp = NULL;
+// 		return (*a);
+// 	}
+// 	else
+// 		*a = ps_one_arg_to_stack_a(str, a);
+// 	if (ps_check_duplicates(a))
+// 	{
+// 		ps_write_error();
+// 		*a = ps_free_list(*a);
+// 		return (NULL);
+// 	}
+// 	return (*a);
+// }
 
-int	ps_take_numbers(t_stack **a, char **args)
+void	ps_take_numbers(t_stack **a, char **args)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (args[i])
@@ -48,7 +48,7 @@ int	ps_take_numbers(t_stack **a, char **args)
 		*a = ps_arguments_to_stack_a(args[i], a);
 		i++;
 	}
-	return (1);
+	return ;
 }
 
 bool	ps_check_probs(char **str)
@@ -91,7 +91,7 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-// ./push_swap "1 2 3"  
+// ./push_swap "1 2 3"
 // ===Printing Stack A BEFORE SORT===
 // Stack 0: 1
 // Stack 1: 2
@@ -101,7 +101,7 @@ int	main(int argc, char *argv[])
 // Stack 1: 2
 // Stack 2: 3
 
-// ./push_swap "1 3 2" 
+// ./push_swap "1 3 2"
 // ===Printing Stack A BEFORE SORT===
 // Stack 0: 1
 // Stack 1: 3
@@ -113,7 +113,7 @@ int	main(int argc, char *argv[])
 // Stack 1: 2
 // Stack 2: 3
 
-// ./push_swap "1 3 2"  
+// ./push_swap "1 3 2"
 // ===Printing Stack A BEFORE SORT===
 // Stack 0: 1
 // Stack 1: 3
@@ -147,5 +147,3 @@ int	main(int argc, char *argv[])
 // Stack 7: 247
 // Stack 8: 156
 // Stack 9: 154
-
-//chmod +x test.sh && ./test.sh

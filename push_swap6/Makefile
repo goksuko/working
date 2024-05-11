@@ -9,14 +9,7 @@ SRCS_1 = \
 
 SRCS_2 = \
 			atois.c \
-			big_sort_first_second.c \
-			big_sort_reverse.c \
-			big_sort_rotate.c \
-			big_sort_utils.c \
-			big_sort.c \
-			checks.c \
 			checks_new.c \
-			clockwise.c \
 			find_index.c \
 			maths.c	\
 			oper_swap.c \
@@ -25,6 +18,7 @@ SRCS_2 = \
 			oper_reverse.c \
 			new_sort.c \
 			new_sort_utils.c \
+			new_sort_utils2.c \
 			sort.c \
 			utils.c \
 			utils2.c \
@@ -38,7 +32,8 @@ OBJS_2 = $(SRCS_2:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR = Objects
 
 BONUS_SRCS = \
-			checker.c
+			checker.c \
+			checker2.c \
 
 BONUS_SRCS_DIR = Sources/Bonus
 
@@ -53,9 +48,7 @@ CFLAGS += -g
 all: $(NAME)
 
 $(NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-#	$(CC) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-#	$(CC) $(CFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
-	$(CC) $(CFLAGS) -g $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS_1) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C ./Libft
@@ -66,13 +59,13 @@ $(FT_PRINTF):
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c 
+$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS) 
-	$(CC) $(CFLAGS) -g -fsanitize=address $(BONUS_OBJS) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(BONUS_NAME)
+$(BONUS_NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_2) $(BONUS_OBJS_DIR) $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(OBJS_2) $(FT_PRINTF) $(LIBFT) -o $(BONUS_NAME)
 
 $(BONUS_OBJS_DIR):
 	mkdir -p $(BONUS_OBJS_DIR)
