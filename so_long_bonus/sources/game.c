@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 23:53:37 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/12 23:20:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	sl_place_images(t_map *my_map, t_game *my_game)
 {
 	sl_place_wall_and_col(my_map, my_game);
 	sl_place_end_and_char(my_map, my_game);
-	sl_place_wolf_and_backgr(my_map, my_game);
+	sl_place_wolf(my_map, my_game);
 	my_game->steps_img = mlx_put_string(my_map->mlx, "0", 1, 2);
 	if (my_game->steps_img == NULL)
 		return (false);

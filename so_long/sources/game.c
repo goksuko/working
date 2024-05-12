@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 23:53:37 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/12 22:43:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ bool	sl_place_images(t_map *my_map, t_game *my_game)
 {
 	sl_place_wall_and_col(my_map, my_game);
 	sl_place_end_and_char(my_map, my_game);
-	sl_place_wolf_and_backgr(my_map, my_game);
-	my_game->steps_img = mlx_put_string(my_map->mlx, "0", 1, 2);
-	if (my_game->steps_img == NULL)
-		return (false);
 	return (true);
 }
 
@@ -43,31 +39,6 @@ static void	remove_collectible(t_map *my_map)
 	}
 }
 
-static void	game_over(t_map *my_map)
-{
-	int				x;
-	int				y;
-	mlx_instance_t	*player;
-
-	x = 0;
-	y = 0;
-	player = &my_map->game.char_img->instances[0];
-	player->enabled = false;
-	while (x < my_map->length_x)
-	{
-		y = 0;
-		while (y < my_map->length_y)
-		{
-			mlx_image_to_window(my_map->mlx, my_map->game.gameover_img, x * 64,
-				y * 64);
-			y++;
-		}
-		x++;
-	}
-	my_map->game.steps = 0;
-	my_map->game.dead = 1;
-}
-
 void	check_move(t_map *my_map)
 {
 	if (my_map->content[my_map->game.char_y][my_map->game.char_x] == 'C')
@@ -83,8 +54,6 @@ void	check_move(t_map *my_map)
 		else
 			mlx_close_window(my_map->mlx);
 	}
-	if (my_map->content[my_map->game.char_y][my_map->game.char_x] == 'F')
-		game_over(my_map);
 }
 
 bool	sl_game(t_game *my_game, t_map *my_map)
@@ -97,7 +66,7 @@ bool	sl_game(t_game *my_game, t_map *my_map)
 		return (false);
 	my_map->mlx = mlx;
 	my_map->game.steps = 0;
-	if (!sl_image_init(my_game, my_map))
+	if (!sl_image_init(my_game))
 		return (sl_clean_window(my_game, my_map), false);
 	if (!sl_text_to_img(my_map, my_game))
 		return (sl_clean_window(my_game, my_map), false);

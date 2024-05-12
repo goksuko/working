@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/26 19:46:49 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/12 01:26:09 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/12 23:21:27 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct s_game
 	mlx_image_t		*col_img;
 	mlx_texture_t	*end_tx;
 	mlx_image_t		*end_img;
-	mlx_texture_t	*backgr_tx;
-	mlx_image_t		*backgr_img;
 	mlx_texture_t	*wolf_tx;
 	mlx_image_t		*wolf_img;
 	mlx_texture_t	*gameover_tx;
@@ -97,7 +95,7 @@ bool				sl_image_init(t_game *my_game, t_map *my_map);
 bool				sl_text_to_img(t_map *my_map, t_game *my_game);
 void				sl_place_wall_and_col(t_map *my_map, t_game *my_game);
 void				sl_place_end_and_char(t_map *my_map, t_game *my_game);
-void				sl_place_wolf_and_backgr(t_map *my_map, t_game *my_game);
+void				sl_place_wolf(t_map *my_map, t_game *my_game);
 
 // keyboard.c
 

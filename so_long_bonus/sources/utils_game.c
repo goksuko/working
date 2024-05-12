@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/02 23:49:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/03 11:49:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/12 23:23:11 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	sl_free_textures(t_game *my_game)
 		mlx_delete_texture(my_game->col_tx);
 	if (my_game->end_tx)
 		mlx_delete_texture(my_game->end_tx);
-	if (my_game->backgr_tx)
-		mlx_delete_texture(my_game->backgr_tx);
 	if (my_game->wolf_tx)
 		mlx_delete_texture(my_game->wolf_tx);
 	if (my_game->gameover_tx)
@@ -40,8 +38,6 @@ void	sl_free_images(t_game *my_game, t_map *my_map)
 		mlx_delete_image(my_map->mlx, my_game->col_img);
 	if (my_game->end_img)
 		mlx_delete_image(my_map->mlx, my_game->end_img);
-	if (my_game->backgr_img)
-		mlx_delete_image(my_map->mlx, my_game->backgr_img);
 	if (my_game->wolf_img)
 		mlx_delete_image(my_map->mlx, my_game->wolf_img);
 	if (my_game->gameover_img)
