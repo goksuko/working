@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/02 23:53:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/12 22:40:06 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 11:15:08 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ bool	sl_image_init(t_game *my_game)
 	my_game->col_tx = mlx_load_png("textures/col.png");
 	my_game->end_tx = mlx_load_png("textures/end.png");
 	if (my_game->char_tx == NULL || my_game->wall_tx == NULL
-		|| my_game->col_tx == NULL || my_game->end_tx == NULL
-		|| my_game->backgr_tx == NULL)
+		|| my_game->col_tx == NULL || my_game->end_tx == NULL)
 		return (false);
 	return (true);
 }

@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/02 23:49:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/12 23:23:11 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:51:06 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	sl_free_textures(t_game *my_game)
 {

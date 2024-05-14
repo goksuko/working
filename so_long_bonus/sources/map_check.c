@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:57 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/09 00:05:08 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:50:56 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 bool	sl_check_size_prob(t_map *my_map)
 {

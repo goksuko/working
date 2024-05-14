@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/29 20:35:53 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/12 23:20:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:50:42 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 bool	sl_place_images(t_map *my_map, t_game *my_game)
 {

@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 23:56:36 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/09 00:14:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:51:03 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 char	*sl_read_map(int fd)
 {

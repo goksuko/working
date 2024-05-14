@@ -30,10 +30,10 @@ RMV = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(ARC) $(NAME) $(OBJS)
+	@$(ARC) $(NAME) $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -g -c $< -o $@
+	@$(CC) $(CFLAGS) -g -c $< -o $@ && printf "Compiling: $(notdir $<)\n"
 # % is a wildcard that matches any sequence of characters, 
 # and it is used to create a pattern. 
 # So, %.o means "any target ending with .o".

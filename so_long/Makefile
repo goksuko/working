@@ -1,4 +1,5 @@
 NAME = so_long
+BONUS_NAME = so_long_bonus
 LIBFT = ./Libft/libft.a
 FT_PRINTF = ./ft_printf/ft_printf.a
 MLX = ./MLX42
@@ -29,6 +30,29 @@ OBJS_2 = $(SRCS_2:%.c=$(OBJS_DIR)/%.o)
 
 OBJS_DIR = objects
 
+BONUS_SRCS_1 = \
+			main_bonus.c \
+
+BONUS_SRCS_2 = \
+			flood_fill_bonus.c \
+			game_bonus.c \
+			images_bonus.c \
+			keyboard_bonus.c \
+			map_bonus.c \
+			map_check_bonus.c \
+			map_check2_bonus.c \
+			utils_game_bonus.c \
+			utils_bonus.c \
+			utils2_bonus.c \
+
+BONUS_SRCS_DIR = sources/bonus
+
+BONUS_OBJS_1 = $(BONUS_SRCS_1:%.c=$(BONUS_OBJS_DIR)/%.o)
+
+BONUS_OBJS_2 = $(BONUS_SRCS_2:%.c=$(BONUS_OBJS_DIR)/%.o)
+
+BONUS_OBJS_DIR = objects/bonus
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g
@@ -41,39 +65,55 @@ mlx42:
 	cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
 $(NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 	@echo ""
 	@echo *******Completed********
 
 $(LIBFT):
-	$(MAKE) -C ./Libft
+	@$(MAKE) -C ./Libft
 
 $(FT_PRINTF):
-	$(MAKE) -C ./ft_printf
+	@$(MAKE) -C ./ft_printf
 
 $(MINILIBX):
-	${MAKE} -C ./MLX42/build
+	@${MAKE} -C ./MLX42/build
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) $(CFLAGS) -c -o $@ $^ && printf "Compiling: $(notdir $<)\n"
+
+bonus: mlx42 $(BONUS_NAME)
+
+mlx42:
+	cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
+
+$(BONUS_NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(BONUS_OBJS_DIR) $(BONUS_OBJS_1) $(BONUS_OBJS_2)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(BONUS_OBJS_1) $(BONUS_OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(BONUS_NAME)
+	@echo ""
+	@echo *******Completed********
+
+$(BONUS_OBJS_DIR):
+	@mkdir -p $(BONUS_OBJS_DIR)
+
+$(BONUS_OBJS_DIR)/%.o:$(BONUS_SRCS_DIR)/%.c
+	@$(CC) $(CFLAGS) -c -o $@ $^ -I $(HEAD) && printf "Compiling: $(notdir $<)\n"
 
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR) $(BONUS_OBJS_DIR)
 	$(MAKE) clean -C ./Libft
 	$(MAKE) clean -C ./ft_printf
 
-fclean:
-	rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME) $(BONUS_NAME)
 	rm -f ./a.out
 	rm -f ./sources/a.out
 	rm -f ./so_long
-	rm -rf $(OBJS_DIR)
+	rm -f ./so_long_bonus
 	$(MAKE) fclean -C ./Libft
 	$(MAKE) fclean -C ./ft_printf
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

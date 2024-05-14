@@ -7,7 +7,7 @@ HEAD = ../include/MLX42.h
 HEAD2 = ../include/MLX42_int.h
 
 SRCS_1 = \
-			main.c \
+			main_bonus.c \
 
 SRCS_2 = \
 			flood_fill.c \
@@ -41,7 +41,7 @@ mlx42:
 	cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
 $(NAME): $(MINILIBX) $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 	@echo ""
 	@echo *******Completed********
 

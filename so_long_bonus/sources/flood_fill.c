@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:27 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/08 23:14:38 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:50:38 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 char	**sl_breadth_first_search(char **content, int x, int y)
 {

@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:08:03 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/04/26 20:09:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:51:14 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	sl_strlen(char *str)
 {

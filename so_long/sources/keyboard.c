@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/01 12:06:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/12 22:34:48 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:48:59 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	my_keyhook(mlx_key_data_t keydata, void *pointer)
 	steps_str = ft_itoa(my_map->game.steps);
 	if (my_map->game.dead != 1)
 	{
-		// keyboard_down(&keydata, my_map, steps_str);
-		// keyboard_up(&keydata, my_map, steps_str);
-		// keyboard_right(&keydata, my_map, steps_str);
-		// keyboard_left(&keydata, my_map, steps_str);
 		keyboard_down(&keydata, my_map);
 		keyboard_up(&keydata, my_map);
 		keyboard_right(&keydata, my_map);

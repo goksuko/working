@@ -6,11 +6,11 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/01 12:06:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/09 00:15:19 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 09:50:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	my_keyhook(mlx_key_data_t keydata, void *pointer)
 {

@@ -61,10 +61,10 @@ AR = ar
 all: $(NAME)
 
 $(NAME): $(OBJS_MAND) 
-	$(AR) rcs $(NAME) $(OBJS_MAND)
+	@$(AR) rcs $(NAME) $(OBJS_MAND)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -g -c $< -o $@
+	@$(CC) $(CFLAGS) -g -c $< -o $@ && printf "Compiling: $(notdir $<)\n"
 
 bonus: $(NAME) $(OBJS_BONUS)
 	$(AR) rcs $(NAME) $(OBJS_MAND) $(OBJS_BONUS)
