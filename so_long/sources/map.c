@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 23:56:36 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/09 00:14:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/14 14:05:37 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**sl_open_map(char *str)
 	if (fd < 0)
 		return (ft_printf("Error\nMap openning error.\n"), NULL);
 	temp = sl_read_map(fd);
+	if (temp == NULL)
+		return (close(fd), NULL);
 	map = sl_split(temp, '\n');
 	if (map == NULL)
 		return (ft_printf("Error\nMap split error.\n"), free(temp), close(fd),
