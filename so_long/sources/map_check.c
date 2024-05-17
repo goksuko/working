@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/25 13:07:57 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/14 11:49:28 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/17 23:34:45 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,18 @@ bool	sl_find_numbers(t_map *my_map)
 bool	sl_check_character_prob(t_map *my_map)
 {
 	if (sl_find_numbers(my_map))
-		return (ft_printf("Error\nWrong charachter found.\n"), 1);
+		return (perror("Error\nWrong charachter found.\n"), 1);
 	sl_put_player(my_map);
 	if (my_map->p_count == 0)
-		return (ft_printf("Error\nPlayer not found.\n"), 1);
+		return (perror("Error\nPlayer not found.\n"), 1);
 	if (my_map->e_count == 0)
-		return (ft_printf("Error\nExit not found.\n"), 1);
+		return (perror("Error\nExit not found.\n"), 1);
 	if (my_map->c_count == 0)
-		return (ft_printf("Error\nCollectible not found.\n"), 1);
+		return (perror("Error\nCollectible not found.\n"), 1);
 	if (my_map->p_count > 1)
-		return (ft_printf("Error\nMultiple players found.\n"), 1);
+		return (perror("Error\nMultiple players found.\n"), 1);
 	if (my_map->e_count > 1)
-		return (ft_printf("Error\nMultiple exits found.\n"), 1);
+		return (perror("Error\nMultiple exits found.\n"), 1);
 	else
 		return (0);
 }
