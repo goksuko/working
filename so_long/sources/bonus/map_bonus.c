@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 23:56:36 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/17 23:35:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/17 23:52:04 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**sl_map_dup(char **map, int length_x, int length_y)
 	{
 		dup_map[y] = malloc(sizeof(char) * (length_x + 1));
 		if (dup_map[y] == NULL)
-			return (perror("Error\nMap dup error.\n"), free_matrix(dup_map), NULL);
+			return (perror("Error\nMap dup\n"), free_matrix(dup_map), NULL);
 		while (x < length_x && map[y][x])
 		{
 			dup_map[y][x] = map[y][x];
