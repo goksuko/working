@@ -53,7 +53,7 @@ int	ft_create_children(t_info *info, char **argv, char **envp)
 {
 	int		i;
 	pid_t	wpidc;
-	pid_t	wpidlc;
+	pid_t	wpidlc; //last child
 	int		status;
 
 	i = 1;

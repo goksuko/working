@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   pipex_main.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/05/17 23:13:39 by akaya-oz      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Includes/pipex.h"
 
 void	do_child_process(char *argv[], char **envp, int pipefd[])
@@ -13,8 +25,8 @@ void	do_child_process(char *argv[], char **envp, int pipefd[])
 	}
 	dup2(pipefd[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
-	// close(pipefd[0]);
 	start_exec(argv[2], envp);
+	close(pipefd[1]);
 }
 
 void	do_parent_process(char *argv[], char **envp, int pipefd[])
@@ -30,26 +42,13 @@ void	do_parent_process(char *argv[], char **envp, int pipefd[])
 	}
 	dup2(pipefd[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
-	// close(pipefd[1]);
 	start_exec(argv[3], envp);
+	close(pipefd[0]);
 }
 
-//to be deleted later
-void	print_env(char **envp)
+int	check_path(char **envp)
 {
 	int	i;
-
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-}
-
-int check_path(char **envp)
-{
-	int i;
 
 	i = 0;
 	while (envp[i] != NULL)
@@ -61,37 +60,27 @@ int check_path(char **envp)
 	return (0);
 }
 
-int main(int argc, char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
 	int		pipefd[2];
 	pid_t	pid;
 	int		path_no;
 
-	// print_env(envp);
-	path_no = check_path(envp);
-	if (envp[path_no] == NULL)
-	{
-		perror("Path not found\n");
-		return (1);
-	}
 	if (argc != 5)
 	{
-		perror("Please write 4 arguments!\n 1. file1\n 2. cmd1\n 3. cmd2\n 4. file2\n");
+		perror("Please write 4 arguments!\n1.file1\n2.cmd1\n3.cmd2\n4.file2\n");
 		return (1);
 	}
+	path_no = check_path(envp);
+	if (envp[path_no] == NULL)
+		return (perror("Path not found\n"), 1);
 	else
 	{
 		if (pipe(pipefd) == -1)
-		{
-			perror("Pipe error\n");
-			return (1);
-		}
+			return (perror("Pipe error\n"), 2);
 		pid = fork();
 		if (pid < 0)
-		{
-			perror("Fork error\n");
-			return (1);
-		}
+			return (perror("Fork error\n"), 3);
 		else if (pid == 0)
 			do_child_process(argv, envp, pipefd);
 		waitpid(pid, NULL, 0);
@@ -99,5 +88,3 @@ int main(int argc, char *argv[], char **envp)
 	}
 	return (0);
 }
-
-//make && ./pipex test.txt "grep h" "wc -m" result.txt

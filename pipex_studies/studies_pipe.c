@@ -66,11 +66,17 @@
 //     return 0;
 // }
 
-// The reason for creating the pipe before forking lies in how the pipe is utilized for communication between the parent and child processes.
+// The reason for creating the pipe before forking lies in how the pipe is utilized 
+// for communication between the parent and child processes.
 
-// When you create a pipe, you essentially create a unidirectional communication channel, allowing one process to write to one end of the pipe and another process to read from the other end. This communication channel is established by the pipe's file descriptors. After forking, both the parent and child processes inherit these file descriptors, enabling them to communicate through the pipe.
+// When you create a pipe, you essentially create a unidirectional communication channel,
+//  allowing one process to write to one end of the pipe and another process to read from the other end. 
+// This communication channel is established by the pipe's file descriptors. After forking,
+// both the parent and child processes inherit these file descriptors, enabling them to communicate through the pipe.
 
-// If you were to fork before creating the pipe, each process (parent and child) would have its own pipe, which defeats the purpose of communication between them. You need both processes to share the same pipe to facilitate communication. Hence, the pipe must be created before forking.
+// If you were to fork before creating the pipe, each process (parent and child) would have its own pipe,
+//  which defeats the purpose of communication between them. You need both processes 
+// to share the same pipe to facilitate communication. Hence, the pipe must be created before forking.
 
 
 // I wrote again below code to understand better
@@ -78,30 +84,33 @@ int main(int argc, char *argv[])
 {
 	int	pipefd[2];
 	int pid;
-	int     w_status;
-    w_status = 0;
+	int w_status;
+	char c;
 
+    w_status = 0;
 	if (argc != 2)
 	{
 		fprintf(stderr, "Please write an argument!\n");
 		return (1);
 	}
-	if(pipe(pipefd) == -1)
+	if(pipe(pipefd) == -1) //int pipe(int pipefd[2]); On success, zero is returned.  On error, -1 is returned
 	{
-		perror("pipe");
+		perror("pipe error");
 		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("fork");
+		perror("fork error");
 		return (1);
 	}
-	else if (pid == 0)
+	else if (pid == 0) //child process
 	{
-		close(pipefd[1]); //child yazmayi kapatti, okumaya devam edecek
-		char c;
-		while (read(pipefd[0], &c, 1) > 0)
+		close(pipefd[1]); //child yazmayi kapatti, okumaya devam edecek 
+		// The array pipefd is used to return two file descriptors referring 
+		// to the ends of the pipe.  pipefd[0] refers to the read end of the pipe.  
+		// pipefd[1] refers to the write end of the pipe.
+		while (read(pipefd[0], &c, 1) > 0) //ssize_t read(int fd, void *buf, size_t count). On  success,  the number of bytes read is returned
 		{
 			c = toupper(c);
 			write(STDOUT_FILENO, &c, 1);
@@ -114,6 +123,8 @@ int main(int argc, char *argv[])
 	{
 		close(pipefd[0]); //parent okumayi kapatti, yazmaya devam edecek
 		write(pipefd[1], argv[1], strlen(argv[1])); //pipe'a yazdik
+		fprintf(stderr, "Parent process wrote to pipe: %s\n", argv[1]);
+		write(pipefd[1], "-parent\n", 7);
 		close(pipefd[1]); //yazmayi kapatti
 		wait(NULL);
 	}

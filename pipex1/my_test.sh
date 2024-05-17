@@ -82,5 +82,17 @@ echo "8. big file"
 
 echo "9. exit number"
 
+echo "10. one space cmd"
+echo "10th org"
+< test.txt " " | wc -l > result.txt
+echo "10th mine"
+./pipex test.txt " " "wc -l" result2.txt
+diff result.txt result2.txt
+echo "now memory check for 10"
+echo ""
+valgrind ./pipex test.txt " " "wc -l" result2.txt
+echo "10th Done"
+echo ""
+
 
 
