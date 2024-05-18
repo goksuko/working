@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/18 18:07:08 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/18 22:51:30 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	start_exec(char *long_command, char **envp)
 		ft_putstr_fd(cmd[0], 2);
 		ft_putstr_fd("\n", 2);
 		free_matrix(cmd);
-		exit(1);
+		exit(127);
 	}
 	if (execve(path, cmd, envp) == -1)
 	{
@@ -94,7 +94,7 @@ char	*find_path(char *main_command, char **envp)
 	return (NULL);
 }
 
-char *put_main_command(char *command, char space)
+char	*put_main_command(char *command, char space)
 {
 	char *temp;
 	int i;

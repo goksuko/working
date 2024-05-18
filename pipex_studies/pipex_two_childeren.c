@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/18 22:51:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/18 22:44:13 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,114 @@ int	check_path(char **envp)
 	return (0);
 }
 
+void	do_first_exec(char *argv[], char **envp, int pipefd[])
+{
+	int	infile;
+
+	close(pipefd[0]);
+	infile = open(argv[1], O_RDONLY, 0777);
+	if (infile < 0)
+	{
+		ft_putstr_fd("Infile error\n", 2);
+		exit(1);
+	}
+	if (dup2(pipefd[1], STDOUT_FILENO) < 0)
+	{
+		ft_putstr_fd("Dup2 error\n", 2);
+		exit(1);
+	}
+	if (dup2(infile, STDIN_FILENO) < 0)
+	{
+		ft_putstr_fd("Dup2 error\n", 2);
+		exit(1);
+	}
+	start_exec(argv[2], envp);
+	close(pipefd[1]);
+}
+
+void	do_first_child(char *argv[], char **envp, int pipefd[])
+{
+	pid_t	pid1;
+	int		status;
+
+	status = 0;
+	pid1 = fork();
+	if (pid1 < 0)
+	{
+		ft_putstr_fd("Fork error\n", 2);
+		exit(1);
+	}
+	else if (pid1 == 0)
+	{
+		do_first_exec(argv, envp, pipefd);
+		exit(EXIT_SUCCESS);
+	}
+	else
+		close(pipefd[1]);
+	waitpid(pid1, &status, 0);
+}
+
+void	do_second_exec(char *argv[], char **envp, int pipefd[])
+{
+	int	outfile;
+
+	close(pipefd[1]);
+	outfile = open(argv[4], O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	if (outfile < 0)
+	{
+		ft_putstr_fd("Outfile error\n", 2);
+		exit(1);
+	}
+	if (dup2(pipefd[0], STDIN_FILENO) < 0)
+	{
+		ft_putstr_fd("Dup2 error\n", 2);
+		exit(1);
+	}
+	if (dup2(outfile, STDOUT_FILENO) < 0)
+	{
+		ft_putstr_fd("Dup2 error\n", 2);
+		exit(1);
+	}
+	start_exec(argv[3], envp);
+	close(pipefd[0]);
+}
+
+void	do_second_child(char *argv[], char **envp, int pipefd[])
+{
+	pid_t	pid2;
+	int		status;
+
+	status = 0;
+	pid2 = fork();
+	if (pid2 < 0)
+	{
+		ft_putstr_fd("Fork error\n", 2);
+		exit(1);
+	}
+	else if (pid2 == 0)
+	{
+		do_second_exec(argv, envp, pipefd);
+		exit(EXIT_SUCCESS);
+	}
+	else
+		close(pipefd[0]);
+	waitpid(pid2, &status, 0);
+}
+
 void	pipex(char *argv[], char **envp)
+{
+	int	pipefd[2];
+
+	if (pipe(pipefd) == -1)
+	{
+		ft_putstr_fd("Pipe error\n", 2);
+		exit(1);
+	}
+	do_first_child(argv, envp, pipefd);
+	do_second_child(argv, envp, pipefd);
+}
+
+void	pipex_old(char *argv[], char **envp)
 {
 	int		pipefd[2];
 	pid_t	pid;
@@ -114,5 +221,15 @@ int	main(int argc, char *argv[], char **envp)
 	}
 	else
 		pipex(argv, envp);
+	// 	if (pipe(pipefd) == -1)
+	// 		return (ft_putstr_fd("Pipe error\n", 2), 2);
+	// 	pid = fork();
+	// 	if (pid < 0)
+	// 		return (ft_putstr_fd("Fork error\n", 2), 3);
+	// 	else if (pid == 0)
+	// 		do_child_process(argv, envp, pipefd);
+	// 	waitpid(pid, NULL, 0);
+	// 	do_parent_process(argv, envp, pipefd);
+	// }
 	return (0);
 }
