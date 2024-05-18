@@ -8,6 +8,8 @@ SRCS_1 = \
 
 SRCS_2 = \
 			utils.c \
+			path.c \
+			ft_putstr2_fd.c \
 
 SRCS_DIR = Sources
 

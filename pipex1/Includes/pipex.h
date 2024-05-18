@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:12 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/18 17:40:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/18 23:42:13 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,16 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 
-// Main functions //
-void	start_exec(char *comand, char **envp);
-char	*find_path(char *cmd, char **envp);
-
 // Utils functions //
-char *put_main_command(char *command, char space);
+char	*put_main_command(char *command, char space);
+void	start_exec(char *comand, char **envp);
+void	*free_matrix(char **string);
+
+// Path functions //
+char	*find_path(char *cmd, char **envp);
+int		check_path(char **envp);
+
+// Ft_putstr2_fd functions //
+void	ft_putstr2_fd(char *s1, char *s2, int fd);
+void	ft_putstr3_fd(char *s1, char *s2, char *s3, int fd);
+void	ft_exit_str_fd(int exit_no, char *s, int fd);
