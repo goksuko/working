@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/17 23:15:57 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/18 18:07:08 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,32 @@ void	start_exec(char *long_command, char **envp)
 	char	**cmd;
 	char	*path;
 
+	if (long_command[0] == ' ')
+	{
+		ft_putstr_fd("zsh: command not found: \n", 2);
+		exit(1);
+	}
 	cmd = ft_split(long_command, ' ');
 	if (cmd[0])
 		path = find_path(cmd[0], envp);
 	else
 	{
 		free_matrix(cmd);
-		perror("Command not found\n");
-		exit(127);
+		ft_putstr_fd("zsh: permission denied: \n", 2);
+		exit(1);
 	}
 	if (!path)
 	{
+		ft_putstr_fd("zsh: not a directory: ", 2);
+		ft_putstr_fd(cmd[0], 2);
+		ft_putstr_fd("\n", 2);
 		free_matrix(cmd);
-		perror("Path not found\n");
-		exit(127);
+		exit(1);
 	}
 	if (execve(path, cmd, envp) == -1)
 	{
 		free_matrix(cmd);
-		perror("Error executing command\n");
+		ft_putstr_fd("Error executing command\n", 2);
 		exit(1);
 	}
 }
@@ -85,4 +92,25 @@ char	*find_path(char *main_command, char **envp)
 	}
 	free_matrix(path_split);
 	return (NULL);
+}
+
+char *put_main_command(char *command, char space)
+{
+	char *temp;
+	int i;
+
+	i = 0;
+	while (command[i] != space && command[i] != '\0')
+		i++;
+	temp = (char *)ft_calloc(sizeof(char), (i + 1));
+	if (!temp)
+		return (NULL);
+	i = 0;
+	while (command[i] != space && command[i] != '\0')
+	{
+		temp[i] = command[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }
