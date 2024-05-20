@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/18 23:39:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/20 17:19:33 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	start_exec(char *long_command, char **envp)
 	char	**cmd;
 	char	*path;
 
+	path = NULL;
 	if (long_command[0] == ' ')
 		ft_exit_str_fd(127, "zsh: command not found: \n", 2);
 	cmd = ft_split(long_command, ' ');
@@ -52,6 +53,8 @@ void	start_exec(char *long_command, char **envp)
 		free_matrix(cmd);
 		exit(127);
 	}
+	// execve(const char *path, char *const argv[], char *const envp[]);
+	// execve takes everything and if compiles, finishes it and frees everything left
 	if (execve(path, cmd, envp) == -1)
 	{
 		free_matrix(cmd);
