@@ -1,3 +1,0 @@
-1:Hello, World to fd!
-2:Hello, World to fd!
-2:It is dup_fd!
