@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/20 22:27:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/21 15:32:18 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	do_child_process(char *argv[], char **envp, int pipefd[])
 	infile = open(argv[1], O_RDONLY, 0777);
 	if (infile < 0)
 		ft_exit_perror(1, "infile opening error");
-	dup2(pipefd[1], STDOUT_FILENO);
-	close(pipefd[1]);
 	dup2(infile, STDIN_FILENO);
 	close(infile);
+	dup2(pipefd[1], STDOUT_FILENO);
+	close(pipefd[1]);
 	start_exec(argv[2], envp);
 }
 
@@ -35,10 +35,10 @@ void	do_second_child_process(char *argv[], char **envp, int pipefd[])
 	outfile = open(argv[4], O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (outfile < 0)
 		ft_exit_perror(1, "outfile opening error");
-	dup2(pipefd[0], STDIN_FILENO);
-	close(pipefd[0]);
 	dup2(outfile, STDOUT_FILENO);
 	close(outfile);
+	dup2(pipefd[0], STDIN_FILENO);
+	close(pipefd[0]);
 	start_exec(argv[3], envp);
 }
 
@@ -47,7 +47,7 @@ void	pipex(char *argv[], char **envp)
 	int		pipefd[2];
 	pid_t	pid;
 	pid_t	pid2;
-	int 	status;
+	int		status;
 
 	status = 0;
 	if (pipe(pipefd) == -1)
@@ -88,7 +88,10 @@ int	main(int argc, char *argv[], char **envp)
 	int		path_no;
 
 	if (argc != 5)
-		return (ft_putstr_fd("./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO), 1);
+	{
+		ft_putstr_fd("./pipex file1 cmd1 cmd2 file2\n", STDERR_FILENO);
+		return (1);
+	}
 	path_no = check_path(envp);
 	if (envp[path_no] == NULL)
 		return (ft_putstr_fd("zsh: path not found\n", STDERR_FILENO), 1);
@@ -98,3 +101,12 @@ int	main(int argc, char *argv[], char **envp)
 		pipex(argv, envp);
 	return (0);
 }
+
+// cmd = ft_split(long_command, ' ');
+// if (errno == ENOMEM || cmd == NULL)
+// 		ft_exit_perror(1, "ft split malloc");
+
+// do also for dup2 and open
+
+// isatty will be used to check open files 
+// check with valgrind open files 

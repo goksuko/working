@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr2_fd.c                                    :+:    :+:            */
+/*   ft_putstr2_fd_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/18 23:30:13 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 10:03:54 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/21 11:40:20 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex_bonus.h"
 
 void	ft_putstr2_fd(char *s1, char *s2, int fd)
 {
@@ -33,6 +33,13 @@ void	ft_exit_str_fd(int exit_no, char *s, int fd)
 
 void	ft_exit_perror(int exit_no, char *s)
 {
+	perror(s);
+	exit(exit_no);
+}
+
+void	ft_close_exit_perror(t_pipex *info, char **matrix, int exit_no, char *s)
+{
+	close_pipex(info, matrix);
 	perror(s);
 	exit(exit_no);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   utils_bonus.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 14:00:38 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/21 11:31:44 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex_bonus.h"
 
 void	*free_matrix(char **string)
 {
@@ -31,32 +31,59 @@ void	*free_matrix(char **string)
 	return (NULL);
 }
 
-void	start_exec(char *long_command, char **envp)
+void	close_pipex(t_pipex *info, char **matrix)
 {
-	char	**cmd;
+	close(info->pipefd[0]);
+	close(info->pipefd[1]);
+	close(info->fd_in);
+	close(info->fd_out);
+	free(info);
+	if (matrix)
+		free_matrix(matrix);
+}
+
+char	*before_exec(char *long_command, t_pipex *info, char **cmd, char **envp)
+{
 	char	*path;
 
 	path = NULL;
+	printf("long_command: %s\n", long_command);
 	if (long_command[0] == ' ')
-		ft_exit_str_fd(127, "zsh: not a directory: \n", 2);
-	cmd = ft_split(long_command, ' ');
+	{
+		close_pipex(info, cmd);
+		ft_exit_str_fd(127, "zsh: command not found: \n", 2);
+	}
+	printf("cmd[0]: %s\n", cmd[0]);
 	if (cmd[0])
 		path = find_path(cmd[0], envp);
 	else
 	{
-		free_matrix(cmd);
+		close_pipex(info, cmd);
 		ft_exit_str_fd(1, "zsh: permission denied: \n", 2);
 	}
 	if (!path)
 	{
-		ft_putstr3_fd("zsh: command not found: ", cmd[0], "\n", 2);
-		free_matrix(cmd);
+		ft_putstr3_fd("zsh: not a directory: ", cmd[0], "\n", 2);
+		close_pipex(info, cmd);
 		exit(127);
 	}
+	return (path);
+}
+
+void	start_exec(t_pipex *info, char **argv, char **envp)
+{
+	char	**cmd;
+	char	*path;
+	char	*long_command;
+
+	path = NULL;
+	long_command = argv[info->curr_cmd];
+	cmd = ft_split(long_command, ' ');
+	path = before_exec(long_command, info, cmd, envp);
 	if (execve(path, cmd, envp) == -1)
 	{
-		free_matrix(cmd);
-		ft_exit_str_fd(1, "Error executing command\n", 2);
+		close_pipex(info, cmd);
+		ft_exit_perror(1, "Error executing command");
 	}
 }
 
