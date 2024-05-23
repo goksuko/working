@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/18 23:18:03 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/18 23:40:03 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/23 22:19:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,17 @@ char	*find_path(char *main_command, char **envp)
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	path_split = ft_split(envp[i] + 5, ':');
+	if (errno == ENOMEM || path_split == NULL)
+		ft_exit_perror(1, "path_split in find_path");
 	i = 0;
 	while (path_split[i])
 	{
 		tmp = ft_strjoin(path_split[i], "/");
+		if (errno == ENOMEM || tmp == NULL)
+			ft_exit_perror(1, "tmp in find_path");
 		path = ft_strjoin(tmp, main_command);
+		if (errno == ENOMEM || path == NULL)
+			ft_exit_perror(1, "path in find_path");
 		free(tmp);
 		if (access(path, F_OK | X_OK) == 0)
 			return (free_matrix(path_split), path);

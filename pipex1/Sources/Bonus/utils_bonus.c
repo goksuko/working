@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 11:31:44 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/23 22:16:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ char	*before_exec(char *long_command, t_pipex *info, char **cmd, char **envp)
 	char	*path;
 
 	path = NULL;
-	printf("long_command: %s\n", long_command);
 	if (long_command[0] == ' ')
 	{
 		close_pipex(info, cmd);
-		ft_exit_str_fd(127, "zsh: command not found: \n", 2);
+		ft_exit_str_fd(127, "zsh: not a directory: \n", 2);
 	}
-	printf("cmd[0]: %s\n", cmd[0]);
 	if (cmd[0])
 		path = find_path(cmd[0], envp);
 	else
@@ -63,7 +61,7 @@ char	*before_exec(char *long_command, t_pipex *info, char **cmd, char **envp)
 	}
 	if (!path)
 	{
-		ft_putstr3_fd("zsh: not a directory: ", cmd[0], "\n", 2);
+		ft_putstr3_fd("zsh: command not found: ", cmd[0], "\n", 2);
 		close_pipex(info, cmd);
 		exit(127);
 	}

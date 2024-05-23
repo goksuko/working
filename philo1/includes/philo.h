@@ -6,6 +6,10 @@
 # include <unistd.h>
 # include <pthread.h>
 
+# define ERROR_NO_SEAT 1
+# define ERROR_NO_FORK 2
+
+
 typedef struct s_chair
 {
 	int					index;

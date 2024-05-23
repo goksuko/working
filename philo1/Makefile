@@ -1,32 +1,28 @@
 NAME = philo
 #LIBFT = ./Libft/libft.a
-#FT_PRINTF = ./ft_printf/ft_printf.a
+FT_PRINTF_FD = ./ft_printf_fd/ft_printf_fd.a
 #SRCS = $(shell find ./src -iname "*.c")
 
-SRCS_1 = \
+SRCS = \
 			main.c \
-
-SRCS_2 = \
 			table.c \
 			utils.c \
 
 SRCS_DIR = sources
 
-OBJS_1 = $(SRCS_1:%.c=$(OBJS_DIR)/%.o)
-
-OBJS_2 = $(SRCS_2:%.c=$(OBJS_DIR)/%.o)
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 OBJS_DIR = objects
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
-CFLAGS += -g -phtread
+CFLAGS += -g -pthread
 
 all: $(NAME)
 
 #$(NAME): $(FT_PRINTF) $(LIBFT) $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-$(NAME): $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
-	$(CC) $(CFLAGS) $(OBJS_1) $(OBJS_2) -o $(NAME)
+$(NAME): $(FT_PRINTF_FD) $(OBJS_DIR) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_FD) -o $(NAME)
 #	$(CC) $(LFLAGS) -g -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(CFLAGS) $(LFLAGS) -g -fPIE -fPIC -fsanitize=address $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
 #	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_1) $(OBJS_2) $(MINILIBX) $(FT_PRINTF) $(LIBFT) -o $(NAME)
@@ -37,11 +33,8 @@ $(NAME): $(OBJS_DIR) $(OBJS_1) $(OBJS_2)
 $(LIBFT):
 	$(MAKE) -C ./Libft
 
-$(FT_PRINTF):
-	$(MAKE) -C ./ft_printf
-
-$(MINILIBX):
-	./include/libmlx42.a
+$(FT_PRINTF_FD):
+	$(MAKE) -C ./ft_printf_fd
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
@@ -63,7 +56,7 @@ $(BONUS_OBJS_DIR)/%.o:$(BONUS_SRCS_DIR)/%.c
 clean:
 	rm -rf $(OBJS_DIR)
 #	$(MAKE) clean -C ./Libft
-#	$(MAKE) clean -C ./ft_printf
+	$(MAKE) clean -C ./ft_printf_fd
 
 fclean:
 	rm -f $(NAME) $(BONUS_NAME)
@@ -72,7 +65,7 @@ fclean:
 	rm -f ./philo
 	rm -rf $(OBJS_DIR)
 #	$(MAKE) fclean -C ./Libft
-#	$(MAKE) fclean -C ./ft_printf
+	$(MAKE) fclean -C ./ft_printf_fd
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 15:32:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/23 22:29:08 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	do_child_process(char *argv[], char **envp, int pipefd[])
 	infile = open(argv[1], O_RDONLY, 0777);
 	if (infile < 0)
 		ft_exit_perror(1, "infile opening error");
-	dup2(infile, STDIN_FILENO);
+	if (dup2(infile, STDIN_FILENO) == -1)
+		ft_exit_perror(1, "dup2 for infile in child process");
 	close(infile);
-	dup2(pipefd[1], STDOUT_FILENO);
+	if(dup2(pipefd[1], STDOUT_FILENO) == -1)
+		ft_exit_perror(1, "dup2 for pipefd in child process");
 	close(pipefd[1]);
 	start_exec(argv[2], envp);
 }
@@ -35,9 +37,11 @@ void	do_second_child_process(char *argv[], char **envp, int pipefd[])
 	outfile = open(argv[4], O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (outfile < 0)
 		ft_exit_perror(1, "outfile opening error");
-	dup2(outfile, STDOUT_FILENO);
+	if(dup2(outfile, STDOUT_FILENO) == -1)
+		ft_exit_perror(1, "dup2 for outfile in second child process");
 	close(outfile);
-	dup2(pipefd[0], STDIN_FILENO);
+	if(dup2(pipefd[0], STDIN_FILENO) == -1)
+		ft_exit_perror(1, "dup2 for pipefd in second child process");
 	close(pipefd[0]);
 	start_exec(argv[3], envp);
 }
