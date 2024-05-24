@@ -7,9 +7,13 @@
 # include <pthread.h>
 # include "../Libft/includes/libft.h"
 # include "../Libft/ft_utils/includes/ft_utils.h"
+# include "../Libft/ft_printf_fd/ft_printf_fd.h"
 
 # define ERROR_NO_SEAT 1
 # define ERROR_NO_FORK 2
+
+typedef struct s_chair	t_chair;
+typedef struct s_table	t_table;
 
 typedef struct s_chair
 {
