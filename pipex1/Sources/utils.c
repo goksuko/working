@@ -6,27 +6,30 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 14:00:38 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/24 10:24:45 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-void	*free_matrix(char **string)
+
+void	*free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	while (string[i])
+	if (matrix == NULL)
+		return (NULL);
+	while (matrix[i])
 	{
-		free(string[i]);
-		string[i] = NULL;
+		free(matrix[i]);
+		matrix[i] = NULL;
 		i++;
 	}
-	if (string)
+	if (matrix)
 	{
-		free(string);
-		string = NULL;
+		free(matrix);
+		matrix = NULL;
 	}
 	return (NULL);
 }

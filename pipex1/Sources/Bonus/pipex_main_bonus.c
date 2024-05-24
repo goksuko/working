@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/23 22:31:00 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/24 10:21:23 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ pid_t	child_process(t_pipex *info, char **argv, char **envp)
 	{
 		if (info->curr_cmd == 2)
 		{
-			if(dup2(info->fd_in, STDIN_FILENO) == -1)
+			if (dup2(info->fd_in, STDIN_FILENO) == -1)
 				ft_exit_perror(1, "dup2 for infile in child process");
 			close(info->fd_in);
 		}
 		close(info->pipefd[0]);
-		if(dup2(info->pipefd[1], STDOUT_FILENO) == -1)
+		if (dup2(info->pipefd[1], STDOUT_FILENO) == -1)
 			ft_exit_perror(1, "dup2 for pipefd in child process");
 		close(info->pipefd[1]);
 		start_exec(info, argv, envp);
@@ -49,10 +49,10 @@ pid_t	last_child_process(t_pipex *info, char **argv, char **envp)
 	if (pid == 0)
 	{
 		close(info->pipefd[1]);
-		if(dup2(info->pipefd[0], STDIN_FILENO) == -1)
+		if (dup2(info->pipefd[0], STDIN_FILENO) == -1)
 			ft_exit_perror(1, "dup2 for pipefd in last child process");
 		close(info->pipefd[0]);
-		if(dup2(info->fd_out, STDOUT_FILENO) == -1)
+		if (dup2(info->fd_out, STDOUT_FILENO) == -1)
 			ft_exit_perror(1, "dup2 for outfile in last child process");
 		close(info->fd_out);
 		start_exec(info, argv, envp);

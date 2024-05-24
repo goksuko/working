@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:12 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/21 11:05:31 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/24 10:25:00 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 // Utils functions //
 char	*put_main_command(char *command, char space);
 void	start_exec(char *comand, char **envp);
-void	*free_matrix(char **string);
+void	*free_matrix(char **matrix);
 
 // Path functions //
 char	*find_path(char *cmd, char **envp);

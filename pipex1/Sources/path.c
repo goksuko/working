@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/18 23:18:03 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/23 22:19:16 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/24 10:23:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,4 @@ char	*find_path(char *main_command, char **envp)
 	free_matrix(path_split);
 	return (NULL);
 }
+// strjoin controls recently added so that it has more than 25 lines
