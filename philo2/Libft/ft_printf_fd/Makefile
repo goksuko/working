@@ -1,18 +1,21 @@
 NAME = ft_printf_fd.a
-HEAD = ft_printf_fd.h
+LIBFT = ./Libft/objects/*.o
 
 SRCS = \
 			ft_char_string.c \
 			ft_dec.c \
 			ft_hex.c \
-			ft_printf_fd.c
+			ft_printf_fd.c \
 
-OBJS = $(SRCS:.c=.o)
+SRCS_DIR = sources
+
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
+
+OBJS_DIR = objects
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fPIE
 
-COPY = cp
 ARC = ar rcs
 #r: This option specifies that files should be replaced 
 # or added to the archive. If a file with the same name 
@@ -24,16 +27,27 @@ ARC = ar rcs
 # s: This option is used to update the symbol table of the archive. 
 # It is typically used when new object files are added to the archive.
 
-RMV = rm -f
-# forcefully removes the files without asking for confirmation.
+ft_printf_fd: $(OBJS_DIR) $(OBJS)
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS_DIR) $(OBJS) $(LIBFT)
 	$(ARC) $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(LIBFT):
+	$(MAKE) -C ../../Libft
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 # % is a wildcard that matches any sequence of characters, 
 # and it is used to create a pattern. 
 # So, %.o means "any target ending with .o".
@@ -47,11 +61,11 @@ $(NAME): $(OBJS)
 # In this context, it represents the source file (%.c).
 
 clean:
-	$(RMV) $(OBJS)
+	rm -rf $(OBJS_DIR)
 
 fclean:clean
-	$(RMV) $(NAME) ./a.out
+	rm -f $(NAME) ./a.out
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

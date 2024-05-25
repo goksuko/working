@@ -1,6 +1,6 @@
 NAME = libft.a
-FT_PRINTF_FD = ./ft_printf_fd/ft_printf_fd.a
-FT_UTILS = ./ft_utils/ft_utils.a
+FT_PRINTF_FD = ./ft_printf_fd/objects/*.o
+FT_UTILS = ./ft_utils/objects/*.o
 
 SRCS = \
 			ft_atoi.c \
@@ -65,9 +65,6 @@ $(NAME): $(FT_PRINTF_FD) $(FT_UTILS) $(OBJS_DIR) $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-
-$(FT_PRINTF):
-	$(MAKE) -C ./ft_printf
 
 $(FT_PRINTF_FD):
 	$(MAKE) -C ./ft_printf_fd

@@ -16,7 +16,7 @@ OBJS_DIR = objects
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
-CFLAGS += -g -pthread -fsanitize=thread 
+#CFLAGS += -g -pthread -fsanitize=thread 
 #CFLAGS += -g -pthread -fsanitize=address
 
 all: $(NAME)

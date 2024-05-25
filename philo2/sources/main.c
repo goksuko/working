@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/24 16:37:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/25 17:31:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@ void	philo(t_table *table)
 int	main(int argc, char **argv)
 {
 	t_table	*table;
-	// char **matrix;
-	char	*str = "HELLO";
 
-	printf("%lu\n", ft_strlen(str));
-
-	// matrix = ft_calloc(50, 1);
-	// ft_free_matrix(matrix);
 	if (argc != 5 && argc != 6)
 	{
 		ft_printf("Error: Wrong number of arguments\n");
