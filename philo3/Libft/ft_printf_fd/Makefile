@@ -27,27 +27,20 @@ ARC = ar rcs
 # s: This option is used to update the symbol table of the archive. 
 # It is typically used when new object files are added to the archive.
 
-ft_printf_fd: $(OBJS_DIR) $(OBJS)
-
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
-
-$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
-
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS) $(LIBFT)
-	$(ARC) $(NAME) $(OBJS)
+	@echo "Compilation in Progress"
+	@$(ARC) $(NAME) $(OBJS)
 
 $(LIBFT):
-	$(MAKE) -C ../../Libft
+	@$(MAKE) -s -C ../../Libft
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) $(CFLAGS) -c -o $@ $^
 # % is a wildcard that matches any sequence of characters, 
 # and it is used to create a pattern. 
 # So, %.o means "any target ending with .o".
@@ -61,10 +54,12 @@ $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 # In this context, it represents the source file (%.c).
 
 clean:
-	rm -rf $(OBJS_DIR)
+	@echo "Cleaning in Progress"
+	@rm -rf $(OBJS_DIR)
 
 fclean:clean
-	rm -f $(NAME) ./a.out
+	@echo "Cleaning in Progress"
+	@rm -f $(NAME) ./a.out
 
 re: fclean all
 

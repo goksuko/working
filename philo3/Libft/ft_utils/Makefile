@@ -18,27 +18,30 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
 #$(NAME): $(OBJS_DIR) $(OBJS) $(LIBFT) $(FT_PRINTF_FD)
-	ar rcs $(NAME) $(OBJS)
+	@echo "Compilation in Progress"
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) $(CFLAGS) -c -o $@ $^
 
 $(LIBFT):
-	$(MAKE) -C ../../Libft
+	@$(MAKE) -s -C ../../Libft
 
 $(FT_PRINTF_FD):
-	$(MAKE) -C ../ft_printf_fd
+	@$(MAKE) -s -C ../ft_printf_fd
 
 clean:
-	rm -rf $(OBJS_DIR)
+	@echo "Cleaning in Progress"
+	@rm -rf $(OBJS_DIR)
 #	$(MAKE) clean -C ../../Libft
 #	$(MAKE) clean -C ../ft_printf_fd
 
 fclean:clean
-	rm -f $(NAME) ./a.out
+	@echo "Cleaning in Progress"
+	@rm -f $(NAME) ./a.out
 #	$(MAKE) fclean -C ../../Libft
 #	$(MAKE) fclean -C ../ft_printf_fd
 

@@ -61,29 +61,32 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(FT_PRINTF_FD) $(FT_UTILS) $(OBJS_DIR) $(OBJS)
-	ar rcs $(NAME) $(OBJS) $(FT_PRINTF_FD) $(FT_UTILS)
+	@echo "Compilation in Progress"
+	@ar rcs $(NAME) $(OBJS) $(FT_PRINTF_FD) $(FT_UTILS)
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 $(FT_PRINTF_FD):
-	$(MAKE) -C ./ft_printf_fd
+	@$(MAKE) -s -C ./ft_printf_fd
 
 $(FT_UTILS):
-	$(MAKE) -C ./ft_utils
+	@$(MAKE) -s -C ./ft_utils
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	@$(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) clean -C ./ft_printf_fd
-	$(MAKE) clean -C ./ft_utils
+	@echo "Cleaning in Progress"
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -s clean -C ./ft_printf_fd
+	@$(MAKE) -s clean -C ./ft_utils
 
 fclean:clean
-	rm -f $(NAME) ./a.out
-	$(MAKE) fclean -C ./ft_printf_fd
-	$(MAKE) fclean -C ./ft_utils
+	@echo "Cleaning in Progress"
+	@rm -f $(NAME) ./a.out
+	@$(MAKE) -s fclean -C ./ft_printf_fd
+	@$(MAKE) -s fclean -C ./ft_utils
 
 re: fclean all
 
