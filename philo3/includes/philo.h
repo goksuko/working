@@ -28,6 +28,7 @@ typedef enum e_error {
 	ERROR_INVALID_EAT_TIME,
 	ERROR_INVALID_SLEEP_TIME,
 	ERROR_THREAD,
+	ERROR_JOIN,
 	ERROR_ALLOCATION,
 	ERROR_INPUT,
 	ERROR_MUTEX_INIT,
@@ -52,8 +53,8 @@ typedef struct s_philo {
 
 typedef struct s_table
 {
-	t_philo			*philos;
-	pthread_t		*philo;
+	t_philo			*philos; //has the address of first philos
+	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 	int				dead_flag;
 	pthread_mutex_t	dead_lock;
@@ -92,5 +93,9 @@ void clean_all(t_table *table);
 // print.c
 
 void print_status(t_philo *philo, t_action status);
+
+// threads.c
+
+void	threads_init(t_table *table, t_philo *philos);
 
 #endif

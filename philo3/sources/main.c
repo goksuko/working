@@ -6,13 +6,13 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:42:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/27 12:29:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
 	t_table	*table;
 
@@ -24,10 +24,11 @@ int	main(int argc, char **argv)
 	if(errno == ENOMEM || !table)
 		ft_exit_perror(ERROR_ALLOCATION, "Table in Main");
 	table_init(table, argc, argv);
+	// ft_printf("argv1: %s\n", argv[1]);
 	philos_init(table);
-	// threads_init(table);
-	ft_printf("philos initialized\n");
-	print_status(table->philos, table->philos->status);
+	threads_init(table, table->philos);
+	// ft_printf("philos initialization finished\n");
+	// print_status(table->philos, table->philos->status);
 	// if (monitor(table))
 		clean_all(table);
 	return (0);

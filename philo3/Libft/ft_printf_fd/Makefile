@@ -4,6 +4,7 @@ LIBFT = ./Libft/objects/*.o
 SRCS = \
 			ft_char_string.c \
 			ft_dec.c \
+			ft_long_long.c \
 			ft_hex.c \
 			ft_printf_fd.c \
 

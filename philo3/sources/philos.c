@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:06:13 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/26 16:54:46 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/27 12:24:55 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void philos_init(t_table *table)
 {
 	int	i;
 
+	// ft_printf("no of philos in philos init: %d\n", table->NO_OF_PHILOS);
 	i = 0;
 	while (i < table->NO_OF_PHILOS)
 	{
+		// ft_printf("no of philos in loop: %d\n", table->NO_OF_PHILOS);
+		// ft_printf("i: %d\n", i);
 		table->philos[i].index = i;
 		table->philos[i].print_lock = &table->print_lock;
 		table->philos[i].dead_lock = &table->dead_lock;
@@ -40,6 +43,8 @@ void philos_init(t_table *table)
 			clean_table(table);
 			ft_exit_perror(ERROR_MUTEX_INIT, "Eat Mutex in Philos Init");
 		}
+		// ft_printf_fd(1, "Philos[%d] is ready\n", i);
+		// print_status(&table->philos[i], table->philos[i].status);
 		i++;
 	}
 }

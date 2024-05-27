@@ -6,49 +6,49 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/26 19:21:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/27 12:56:59 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// void	*thread_routine(void *data)
-// {
-// 	pthread_t tid;
+void	*my_thread_func(void *ptr)
+{
+	pthread_t tid;
+    t_table *my_table;
+    char *str;
 
-// 	// The pthread_self() function provides
-// 	// this thread's own ID.
-// 	tid = pthread_self();
-// 	printf("Thread [%ld]: The heaviest burden is to exist without living.\n", tid);
-// 	return (NULL); // The thread ends here.
-// }
+    str = NULL;
+    my_table = ptr;
+	// The pthread_self() function provides
+	// this thread's own ID.
+	tid = pthread_self();
+    pthread_mutex_lock(&my_table->print_lock);
+	printf("Thread [%ld] has str %s\n", tid, str);
+    pthread_mutex_unlock(&my_table->print_lock);
+	return (NULL); // The thread ends here.
+}
 
-// int	main(void)
-// {
-// 	pthread_t	tid1;	// First thread's ID
-// 	pthread_t	tid2;	// Second thread's ID
+void	threads_init(t_table *table, t_philo *philos)
+{
+	int	i;
 
-// 	pthread_create(&tid1, NULL, thread_routine, NULL);
-// 	printf("Main: Created first thread [%ld]\n", tid1);
-// 	pthread_create(&tid2, NULL, thread_routine, NULL);
-// 	printf("Main: Created second thread [%ld]\n", tid2);
-
-// 	pthread_join(tid1, NULL);
-// 	printf("Main: Joining first thread [%ld]\n", tid1);
-// 	pthread_join(tid2, NULL);
-// 	printf("Main: Joining second thread [%ld]\n", tid2);
-// 	return (0);
-// }
-
-// void	threads_init(t_table *table)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < table->NO_OF_PHILOS)
-// 	{
-// 		if (pthread_create(&table->philo[i].thread, NULL, thread_routine, &table->philo[i]))
-// 			ft_exit_perror(ERROR_THREAD, "Thread creation");
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < table->NO_OF_PHILOS)
+	{
+		if (pthread_create(&philos[i].thread, NULL, my_thread_func, &table))
+			ft_exit_perror(ERROR_THREAD, "Thread creation");
+        pthread_mutex_lock(&my_table->print_lock);
+        ft_printf_fd(1, "created thread for %d\n", i + 1);
+        pthread_mutex_unlock(&my_table->print_lock);
+		i++;
+	}
+    i = 0;
+    while (i < table->NO_OF_PHILOS)
+	{
+		if (pthread_join(philos[i].thread, NULL))
+			ft_exit_perror(ERROR_JOIN, "Thread join");
+        ft_printf_fd(1, "joined thread for %d\n", i + 1);
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/26 16:50:01 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/27 12:37:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void table_init(t_table *table, int argc, char **argv)
 {
 	table->dead_flag = 0;
 	table->NO_OF_PHILOS = ft_atoi(argv[1]);
+	// ft_printf("argv1: %s\n", argv[1]);
+	// ft_printf("no of philos in table init: %d\n", table->NO_OF_PHILOS);
 	table->DIE_TIME = ft_atoi(argv[2]);
 	table->EAT_TIME = ft_atoi(argv[3]);
 	table->SLEEP_TIME = ft_atoi(argv[4]);
@@ -32,8 +34,8 @@ void table_init(t_table *table, int argc, char **argv)
 		free(table->philos);
 		ft_exit_perror(ERROR_ALLOCATION, "Forks in Table Init");
 	}
-	table->philo = (pthread_t *)ft_calloc(sizeof(pthread_t), table->NO_OF_PHILOS);
-	if (errno == ENOMEM || !table->philo)
+	table->threads = (pthread_t *)ft_calloc(sizeof(pthread_t), table->NO_OF_PHILOS);
+	if (errno == ENOMEM || !table->threads)
 	{
 		free(table->philos);
 		free(table->forks);
@@ -43,14 +45,14 @@ void table_init(t_table *table, int argc, char **argv)
 	{
 		free(table->philos);
 		free(table->forks);
-		free(table->philo);
+		free(table->threads);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Dead Lock in Table Init");
 	}
 	if (pthread_mutex_init(&table->meal_lock, NULL) < 0)
 	{
 		free(table->philos);
 		free(table->forks);
-		free(table->philo);
+		free(table->threads);
 		pthread_mutex_destroy(&table->dead_lock);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Meal Lock in Table Init");
 	}
@@ -58,7 +60,7 @@ void table_init(t_table *table, int argc, char **argv)
 	{
 		free(table->philos);
 		free(table->forks);
-		free(table->philo);
+		free(table->threads);
 		pthread_mutex_destroy(&table->dead_lock);
 		pthread_mutex_destroy(&table->meal_lock);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Print Lock in Table Init");

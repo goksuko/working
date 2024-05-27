@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/26 16:52:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/05/27 12:37:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char *ft_error(t_error code)
 	[ERROR_INVALID_EAT_TIME] = "Invalid Time to Eat",
 	[ERROR_INVALID_SLEEP_TIME] = "Invalid Time to Sleep",
 	[ERROR_THREAD] = "Thread Creation Failure",
+	[ERROR_JOIN] = "Thread Join Failure",
 	[ERROR_ALLOCATION] = "Allocation Failure",
 	[ERROR_INPUT] = "Invalid Number",
 	[ERROR_MUTEX_INIT] = "Mutex Initialization Failure",
@@ -113,7 +114,7 @@ void clean_table(t_table *table)
 	pthread_mutex_destroy(&table->dead_lock);
 	free(table->philos);
 	free(table->forks);
-	free(table->philo);
+	free(table->threads);
 	free(table);
 }
 
@@ -126,6 +127,6 @@ void clean_all(t_table *table)
 	// destroy_forks_mutex(table);
 	free(table->philos);
 	free(table->forks);
-	free(table->philo);
+	free(table->threads);
 	free(table);
 }
