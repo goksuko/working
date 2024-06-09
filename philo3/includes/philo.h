@@ -98,4 +98,10 @@ void print_status(t_philo *philo, t_action status);
 
 void	threads_init(t_table *table, t_philo *philos);
 
+// forks.c
+
+void	forks_init(t_table *table, t_philo *philos);
+void start_eating(t_table *table, t_philo *philos);
+
+
 #endif

@@ -10,6 +10,7 @@ SRCS = \
 			print.c \
 			monitor.c \
 			threads.c \
+			forks.c \
 
 SRCS_DIR = sources
 

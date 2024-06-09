@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/27 12:37:16 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/03 13:31:48 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,21 @@ void clean_table(t_table *table)
 
 void clean_all(t_table *table)
 {
+	// int	i;
+
+	// i = 0;
 	pthread_mutex_destroy(&table->print_lock);
 	pthread_mutex_destroy(&table->meal_lock);
 	pthread_mutex_destroy(&table->dead_lock);
 	// destroy_eat_mutex(table);
-	// destroy_forks_mutex(table);
+	destroy_forks_mutex(table);
 	free(table->philos);
 	free(table->forks);
-	free(table->threads);
+	// while(i < table->NO_OF_PHILOS)
+	// {
+	// 	free(table->philos[i].thread);
+	// 	i++;
+	// }
+	// free(table->threads);
 	free(table);
 }
