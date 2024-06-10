@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:29:30 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/27 12:24:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/10 22:00:35 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char *status_strs(t_action status)
 	[DIED] = "died",
 	[SLEEPING] = "is sleeping",
 	[EATING] = "is eating",
-	[FORK] = "has taken a fork"};
+	[FORK] = "has taken a fork",
+	[TEST] = "test"};
 	return (str[status]);
 }
 
@@ -58,15 +59,25 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
+	{
+		if(usleep(500))
+			ft_exit_perror(ERROR_USLEEP, "in ft_usleep");
+	}
 	return (0);
 }
 
 void print_status(t_philo *philo, t_action status)
 {
 	// ft_printf("hello\n");
+	// pthread_mutex_lock(&philo->table->dead_lock);
+	// if (philo->table->dead_flag)
+	// {
+	// 	pthread_mutex_unlock(&philo->table->dead_lock);
+	// 	return ;
+	// }
 	pthread_mutex_lock(philo->print_lock);
 	// ft_printf("mutex locked\n");
+	// printf("%d\n", philo->index);
 	ft_printf_fd(1, "%l %d %s\n", get_current_time(), philo->index + 1, status_strs(status));
 	pthread_mutex_unlock(philo->print_lock);
 }

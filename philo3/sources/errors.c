@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/03 13:31:48 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/10 22:25:02 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ char *ft_error(t_error code)
 	[ERROR_ALLOCATION] = "Allocation Failure",
 	[ERROR_INPUT] = "Invalid Number",
 	[ERROR_MUTEX_INIT] = "Mutex Initialization Failure",
+	[ERROR_MUTEX_LOCK] = "Mutex Lock Failure", 
+	// bu error kodlarina bak
+	[ERROR_MUTEX_UNLOCK] = "Mutex Unlock Failure",
+	[ERROR_MUTEX_DESTROY] = "Mutex Destroy Failure",
+	[ERROR_USLEEP] = "Usleep Failure",
 	[UNDEFINED_ERROR] = "Undefined Error"};
 
 	if (code < 0 || code >= UNDEFINED_ERROR)
@@ -83,17 +88,17 @@ void	ft_exit_print(t_error code)
 }
 
 
-void destroy_eat_mutex(t_table *table)
-{
-	int	i;
+// void destroy_eat_mutex(t_table *table)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < table->NO_OF_PHILOS)
-	{
-		pthread_mutex_destroy(&table->philos[i].eat_mutex);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < table->NO_OF_PHILOS)
+// 	{
+// 		pthread_mutex_destroy(&table->philos[i].eat_mutex);
+// 		i++;
+// 	}
+// }
 
 void destroy_forks_mutex(t_table *table)
 {
@@ -107,34 +112,31 @@ void destroy_forks_mutex(t_table *table)
 	}
 }
 
-void clean_table(t_table *table)
-{
-	pthread_mutex_destroy(&table->print_lock);
-	pthread_mutex_destroy(&table->meal_lock);
-	pthread_mutex_destroy(&table->dead_lock);
-	free(table->philos);
-	free(table->forks);
-	free(table->threads);
-	free(table);
-}
+// void clean_table(t_table *table)
+// {
+// 	pthread_mutex_destroy(&table->print_lock);
+// 	pthread_mutex_destroy(&table->meal_lock);
+// 	pthread_mutex_destroy(&table->dead_lock);
+// 	free(table->philos);
+// 	free(table->forks);
+// 	free(table);
+// }
 
 void clean_all(t_table *table)
 {
-	// int	i;
+	int i;
 
-	// i = 0;
+	i = 0;
 	pthread_mutex_destroy(&table->print_lock);
 	pthread_mutex_destroy(&table->meal_lock);
 	pthread_mutex_destroy(&table->dead_lock);
-	// destroy_eat_mutex(table);
+	while (i < table->NO_OF_PHILOS)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
 	destroy_forks_mutex(table);
 	free(table->philos);
 	free(table->forks);
-	// while(i < table->NO_OF_PHILOS)
-	// {
-	// 	free(table->philos[i].thread);
-	// 	i++;
-	// }
-	// free(table->threads);
 	free(table);
 }
