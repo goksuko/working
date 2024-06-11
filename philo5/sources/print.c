@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:29:30 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/10 23:30:39 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/11 22:51:07 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char *status_strs(t_action status)
 	[DIED] = "died",
 	[SLEEPING] = "is sleeping",
 	[EATING] = "is eating",
-	[FORK] = "has taken a fork",
-	[TEST] = "test"};
+	[FORK] = "has taken a fork"};
 	return (str[status]);
 }
 
@@ -71,7 +70,7 @@ void print_status(t_philo *philo, t_action status)
 	if (!to_finish(philo->table))
 	{
 		pthread_mutex_lock(philo->print_lock);
-		ft_printf_fd(1, "%l %d %s\n", get_current_time(), philo->index + 1, status_strs(status));
+		printf("%lld %d %s\n", get_current_time(), philo->index + 1, status_strs(status));
 		pthread_mutex_unlock(philo->print_lock);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/10 22:37:51 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/11 22:20:58 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,50 @@ void	*my_thread_func(void *ptr)
 	// pthread_mutex_unlock(&philo->table->print_lock);
 	if (philo->index % 2 == 0)
 	{
-		// pthread_mutex_lock(philo->left_fork);
-		// print_status(philo, FORK);
-
-		// eat_and_sleep(philo->table, philo, philo->index);
-		print_status(philo, TEST);
-
+		if (left_fork(philo))
+		{
+			if (right_fork(philo) && philo->table->NO_OF_PHILOS > 1)
+			{
+				pthread_mutex_lock(&philo->table->meal_lock);
+				print_status(philo, EATING);
+				philo->last_meal_time = get_current_time();
+				philo->has_eaten++;
+				pthread_mutex_unlock(&philo->table->meal_lock);
+				ft_usleep(philo->table->EAT_TIME);
+				pthread_mutex_unlock(philo->right_fork);
+				pthread_mutex_unlock(philo->left_fork);
+				ft_usleep(philo->table->SLEEP_TIME);
+				if (!to_finish(philo->table))
+				{
+					print_status(philo, SLEEPING);
+				}
+				if (!to_finish(philo->table))
+					print_status(philo, THINKING);
+			}
+		}
 	}
 	else
 	{
 		ft_usleep(philo->table->EAT_TIME / 2);
 		print_status(philo, THINKING);
+		if (left_fork(philo) && right_fork(philo))
+		{
+			pthread_mutex_lock(&philo->table->meal_lock);
+			print_status(philo, EATING);
+			philo->last_meal_time = get_current_time();
+			philo->has_eaten++;
+			pthread_mutex_unlock(&philo->table->meal_lock);
+			ft_usleep(philo->table->EAT_TIME);
+			pthread_mutex_unlock(philo->right_fork);
+			pthread_mutex_unlock(philo->left_fork);
+			ft_usleep(philo->table->SLEEP_TIME);
+			if (!to_finish(philo->table))
+			{
+				print_status(philo, SLEEPING);
+			}
+			if (!to_finish(philo->table))
+				print_status(philo, THINKING);
+		}
 	}
 	if (philo->table->NO_OF_PHILOS == 1)
 	{
@@ -51,6 +84,93 @@ void	*my_thread_func(void *ptr)
 	return (NULL); // The thread ends here.
 }
 
+bool eat(t_philo *philo)
+{
+	if (philo->index % 2 == 0)
+	{
+		if (left_fork(philo))
+		{
+			if (right_fork(philo) && philo->table->NO_OF_PHILOS > 1)
+			{
+				pthread_mutex_lock(&philo->table->meal_lock);
+				print_status(philo, EATING);
+				philo->last_meal_time = get_current_time();
+				philo->has_eaten++;
+				pthread_mutex_unlock(&philo->table->meal_lock);
+				ft_usleep(philo->table->EAT_TIME);
+				pthread_mutex_unlock(philo->right_fork);
+				pthread_mutex_unlock(philo->left_fork);
+				ft_usleep(philo->table->SLEEP_TIME);
+				if (!to_finish(philo->table))
+				{
+					print_status(philo, SLEEPING);
+				}
+				if (!to_finish(philo->table))
+					print_status(philo, THINKING);
+			}
+			else
+			{
+				pthread_mutex_unlock(philo->left_fork);
+				return (false);
+			}
+		}
+		else
+			return (false);
+	}
+	else
+	{
+		ft_usleep(philo->table->EAT_TIME / 2);
+		print_status(philo, THINKING);
+		if (right_fork(philo))
+		{
+			if (left_fork(philo))
+			{
+				pthread_mutex_lock(&philo->table->meal_lock);
+				print_status(philo, EATING);
+				philo->last_meal_time = get_current_time();
+				philo->has_eaten++;
+				pthread_mutex_unlock(&philo->table->meal_lock);
+				ft_usleep(philo->table->EAT_TIME);
+				pthread_mutex_unlock(philo->right_fork);
+				pthread_mutex_unlock(philo->left_fork);
+				ft_usleep(philo->table->SLEEP_TIME);
+				if (!to_finish(philo->table))
+				{
+					print_status(philo, SLEEPING);
+				}
+				if (!to_finish(philo->table))
+					print_status(philo, THINKING);
+			}
+			else
+			{
+				pthread_mutex_unlock(philo->right_fork);
+				return (false);
+			}
+		}
+		else
+			return (false);
+	}
+	return (true);
+}
+
+
+void	*philos_thread(void *ptr)
+{
+	t_philo *philo;
+
+	philo = (t_philo *)ptr;
+	while (1)
+	{
+		if (!eat(philo))
+			break ;
+		// if(!sleep(philo))
+		// 	break ;
+		// if (!think(philo))
+		// 	break ;
+	}
+	return (NULL);
+}
+
 void	threads_init(t_table *table, t_philo *philos)
 {
 	int	i;
@@ -62,9 +182,10 @@ void	threads_init(t_table *table, t_philo *philos)
 		// printf("creating thread for %d\n", i + 1);
 		// pthread_mutex_unlock(&table->print_lock);
 
-		if (pthread_create(&philos[i].thread, NULL, &my_thread_func, &table->philos[i]))
+		// if (pthread_create(&philos[i].thread, NULL, &my_thread_func, &table->philos[i]))
+		if (pthread_create(&philos[i].thread, NULL, &philos_thread, &table->philos[i]))
 			ft_exit_perror(ERROR_THREAD, "Philo threads creation");
-		ft_usleep(100);
+		ft_usleep(250);
 		
 		// pthread_mutex_lock(&table->print_lock);
 		// ft_printf_fd(1, "created thread for %d\n", i + 1);
@@ -96,19 +217,7 @@ void	eat_and_sleep(t_table *table, t_philo *philos, int i)
 	printf("%p is for %d\n", &philos[i].right_fork, i + 1);
 	pthread_mutex_unlock(&table->print_lock);
 
-	if(pthread_mutex_lock(philos[i].right_fork) != 0)
-	{
-		clean_all(table);
-		ft_exit_perror(ERROR_MUTEX_LOCK, "Right Fork");
-	}
-	print_status(&philos[i], FORK);
-	if (pthread_mutex_lock(philos[i].left_fork) != 0)
-	{
-		clean_all(table);
-		ft_exit_perror(ERROR_MUTEX_LOCK, "Left Fork");
-	}
-	print_status(&philos[i], FORK);
-	if (!to_finish(table))
+	if (left_fork(&philos[i]) && right_fork(&philos[i]) && table->NO_OF_PHILOS > 1)
 	{
 		pthread_mutex_lock(&table->meal_lock);
 		print_status(&philos[i], EATING);

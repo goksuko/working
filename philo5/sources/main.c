@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/10 23:41:55 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/11 23:23:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void join_threads(t_table *table)
 
 	i = 0;
 	// pthread_mutex_lock(&table->print_lock);
-	// ft_printf_fd(1, "loop finished\n");
+	// printf_fd(1, "loop finished\n");
 	// pthread_mutex_unlock(&table->print_lock);
 	while (i < table->NO_OF_PHILOS)
 	{
 		// pthread_mutex_lock(&table->print_lock);
-		// ft_printf_fd(1, "i: %d\n", i);
+		// printf_fd(1, "i: %d\n", i);
 		// pthread_mutex_unlock(&table->print_lock);
 		// pthread_mutex_lock(&table->print_lock);
 		if (pthread_join(table->philos[i].thread, NULL))
@@ -34,7 +34,7 @@ void join_threads(t_table *table)
 	// pthread_mutex_lock(&table->print_lock);
 	if (pthread_join(table->monitor_thread, NULL))
 		ft_exit_perror(ERROR_JOIN, "Thread join");
-	// ft_printf_fd(1, "joined monitor thread\n");
+	// printf_fd(1, "joined monitor thread\n");
 	// pthread_mutex_unlock(&table->print_lock);
 }
 
@@ -50,17 +50,27 @@ int	main(int argc, char *argv[])
 	if(errno == ENOMEM || !table)
 		ft_exit_perror(ERROR_ALLOCATION, "Table in Main");
 	table_init(table, argc, argv);
-	ft_printf("table init finished\n");
+	printf("table init finished\n");
 	philos_init(table);
-	ft_printf("philos init finished\n");
+	printf("philos init finished\n");
 	forks_init(table, table->philos);
-	ft_printf("forks init finished\n");
+	printf("forks init finished\n");
 	monitor_init(table);
 	pthread_mutex_lock(&table->print_lock);
-	ft_printf("monitor init finished\n");
+	printf("monitor init finished\n");
 	pthread_mutex_unlock(&table->print_lock);
 	threads_init(table, table->philos);
 	join_threads(table);
+
+	if (table->NO_OF_PHILOS == 1)
+	{
+		ft_usleep(1000);
+		print_status(&table->philos[0], DIED);
+		clean_all(table);
+		return (0);
+	}
+	if (table->dead_flag)
+		return (print_status(&table->philos[table->dead_flag], DIED), clean_all(table), 0);
 	if (to_finish(table))
-		return(ft_printf("finished\n"), clean_all(table), 0);
+		return(printf("finished\n"), clean_all(table), 0);
 }

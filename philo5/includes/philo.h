@@ -7,9 +7,9 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <sys/time.h>
-# include "../Libft/includes/libft.h"
-# include "../Libft/ft_utils/includes/ft_utils.h"
-# include "../Libft/ft_printf_fd/includes/ft_printf_fd.h"
+# include <errno.h>
+# include <stddef.h>
+# include <stdint.h>
 
 # define MAX_EAT 250
 
@@ -19,7 +19,6 @@ typedef enum e_action {
 	SLEEPING,
 	EATING,
 	FORK,
-	TEST,
 }	t_action;
 
 typedef enum e_error {
@@ -45,6 +44,7 @@ typedef enum e_error {
 typedef struct s_philo {
 	struct s_table	*table;
 	int				*dead_flag;
+	int				*full_flag;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*print_lock;
@@ -65,6 +65,7 @@ typedef struct s_table
 	pthread_t		monitor_thread;
 	pthread_mutex_t	*forks;
 	int				dead_flag;
+	int				full_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	print_lock;
@@ -127,4 +128,11 @@ bool right_fork(t_philo *philo);
 
 void join_threads(t_table *table);
 
+// ft_atoi.c
+
+int	ft_atoi(const char *nptr);
+
+// ft_calloc.c
+
+void	*ft_calloc(size_t nmemb, size_t size);
 #endif

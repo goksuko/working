@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:06:13 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 21:46:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/11 22:55:30 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void philos_init(t_table *table)
 		table->philos[i].has_eaten = 0;
 		table->philos[i].last_meal_time = 0;
 		table->philos[i].dead_flag = &table->dead_flag;
+		table->philos[i].full_flag = &table->full_flag;
 		// table->philos[i].right_fork = &table->forks[i];
 		// table->philos[i].left_fork = &table->forks[(i + 1) % table->NO_OF_PHILOS];
 		table->philos[i].status = THINKING;

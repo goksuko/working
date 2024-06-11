@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 21:51:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/11 23:58:21 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,32 @@ void	*monitor(void *param)
 {
 	t_table	*table;
 	int		i;
-	int		full;
+	// int		full;
 
 	table = (t_table *)param;
 	i = 0;
-	full = 0;
+	// full = 0;
 	while (!to_finish(table) && table->NO_OF_PHILOS > 1)
 	{
 		if (check_if_died(&table->philos[i]))
 			break ;
 		if (check_if_full(&table->philos[i]))
-			full++;
-		// else
-		// 	full = 0;
-		if (full == table->NO_OF_PHILOS)
-		{
-			pthread_mutex_lock(&table->dead_lock);
-			table->dead_flag = 1;
-			pthread_mutex_unlock(&table->dead_lock);
-		}		
+			break ;
+		// 	full++;
+		// // else
+		// // 	full = 0;
+		// if (full == table->NO_OF_PHILOS)
+		// {
+		// 	pthread_mutex_lock(&table->dead_lock);
+		// 	table->dead_flag = 1;
+		// 	pthread_mutex_unlock(&table->dead_lock);
+		// }		
 		if (++i == table->NO_OF_PHILOS)
 			i = 0;
+		
+		// pthread_mutex_lock(&table->print_lock);
+		// printf("monitored %d \n", table->philos[i].index + 1);
+		// pthread_mutex_unlock(&table->print_lock);
 	}
 	return (NULL);
 }
@@ -47,6 +52,7 @@ void table_init(t_table *table, int argc, char **argv)
 
 	i = 0;
 	table->dead_flag = 0;
+	table->full_flag = 0;
 	table->NO_OF_PHILOS = ft_atoi(argv[1]);
 	// ft_printf("argv1: %s\n", argv[1]);
 	// ft_printf("no of philos in table init: %d\n", table->NO_OF_PHILOS);
