@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 23:23:16 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:26:53 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,28 @@ int	main(int argc, char *argv[])
 	if(errno == ENOMEM || !table)
 		ft_exit_perror(ERROR_ALLOCATION, "Table in Main");
 	table_init(table, argc, argv);
-	printf("table init finished\n");
+	// printf("table init finished\n");
 	
 	philos_init(table);
-	printf("philos init finished\n");
+	// printf("philos init finished\n");
 	
 	forks_init(table, table->philos);
-	printf("forks init finished\n");
+	// printf("forks init finished\n");
 	
 	monitor_init(table);
-	pthread_mutex_lock(&table->print_lock);
-	printf("monitor init finished\n");
-	pthread_mutex_unlock(&table->print_lock);
+	// pthread_mutex_lock(&table->print_lock);
+	// printf("monitor init finished\n");
+	// pthread_mutex_unlock(&table->print_lock);
 	
 	threads_init(table, table->philos);
-	pthread_mutex_lock(&table->print_lock);
-	printf("ready to join threads\n");
-	pthread_mutex_unlock(&table->print_lock);
+	// pthread_mutex_lock(&table->print_lock);
+	// printf("ready to join threads\n");
+	// pthread_mutex_unlock(&table->print_lock);
 	
 	join_threads(table);
-	pthread_mutex_lock(&table->print_lock);
-	printf("joined threads\n");
-	pthread_mutex_unlock(&table->print_lock);
+	// pthread_mutex_lock(&table->print_lock);
+	// printf("joined threads\n");
+	// pthread_mutex_unlock(&table->print_lock);
 	
 	// if (table->NO_OF_PHILOS == 1)
 	// {

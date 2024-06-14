@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/14 11:56:24 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:47:56 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	*monitor(void *param)
 	table = (t_table *)param;
 	i = 0;
 	// full = 0;
-	while (!to_finish(table) && table->NO_OF_PHILOS > 1)
+	while (!to_finish(table))
 	{
-		// if (check_if_died(&table->philos[i]))
+		// if (check_if_died(table))
 		// 	break ;
-		// if (check_if_full(&table->philos[i]))
+		// if (check_if_full(table))
 		// 	break ;
 		// 	full++;
 		// // else
@@ -42,6 +42,12 @@ void	*monitor(void *param)
 		// pthread_mutex_lock(&table->print_lock);
 		// printf("monitored %d \n", table->philos[i].index + 1);
 		// pthread_mutex_unlock(&table->print_lock);
+	}
+	if (to_finish(table))
+	{
+		pthread_mutex_lock(&table->print_lock);
+		printf("All philosophers have eaten %d times or died\n", table->NO_OF_EAT);
+		pthread_mutex_unlock(&table->print_lock);
 	}
 	return (NULL);
 }

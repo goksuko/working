@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/10 12:42:46 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 23:58:31 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:33:05 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	check_if_died(t_table *table)
 	dead_flag = table->dead_flag;
 	pthread_mutex_unlock(&table->dead_lock);
 	if (dead_flag)
+	{
+		print_status(&table->philos[dead_flag - 1], DIED);
 		return (dead_flag);
+	}
 	return (0);
 	// pthread_mutex_lock(philo->dead_lock);
 	// if (philo->last_meal_time != 0 && get_current_time() - philo->last_meal_time > philo->table->DIE_TIME)
