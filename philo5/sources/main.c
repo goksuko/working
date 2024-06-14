@@ -51,26 +51,40 @@ int	main(int argc, char *argv[])
 		ft_exit_perror(ERROR_ALLOCATION, "Table in Main");
 	table_init(table, argc, argv);
 	printf("table init finished\n");
+	
 	philos_init(table);
 	printf("philos init finished\n");
+	
 	forks_init(table, table->philos);
 	printf("forks init finished\n");
+	
 	monitor_init(table);
 	pthread_mutex_lock(&table->print_lock);
 	printf("monitor init finished\n");
 	pthread_mutex_unlock(&table->print_lock);
+	
 	threads_init(table, table->philos);
+	pthread_mutex_lock(&table->print_lock);
+	printf("ready to join threads\n");
+	pthread_mutex_unlock(&table->print_lock);
+	
 	join_threads(table);
-
-	if (table->NO_OF_PHILOS == 1)
-	{
-		ft_usleep(1000);
-		print_status(&table->philos[0], DIED);
-		clean_all(table);
-		return (0);
-	}
-	if (table->dead_flag)
-		return (print_status(&table->philos[table->dead_flag], DIED), clean_all(table), 0);
+	pthread_mutex_lock(&table->print_lock);
+	printf("joined threads\n");
+	pthread_mutex_unlock(&table->print_lock);
+	
+	// if (table->NO_OF_PHILOS == 1)
+	// {
+	// 	pthread_mutex_lock(&table->print_lock);
+	// 	printf("inside loop of 1 philo\n");
+	// 	pthread_mutex_unlock(&table->print_lock);
+	// 	ft_usleep(1000);
+	// 	print_status(&table->philos[0], DIED);
+	// 	clean_all(table);
+	// 	return (0);
+	// // }
+	// if (table->dead_flag)
+	// 	return (print_status(&table->philos[table->dead_flag], DIED), clean_all(table), 0);
 	if (to_finish(table))
 		return(printf("finished\n"), clean_all(table), 0);
 }

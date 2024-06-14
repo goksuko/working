@@ -87,8 +87,8 @@ void philos_init(t_table *table);
 
 // check.c
 
-int	check_if_died(t_philo *philo);
-int	check_if_full(t_philo *philo);
+int	check_if_died(t_table *table);
+int	check_if_full(t_table *table);
 int	to_finish(t_table *table);
 
 // monitor.c
@@ -116,7 +116,7 @@ long long	get_current_time(void);
 // threads.c
 
 void	threads_init(t_table *table, t_philo *philos);
-void	eat_and_sleep(t_table *table, t_philo *philos, int i);
+// void	eat_and_sleep(t_table *table, t_philo *philos, int i);
 
 // forks.c
 

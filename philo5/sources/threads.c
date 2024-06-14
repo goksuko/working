@@ -94,8 +94,16 @@ bool eat(t_philo *philo)
 	{
 		if (left_fork(philo))
 		{
+			pthread_mutex_lock(&philo->table->print_lock);
+			printf("test 1 loop\n");
+			pthread_mutex_unlock(&philo->table->print_lock);
+
 			if (right_fork(philo) && philo->table->NO_OF_PHILOS > 1)
 			{
+				pthread_mutex_lock(&philo->table->print_lock);
+				printf("test 2 loop\n");
+				pthread_mutex_unlock(&philo->table->print_lock);
+
 				pthread_mutex_lock(&philo->table->meal_lock);
 				print_status(philo, EATING);
 				philo->last_meal_time = get_current_time();
@@ -112,9 +120,18 @@ bool eat(t_philo *philo)
 			}
 			else
 			{
+
+				pthread_mutex_lock(&philo->table->print_lock);
+				printf("test 3 loop\n");
+				pthread_mutex_unlock(&philo->table->print_lock);
+					
 				pthread_mutex_unlock(philo->left_fork);
 				if (philo->table->NO_OF_PHILOS == 1)
 				{
+					pthread_mutex_lock(&philo->table->print_lock);
+					printf("inside 1 loop\n");
+					pthread_mutex_unlock(&philo->table->print_lock);
+					
 					ft_usleep(philo->table->DIE_TIME);
 					pthread_mutex_lock(philo->dead_lock);
 					philo->table->dead_flag = philo->index + 1;
