@@ -41,6 +41,10 @@ typedef enum e_error {
 	UNDEFINED_ERROR,
 }	t_error;
 
+//print lock: in order to not to write at the same time
+//dead lock: in order to not to change the dead flag at the same time
+//meal lock: in order to not to change and check the meal_eaten number at the same time
+
 typedef struct s_philo {
 	struct s_table	*table;
 	int				*dead_flag;

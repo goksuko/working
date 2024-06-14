@@ -20,9 +20,10 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR = objects
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS = -g -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g -pthread
-#CFLAGS += -g -pthread -fsanitize=thread 
+CFLAGS += -g
+CFLAGS += -g -pthread -fsanitize=thread 
 #CFLAGS += -g -pthread -fsanitize=address
 
 all: $(NAME)

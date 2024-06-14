@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/12 00:00:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/14 12:13:14 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ bool eat(t_philo *philo)
 				printf("test 2 loop\n");
 				pthread_mutex_unlock(&philo->table->print_lock);
 
-				pthread_mutex_lock(&philo->table->meal_lock);
 				print_status(philo, EATING);
 				philo->last_meal_time = get_current_time();
+				pthread_mutex_lock(&philo->table->meal_lock);
 				philo->has_eaten++;
 				pthread_mutex_unlock(&philo->table->meal_lock);
 				ft_usleep(philo->table->EAT_TIME);
@@ -153,9 +153,9 @@ bool eat(t_philo *philo)
 		{
 			if (left_fork(philo))
 			{
-				pthread_mutex_lock(&philo->table->meal_lock);
 				print_status(philo, EATING);
 				philo->last_meal_time = get_current_time();
+				pthread_mutex_lock(&philo->table->meal_lock);
 				philo->has_eaten++;
 				pthread_mutex_unlock(&philo->table->meal_lock);
 				ft_usleep(philo->table->EAT_TIME);

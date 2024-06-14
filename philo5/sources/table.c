@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 23:58:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/14 11:56:24 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	*monitor(void *param)
 	// full = 0;
 	while (!to_finish(table) && table->NO_OF_PHILOS > 1)
 	{
-		if (check_if_died(&table->philos[i]))
-			break ;
-		if (check_if_full(&table->philos[i]))
-			break ;
+		// if (check_if_died(&table->philos[i]))
+		// 	break ;
+		// if (check_if_full(&table->philos[i]))
+		// 	break ;
 		// 	full++;
 		// // else
 		// // 	full = 0;
