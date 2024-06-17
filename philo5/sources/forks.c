@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/03 11:20:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/10 23:34:42 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/18 00:32:04 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,45 +26,7 @@ void	forks_init(t_table *table, t_philo *philos)
 	table->forks = philos[0].left_fork;
 }
 
-// void start_eating(t_table *table, t_philo *philos)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < table->NO_OF_PHILOS)
-// 	{
-// 		if (i % 2 == 0)
-// 		{
-// 			pthread_mutex_lock(philos[i].left_fork);
-// 			// pthread_mutex_lock(&table->print_lock);
-// 			// ft_printf_fd(1, "philo[%d] has taken left fork\n", i);
-// 			print_status(&philos[i], FORK);
-// 			// pthread_mutex_unlock(&table->print_lock);
-// 		}
-// 		else
-// 		{
-// 			ft_usleep(table->EAT_TIME / 2);
-// 			print_status(&philos[i], THINKING);
-// 		}
-// 		i++;
-// 	}
-// 	// i = 0;
-// 	// while (i < table->NO_OF_PHILOS)
-// 	// {
-// 	// 	pthread_mutex_lock(&philos[i].right_fork);
-// 	// 	pthread_mutex_lock(&philos[i].left_fork);
-// 	// 	pthread_mutex_lock(&table->print_lock);
-// 	// 	ft_printf_fd(1, "Philosopher %d is eating\n", i + 1);
-// 	// 	pthread_mutex_unlock(&table->print_lock);
-// 	// 	usleep(table->EAT_TIME * 1000);
-// 	// 	pthread_mutex_unlock(&philos[i].right_fork);
-// 	// 	pthread_mutex_unlock(&philos[i].left_fork);
-// 	// 	i++;
-// 	// }
-// }
-
-
-bool left_fork(t_philo *philo)
+bool	left_fork(t_philo *philo)
 {
 	if (to_finish(philo->table))
 		return (false);
@@ -73,7 +35,7 @@ bool left_fork(t_philo *philo)
 	return (true);
 }
 
-bool right_fork(t_philo *philo)
+bool	right_fork(t_philo *philo)
 {
 	if (to_finish(philo->table))
 		return (false);

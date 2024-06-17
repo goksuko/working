@@ -1,27 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   philo.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
+/*   Updated: 2024/06/18 00:46:18 by akaya-oz      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <errno.h>
 # include <pthread.h>
 # include <stdbool.h>
-# include <sys/time.h>
-# include <errno.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 # define MAX_EAT 250
 
-typedef enum e_action {
+typedef enum e_action
+{
 	THINKING,
 	DIED,
 	SLEEPING,
 	EATING,
 	FORK,
-}	t_action;
+}					t_action;
 
-typedef enum e_error {
+typedef enum e_error
+{
 	NO_ERROR,
 	ERROR_ARGUMENT_COUNT,
 	ERROR_INVALID_ARGUMENTS,
@@ -39,13 +53,14 @@ typedef enum e_error {
 	ERROR_MUTEX_DESTROY,
 	ERROR_USLEEP,
 	UNDEFINED_ERROR,
-}	t_error;
+}					t_error;
 
-//print lock: in order to not to write at the same time
-//dead lock: in order to not to change the dead flag at the same time
-//meal lock: in order to not to change and check the meal_eaten number at the same time
+// print lock: in order to not to write at the same time
+// dead lock: in order to not to change the dead flag at the same time
+// meal lock: in order to not to change and check the meal_eaten number at the same time
 
-typedef struct s_philo {
+typedef struct s_philo
+{
 	struct s_table	*table;
 	int				*dead_flag;
 	int				*full_flag;
@@ -60,11 +75,11 @@ typedef struct s_philo {
 	pthread_mutex_t	*left_fork;
 	// pthread_mutex_t	eat_mutex;
 	int				status;
-}	t_philo;
+}					t_philo;
 
 typedef struct s_table
 {
-	t_philo			*philos; //has the address of first philos
+	t_philo *philos; // has the address of first philos
 	// pthread_t		*threads;
 	pthread_t		monitor_thread;
 	pthread_mutex_t	*forks;
@@ -79,65 +94,67 @@ typedef struct s_table
 	int				SLEEP_TIME;
 	int				NO_OF_EAT;
 	long long		start_time;
-}						t_table;
+}					t_table;
 
 // table.c
 
-void table_init(t_table *table, int argc, char **argv);
-void monitor_init(t_table *table);
+void				table_init(t_table *table, int argc, char **argv);
 
 // philos.c
 
-void philos_init(t_table *table);
+void				philos_init(t_table *table);
 
 // check.c
 
-int	check_if_died(t_table *table);
-int	check_if_full(t_table *table);
-int	to_finish(t_table *table);
+int					check_if_died(t_table *table);
+int					check_if_full(t_table *table);
+int					to_finish(t_table *table);
+
+// clean.c
+
+void				clean_all(t_table *table);
 
 // monitor.c
 
-// int	monitor(t_table *table);
+void				monitor_init(t_table *table);
 
 // errors.c
 
-char *ft_error(t_error code);
-int	ft_print_error(t_error code);
-bool check_argument_count_problem(int argc);
-bool check_argument_problem(int argc, char **argv);
-void ft_exit_perror(t_error code, char *s);
-void ft_exit_print(t_error code);
-// void clean_table(t_table *table);
-void clean_all(t_table *table);
+char				*ft_error(t_error code);
+int					ft_print_error(t_error code);
+bool				check_argument_count_problem(int argc);
+bool				check_argument_problem(int argc, char **argv);
+void				ft_exit_perror(t_error code, char *s);
 
 // print.c
 
-void print_status(t_philo *philo, t_action status);
-int	ft_usleep(size_t milliseconds);
-long long	get_current_time(void);
-
+void				print_status(t_philo *philo, t_action status);
+int					ft_usleep(size_t milliseconds);
+long long			get_current_time(void);
 
 // threads.c
 
-void	threads_init(t_table *table, t_philo *philos);
-// void	eat_and_sleep(t_table *table, t_philo *philos, int i);
+void				threads_init(t_table *table, t_philo *philos);
+
+// threads_philo.c
+
+bool				eat_sleep_think(t_philo *philo);
 
 // forks.c
 
-void	forks_init(t_table *table, t_philo *philos);
-bool left_fork(t_philo *philo);
-bool right_fork(t_philo *philo);
+void				forks_init(t_table *table, t_philo *philos);
+bool				left_fork(t_philo *philo);
+bool				right_fork(t_philo *philo);
 
 // main.c
 
-void join_threads(t_table *table);
+void				join_threads(t_table *table);
 
 // ft_atoi.c
 
-int	ft_atoi(const char *nptr);
+int					ft_atoi(const char *nptr);
 
 // ft_calloc.c
 
-void	*ft_calloc(size_t nmemb, size_t size);
+void				*ft_calloc(size_t nmemb, size_t size);
 #endif

@@ -4,11 +4,13 @@ SRCS = \
 			main.c \
 			table.c \
 			check.c \
+			clean.c \
 			errors.c \
 			philos.c \
 			print.c \
 			monitor.c \
 			threads.c \
+			threads_philo.c \
 			forks.c \
 			ft_atoi.c \
 			ft_calloc.c \
@@ -23,8 +25,8 @@ CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g -pthread
 CFLAGS += -g
-#CFLAGS += -g -pthread -fsanitize=thread 
-CFLAGS += -g -pthread -fsanitize=address
+CFLAGS += -g -pthread -fsanitize=thread 
+#CFLAGS += -g -pthread -fsanitize=address
 
 all: $(NAME)
 

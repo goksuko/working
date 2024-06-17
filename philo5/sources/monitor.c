@@ -6,38 +6,43 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:11:59 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/10 13:14:39 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/18 00:31:41 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// int	monitor(t_table *table)
-// {
-// 	int	i;
+void	*monitor(void *param)
+{
+	t_table	*table;
 
-// 	while (1)
-// 	{
-// 		i = 0;
-// 		while (i < table->NO_OF_PHILOS)
-// 		{
-// 			pthread_mutex_lock(&table->dead_lock);
-// 			if (table->dead_flag)
-// 			{
-// 				pthread_mutex_unlock(&table->dead_lock);
-// 				return (1);
-// 			}
-// 			pthread_mutex_unlock(&table->dead_lock);
-// 			if (table->philos[i].has_eaten > table->NO_OF_EAT)
-// 			{
-// 				pthread_mutex_lock(&table->meal_lock);
-// 				table->philos[i].has_eaten = -1;
-// 				pthread_mutex_unlock(&table->meal_lock);
-// 				return (1);
-// 			}
-// 			eat_and_sleep(table, table->philos, i);
-// 			i++;
-// 		}
-// 	}
-// 	return (0);
-// }
+	table = (t_table *)param;
+	while (1)
+	{
+		if (to_finish(table))
+			break ;
+	}
+	return (NULL);
+}
+
+void	monitor_init(t_table *table)
+{
+	int i;
+
+	i = 0;
+	if (pthread_create(&table->monitor_thread, NULL, &monitor, table))
+	{
+		free(table->philos);
+		free(table->forks);
+		pthread_mutex_destroy(&table->dead_lock);
+		pthread_mutex_destroy(&table->meal_lock);
+		pthread_mutex_destroy(&table->print_lock);
+		while (i < table->NO_OF_PHILOS)
+		{
+			pthread_mutex_destroy(&table->forks[i]);
+			i++;
+		}
+		ft_exit_perror(ERROR_THREAD, "Monitor thread creation");
+	}
+	return ;
+}
