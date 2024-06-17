@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/14 13:26:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/17 23:23:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,13 @@ int	main(int argc, char *argv[])
 	// if (table->dead_flag)
 	// 	return (print_status(&table->philos[table->dead_flag], DIED), clean_all(table), 0);
 	if (to_finish(table))
-		return(printf("finished\n"), clean_all(table), 0);
+	{
+		if (table->dead_flag > 0)
+		{
+			pthread_mutex_lock(&table->print_lock);
+			printf("%lld %d %s\n", get_current_time(), table->dead_flag, "died");
+			pthread_mutex_unlock(&table->print_lock);
+		}
+		return(clean_all(table), 0);
+	}
 }

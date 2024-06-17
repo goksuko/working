@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:06:13 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 22:55:30 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/15 23:22:04 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void philos_init(t_table *table)
 		table->philos[i].dead_lock = &table->dead_lock;
 		table->philos[i].meal_lock = &table->meal_lock;
 		table->philos[i].has_eaten = 0;
-		table->philos[i].last_meal_time = 0;
+		// table->philos[i].last_meal_time = 0;
+		table->philos[i].last_meal_time = table->start_time;
 		table->philos[i].dead_flag = &table->dead_flag;
 		table->philos[i].full_flag = &table->full_flag;
 		// table->philos[i].right_fork = &table->forks[i];
@@ -49,4 +50,5 @@ void philos_init(t_table *table)
 		i++;
 	}
 	table->philos = &table->philos[0];
+	return ;
 }

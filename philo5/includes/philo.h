@@ -78,6 +78,7 @@ typedef struct s_table
 	int				EAT_TIME;
 	int				SLEEP_TIME;
 	int				NO_OF_EAT;
+	long long		start_time;
 }						t_table;
 
 // table.c

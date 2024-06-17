@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/14 13:47:56 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/17 23:56:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,61 @@
 void	*monitor(void *param)
 {
 	t_table	*table;
-	int		i;
+	// int		i;
 	// int		full;
+	// int 	dead_flag;
 
 	table = (t_table *)param;
-	i = 0;
-	// full = 0;
-	while (!to_finish(table))
-	{
-		// if (check_if_died(table))
-		// 	break ;
-		// if (check_if_full(table))
-		// 	break ;
-		// 	full++;
-		// // else
-		// // 	full = 0;
-		// if (full == table->NO_OF_PHILOS)
-		// {
-		// 	pthread_mutex_lock(&table->dead_lock);
-		// 	table->dead_flag = 1;
-		// 	pthread_mutex_unlock(&table->dead_lock);
-		// }		
-		if (++i == table->NO_OF_PHILOS)
-			i = 0;
+	// i = 0;
+	// // full = 0;
+	// // dead_flag = 0;
+	// while (!to_finish(table))
+	// {
+	// 	// if (check_if_died(table))
+	// 	// 	break ;
+	// 	// if (check_if_full(table))
+	// 	// 	break ;
+	// 	// 	full++;
+	// 	// // else
+	// 	// // 	full = 0;
+	// 	// if (full == table->NO_OF_PHILOS)
+	// 	// {
+	// 	// pthread_mutex_lock(&table->dead_lock);
+	// 	// dead_flag = table->dead_flag;
+	// 	// pthread_mutex_unlock(&table->dead_lock);
+	// 	// }		
+	// 	if (++i == table->NO_OF_PHILOS)
+	// 		i = 0;
 		
-		// pthread_mutex_lock(&table->print_lock);
-		// printf("monitored %d \n", table->philos[i].index + 1);
-		// pthread_mutex_unlock(&table->print_lock);
-	}
-	if (to_finish(table))
+	// 	// pthread_mutex_lock(&table->print_lock);
+	// 	// printf("monitored %d \n", table->philos[i].index + 1);
+	// 	// pthread_mutex_unlock(&table->print_lock);
+	// }
+	// pthread_mutex_lock(&table->print_lock);
+	// printf("out loop %d \n", table->philos[i].index + 1);
+	// pthread_mutex_unlock(&table->print_lock);
+	while (1)
 	{
-		pthread_mutex_lock(&table->print_lock);
-		printf("All philosophers have eaten %d times or died\n", table->NO_OF_EAT);
-		pthread_mutex_unlock(&table->print_lock);
+		// pthread_mutex_lock(&table->dead_lock);
+		// dead_flag = table->dead_flag;
+		// pthread_mutex_unlock(&table->dead_lock);
+		// if (dead_flag > 0)
+		// {
+		// 	pthread_mutex_lock(&table->print_lock);
+		// 	printf("Philosopher %d died\n", dead_flag);
+		// 	pthread_mutex_unlock(&table->print_lock);
+		// 	break ;
+		// }	
+		if (to_finish(table))
+		{
+			// if (table->dead_flag > 0)
+			// {
+			// 	pthread_mutex_lock(&table->print_lock);
+			// 	printf("%lld %d %s\n", get_current_time(), table->dead_flag, "died");
+			// 	pthread_mutex_unlock(&table->print_lock);
+			// }
+			break ;
+		}
 	}
 	return (NULL);
 }
@@ -60,11 +82,10 @@ void table_init(t_table *table, int argc, char **argv)
 	table->dead_flag = 0;
 	table->full_flag = 0;
 	table->NO_OF_PHILOS = ft_atoi(argv[1]);
-	// ft_printf("argv1: %s\n", argv[1]);
-	// ft_printf("no of philos in table init: %d\n", table->NO_OF_PHILOS);
 	table->DIE_TIME = ft_atoi(argv[2]);
 	table->EAT_TIME = ft_atoi(argv[3]);
 	table->SLEEP_TIME = ft_atoi(argv[4]);
+	table->start_time = get_current_time();
 	if (argc == 6)
 		table->NO_OF_EAT = ft_atoi(argv[5]);
 	else
@@ -72,32 +93,20 @@ void table_init(t_table *table, int argc, char **argv)
 	table->philos = (t_philo *)ft_calloc(sizeof(t_philo), table->NO_OF_PHILOS);
 	if (errno == ENOMEM || !table->philos)
 		ft_exit_perror(ERROR_ALLOCATION, "Philos in Table Init");
-	// table->threads = (pthread_t *)ft_calloc(sizeof(pthread_t), table->NO_OF_PHILOS);
-	// printf("sizeof(pthread_t) = %zu bytes\n", sizeof(pthread_t));
-	// table->threads = NULL;
-	// if (errno == ENOMEM || !table->threads)
-	// {
-	// 	free(table->philos);
-	// 	free(table->forks);
-	// 	ft_exit_perror(ERROR_ALLOCATION, "Philo in Table Init");
-	// }
 	if (pthread_mutex_init(&table->dead_lock, NULL) < 0)
 	{
 		free(table->philos);
-		// free(table->threads);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Dead Lock in Table Init");
 	}
 	if (pthread_mutex_init(&table->meal_lock, NULL) < 0)
 	{
 		free(table->philos);
-		// free(table->threads);
 		pthread_mutex_destroy(&table->dead_lock);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Meal Lock in Table Init");
 	}
 	if (pthread_mutex_init(&table->print_lock, NULL) < 0)
 	{
 		free(table->philos);
-		// free(table->threads);
 		pthread_mutex_destroy(&table->dead_lock);
 		pthread_mutex_destroy(&table->meal_lock);
 		ft_exit_perror(ERROR_MUTEX_INIT, "Print Lock in Table Init");
@@ -136,7 +145,6 @@ void monitor_init(t_table *table)
 	{
 		free(table->philos);
 		free(table->forks);
-		// free(table->threads);
 		pthread_mutex_destroy(&table->dead_lock);
 		pthread_mutex_destroy(&table->meal_lock);
 		pthread_mutex_destroy(&table->print_lock);
@@ -147,4 +155,5 @@ void monitor_init(t_table *table)
 		}
 		ft_exit_perror(ERROR_THREAD, "Monitor thread creation");
 	}
+	return ;
 }
