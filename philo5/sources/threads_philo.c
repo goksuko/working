@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:45:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/18 00:46:24 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 19:49:10 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	do_the_job(t_philo *philo)
 	philo->last_meal_time = get_current_time();
 	philo->has_eaten++;
 	pthread_mutex_unlock(&philo->table->meal_lock);
-	ft_usleep(philo->table->EAT_TIME);
+	ft_usleep(philo->table->eat_time);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 	if (!to_finish(philo->table))
 		print_status(philo, SLEEPING);
-	ft_usleep(philo->table->SLEEP_TIME);
+	ft_usleep(philo->table->sleep_time);
 	if (!to_finish(philo->table))
 		print_status(philo, THINKING);
 }
@@ -50,8 +50,8 @@ bool	even_philo(t_philo *philo)
 
 bool	odd_philo(t_philo *philo)
 {
-	ft_usleep(5);
-	print_status(philo, THINKING);
+	// ft_usleep(5);
+	// print_status(philo, THINKING);
 	if (right_fork(philo))
 	{
 		if (left_fork(philo))

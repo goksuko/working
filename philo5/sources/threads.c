@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/18 00:45:35 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 19:01:39 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	*philos_thread(void *ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
-	if (philo->table->NO_OF_PHILOS == 1)
+	if (philo->table->no_of_philos == 1)
 	{
 		one_philo(philo);
-		ft_usleep(philo->table->DIE_TIME);
+		ft_usleep(philo->table->die_time);
 		return (NULL);
 	}
 	while (1)
@@ -48,12 +48,12 @@ void	threads_init(t_table *table, t_philo *philos)
 	int	i;
 
 	i = 0;
-	while (i < table->NO_OF_PHILOS)
+	while (i < table->no_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, &philos_thread,
 				&table->philos[i]))
 			ft_exit_perror(ERROR_THREAD, "Philo threads creation");
-		ft_usleep(50);
+		ft_usleep(4);
 		i++;
 	}
 	return ;

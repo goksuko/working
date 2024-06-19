@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/20 11:30:18 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/11 22:51:49 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 11:21:34 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ calloc() returns either NULL, or a unique pointer value that can
 later be successfully passed  to  free().   If the multiplication 
 of nmemb and size would result in integer overflow, then calloc() 
 returns an error. */
-
 
 void	ft_bzero(void *s, size_t n)
 {

@@ -6,20 +6,18 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:29:30 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/18 00:17:05 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 16:35:25 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-char *status_strs(t_action status)
+char	*status_strs(t_action status)
 {
-	static char	*str[] = {
-	[THINKING] = "is thinking",
-	[DIED] = "died",
-	[SLEEPING] = "is sleeping",
-	[EATING] = "is eating",
+	static char	*str[] = {[THINKING] = "is thinking", [DIED] = "died",
+	[SLEEPING] = "is sleeping", [EATING] = "is eating",
 	[FORK] = "has taken a fork"};
+
 	return (str[status]);
 }
 
@@ -37,8 +35,8 @@ char *status_strs(t_action status)
 // 1 sec = thousand (1000) milliseconds
 
 // 1000LL is a way of representing the number 1000 as a long long integer.
-// This is often used in situations where you want to ensure that 
-// arithmetic involving this constant is performed using long long 
+// This is often used in situations where you want to ensure that
+// arithmetic involving this constant is performed using long long
 // arithmetic, especially if overflow might be a concern.
 
 long long	get_current_time(void)
@@ -59,18 +57,19 @@ int	ft_usleep(size_t milliseconds)
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
 	{
-		if(usleep(500))
+		if (usleep(500))
 			ft_exit_perror(ERROR_USLEEP, "in ft_usleep");
 	}
 	return (0);
 }
 
-void print_status(t_philo *philo, t_action status)
+void	print_status(t_philo *philo, t_action status)
 {
 	if (!to_finish(philo->table))
 	{
 		pthread_mutex_lock(philo->print_lock);
-		printf("%lld %d %s\n", get_current_time(), philo->index + 1, status_strs(status));
+		printf("%lld %d %s\n", get_current_time(), philo->index + 1,
+			status_strs(status));
 		pthread_mutex_unlock(philo->print_lock);
 	}
 	return ;

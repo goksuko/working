@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/18 00:46:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 11:38:15 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef enum e_error
 	ERROR_ARGUMENT_COUNT,
 	ERROR_INVALID_ARGUMENTS,
 	ERROR_INVALID_PHILOS,
-	ERROR_INVALID_DIE_TIME,
-	ERROR_INVALID_EAT_TIME,
-	ERROR_INVALID_SLEEP_TIME,
+	ERROR_INVALID_die_time,
+	ERROR_INVALID_eat_time,
+	ERROR_INVALID_sleep_time,
 	ERROR_THREAD,
 	ERROR_JOIN,
 	ERROR_ALLOCATION,
@@ -57,7 +57,7 @@ typedef enum e_error
 
 // print lock: in order to not to write at the same time
 // dead lock: in order to not to change the dead flag at the same time
-// meal lock: in order to not to change and check the meal_eaten number at the same time
+// meal lock: in order to not to change and check the meal_eaten number
 
 typedef struct s_philo
 {
@@ -73,14 +73,12 @@ typedef struct s_philo
 	long long		last_meal_time;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
-	// pthread_mutex_t	eat_mutex;
 	int				status;
 }					t_philo;
 
 typedef struct s_table
 {
-	t_philo *philos; // has the address of first philos
-	// pthread_t		*threads;
+	t_philo			*philos;
 	pthread_t		monitor_thread;
 	pthread_mutex_t	*forks;
 	int				dead_flag;
@@ -88,11 +86,11 @@ typedef struct s_table
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	print_lock;
-	int				NO_OF_PHILOS;
-	int				DIE_TIME;
-	int				EAT_TIME;
-	int				SLEEP_TIME;
-	int				NO_OF_EAT;
+	int				no_of_philos;
+	int				die_time;
+	int				eat_time;
+	int				sleep_time;
+	int				no_of_eat;
 	long long		start_time;
 }					t_table;
 

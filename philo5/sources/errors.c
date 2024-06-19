@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/18 00:31:51 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/19 18:53:19 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 char	*ft_error(t_error code)
 {
-	static char *str[] = {[NO_ERROR] = "No Error",
-							[ERROR_ARGUMENT_COUNT] = "Invalid Amount of Arguments",
-							[ERROR_INVALID_ARGUMENTS] = "Arguments can only be numbers",
-							[ERROR_INVALID_PHILOS] = "Invalid Number of Philosophers",
-							[ERROR_INVALID_DIE_TIME] = "Invalid Time to Die",
-							[ERROR_INVALID_EAT_TIME] = "Invalid Time to Eat",
-							[ERROR_INVALID_SLEEP_TIME] = "Invalid Time to Sleep",
-							[ERROR_THREAD] = "Thread Creation Failure",
-							[ERROR_JOIN] = "Thread Join Failure",
-							[ERROR_ALLOCATION] = "Allocation Failure",
-							[ERROR_INPUT] = "Invalid Number",
-							[ERROR_MUTEX_INIT] = "Mutex Initialization Failure",
-							[ERROR_MUTEX_LOCK] = "Mutex Lock Failure",
-							// bu error kodlarina bak
-							[ERROR_MUTEX_UNLOCK] = "Mutex Unlock Failure",
-							[ERROR_MUTEX_DESTROY] = "Mutex Destroy Failure",
-							[ERROR_USLEEP] = "Usleep Failure",
-							[UNDEFINED_ERROR] = "Undefined Error"};
+	static char	*str[] = {[NO_ERROR] = "No Error",
+	[ERROR_ARGUMENT_COUNT] = "Invalid Amount of Arguments",
+	[ERROR_INVALID_ARGUMENTS] = "Arguments can only be numbers",
+	[ERROR_INVALID_PHILOS] = "Invalid Number of Philosophers",
+	[ERROR_INVALID_die_time] = "Invalid Time to Die",
+	[ERROR_INVALID_eat_time] = "Invalid Time to Eat",
+	[ERROR_INVALID_sleep_time] = "Invalid Time to Sleep",
+	[ERROR_THREAD] = "Thread Creation Failure",
+	[ERROR_JOIN] = "Thread Join Failure",
+	[ERROR_ALLOCATION] = "Allocation Failure",
+	[ERROR_INPUT] = "Invalid Number",
+	[ERROR_MUTEX_INIT] = "Mutex Initialization Failure",
+	[ERROR_MUTEX_LOCK] = "Mutex Lock Failure",
+	[UNDEFINED_ERROR] = "Undefined Error"};
+
 	if (code < 0 || code >= UNDEFINED_ERROR)
 		return (str[UNDEFINED_ERROR]);
 	else
