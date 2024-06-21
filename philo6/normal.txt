@@ -1,0 +1,18 @@
+1718991549694 1 has taken a fork
+1718991549694 1 has taken a fork
+1718991549694 1 is eating
+1718991549699 2 has taken a fork
+1718991549707 4 has taken a fork
+1718991549707 4 has taken a fork
+1718991549707 4 is eating
+1718991549894 1 is sleeping
+1718991549894 2 has taken a fork
+1718991549894 2 is eating
+1718991549907 4 is sleeping
+1718991549907 5 has taken a fork
+1718991549907 5 has taken a fork
+1718991549907 5 is eating
+1718991550094 2 is sleeping
+1718991550094 3 has taken a fork
+1718991550094 3 has taken a fork
+1718991550094 3 is eating
