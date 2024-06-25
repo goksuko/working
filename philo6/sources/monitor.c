@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:11:59 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 11:37:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:49:32 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	monitor_init(t_table *table)
 		}
 		ft_exit_perror(ERROR_THREAD, "Monitor thread creation");
 	}
+	pthread_detach(table->monitor_thread);
 	return ;
 }

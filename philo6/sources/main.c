@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 12:27:08 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:51:49 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void	join_threads(t_table *table)
 	i = 0;
 	while (i < table->no_of_philos)
 	{
-		if (pthread_join(table->philos[i].thread, NULL))
-			ft_exit_perror(ERROR_JOIN, "Thread join");
+		// if (pthread_join(table->philos[i].thread, NULL))
+		pthread_join(table->philos[i].thread, NULL);
+			// ft_exit_perror(ERROR_JOIN, "Thread join");
 		i++;
 	}
-	if (pthread_join(table->monitor_thread, NULL))
-		ft_exit_perror(ERROR_JOIN, "Thread join");
+	// if (pthread_join(table->monitor_thread, NULL))
+	pthread_join(table->monitor_thread, NULL);
+		// ft_exit_perror(ERROR_JOIN, "Thread join");
 }
 
 void	finish_program(t_table *table)
