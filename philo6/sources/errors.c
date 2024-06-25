@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 18:53:19 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:34:23 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_error(t_error code)
 {
 	static char	*str[] = {[NO_ERROR] = "No Error",
 	[ERROR_ARGUMENT_COUNT] = "Invalid Amount of Arguments",
-	[ERROR_INVALID_ARGUMENTS] = "Arguments can only be numbers",
+	[ERROR_INVALID_ARGUMENTS] = "Arguments can only be valid numbers",
 	[ERROR_INVALID_PHILOS] = "Invalid Number of Philosophers",
 	[ERROR_INVALID_die_time] = "Invalid Time to Die",
 	[ERROR_INVALID_eat_time] = "Invalid Time to Eat",
@@ -60,6 +60,10 @@ bool	check_argument_problem(int argc, char **argv)
 		}
 		i++;
 	}
+	if (ft_atoi(argv[1]) < 1 || ft_atoi(argv[1]) > 200 || ft_atoi(argv[2]) < 60
+		|| ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60
+		|| (argv[5] && ft_atoi(argv[5]) < 1))
+		return (1);
 	return (0);
 }
 

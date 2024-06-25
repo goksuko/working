@@ -44,7 +44,7 @@ CFLAGS = -g -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g -pthread
 CFLAGS += -g
 #CFLAGS += -g -pthread -fsanitize=thread 
-CFLAGS += -g -pthread -fsanitize=address
+#CFLAGS += -g -pthread -fsanitize=address
 
 all: $(NAME)
 

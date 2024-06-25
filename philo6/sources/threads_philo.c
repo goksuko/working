@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:45:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 22:19:41 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:20:02 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	do_the_job(t_philo *philo)
 
 bool	even_philo(t_philo *philo)
 {
-	if (left_fork(philo))
+	if (left_fork(philo) && !to_finish(philo->table))
 	{
 		if (right_fork(philo))
 		{
@@ -50,9 +50,9 @@ bool	even_philo(t_philo *philo)
 
 bool	odd_philo(t_philo *philo)
 {
-	ft_usleep(1);
-	if (right_fork(philo))
+	if (right_fork(philo) && !to_finish(philo->table))
 	{
+		ft_usleep(1);
 		if (left_fork(philo))
 		{
 			do_the_job(philo);
@@ -70,12 +70,12 @@ bool	odd_philo(t_philo *philo)
 
 bool	eat_sleep_think(t_philo *philo)
 {
-	if (philo->index % 2 == 0)
+	if (philo->index % 2 == 0 && !to_finish(philo->table))
 	{
 		if (!even_philo(philo))
 			return (false);
 	}
-	else
+	else if (!to_finish(philo->table))
 	{
 		if (!odd_philo(philo))
 			return (false);

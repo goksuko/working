@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:45:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:48:25 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:21:43 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	do_the_job(t_philo *philo)
 
 bool	eat_sleep_think(t_philo *philo)
 {
-	if (take_forks(philo))
+	if (take_forks(philo) && !to_finish(philo->table))
 		do_the_job(philo);
 	return (true);
 }

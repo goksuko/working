@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/10 12:42:46 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 19:55:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 12:19:24 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,16 @@ int	check_if_died(t_table *table)
 {
 	int			i;
 	long long	last_meal_time;
+	long long	current_time;
 
+	current_time = get_current_time();
 	i = 0;
 	while (i < table->no_of_philos)
 	{
 		pthread_mutex_lock(&table->meal_lock);
 		last_meal_time = table->philos[i].last_meal_time;
 		pthread_mutex_unlock(&table->meal_lock);
-		if (last_meal_time != table->start_time && get_current_time()
-			- last_meal_time > table->die_time)
+		if (last_meal_time != table->start_time && current_time - last_meal_time > table->die_time)
 		{
 			pthread_mutex_lock(&table->dead_lock);
 			table->dead_flag = table->philos[i].index + 1;
