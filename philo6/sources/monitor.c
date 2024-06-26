@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:11:59 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 12:49:32 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/26 00:23:18 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	monitor_init(t_table *table)
 	if (pthread_create(&table->monitor_thread, NULL, &monitor, table))
 	{
 		free(table->philos);
-		free(table->forks);
 		pthread_mutex_destroy(&table->dead_lock);
 		pthread_mutex_destroy(&table->meal_lock);
 		pthread_mutex_destroy(&table->print_lock);
@@ -42,8 +41,8 @@ void	monitor_init(t_table *table)
 			pthread_mutex_destroy(&table->forks[i]);
 			i++;
 		}
+		free(table->forks);
 		ft_exit_perror(ERROR_THREAD, "Monitor thread creation");
 	}
-	pthread_detach(table->monitor_thread);
 	return ;
 }

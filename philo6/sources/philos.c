@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 15:06:13 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 11:53:59 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 23:36:56 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	philos_init(t_table *table)
 		i++;
 	}
 	table->philos = &table->philos[0];
+	table->forks = &table->forks[0];
 	return ;
 }

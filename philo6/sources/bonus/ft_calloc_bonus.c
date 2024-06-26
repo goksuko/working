@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/20 11:30:18 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 22:37:18 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/25 23:39:34 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	else
 	{
 		ptr = (void *)malloc(nmemb * size);
-		if (ptr == NULL)
+		if (ptr == NULL || errno == ENOMEM)
 			return (NULL);
 	}
 	ft_bzero(ptr, nmemb * size);

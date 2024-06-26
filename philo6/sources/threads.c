@@ -6,21 +6,18 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 12:48:46 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 00:53:59 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	one_philo(t_philo *philo)
-{
-	left_fork(philo);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_lock(philo->dead_lock);
-	philo->table->dead_flag = philo->index + 1;
-	pthread_mutex_unlock(philo->dead_lock);
-	return ;
-}
+// void	one_philo(t_philo *philo)
+// {
+// 	left_fork(philo);
+// 	pthread_mutex_unlock(philo->left_fork);
+// 	return ;
+// }
 
 void	*philos_thread(void *ptr)
 {
@@ -29,8 +26,11 @@ void	*philos_thread(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->table->no_of_philos == 1)
 	{
-		one_philo(philo);
+		// one_philo(philo);
+		left_fork(philo);
+		pthread_mutex_unlock(philo->left_fork);
 		ft_usleep(philo->table->die_time);
+		print_dead(philo, DIED);
 		return (NULL);
 	}
 	while (1)
@@ -53,13 +53,7 @@ void	threads_init(t_table *table, t_philo *philos)
 		if (pthread_create(&philos[i].thread, NULL, &philos_thread,
 				&table->philos[i]))
 			ft_exit_perror(ERROR_THREAD, "Philo threads creation");
-		ft_usleep(4);
-		i++;
-	}
-	i = 0;
-	while (i < table->no_of_philos)
-	{
-		pthread_detach(philos[i].thread);
+		ft_usleep(2);
 		i++;
 	}
 	return ;

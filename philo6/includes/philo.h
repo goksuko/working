@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 11:28:21 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/26 21:01:33 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 	int				dead_flag;
 	int				full_flag;
+	int				finish_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	print_lock;
@@ -108,6 +109,7 @@ void				philos_init(t_table *table);
 int					check_if_died(t_table *table);
 int					check_if_full(t_table *table);
 int					to_finish(t_table *table);
+bool				check_if_starving(t_philo *philo);
 
 // clean.c
 
@@ -130,6 +132,7 @@ void				ft_exit_perror(t_error code, char *s);
 void				print_status(t_philo *philo, t_action status);
 int					ft_usleep(size_t milliseconds);
 long long			get_current_time(void);
+void				print_dead(t_philo *philo, t_action status);
 
 // threads.c
 

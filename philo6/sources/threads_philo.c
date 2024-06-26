@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:45:07 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 12:20:02 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 00:47:31 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,58 +24,87 @@ void	do_the_job(t_philo *philo)
 	pthread_mutex_unlock(philo->left_fork);
 	if (!to_finish(philo->table))
 		print_status(philo, SLEEPING);
+	else
+		return ;
 	ft_usleep(philo->table->sleep_time);
-	if (!to_finish(philo->table))
-		print_status(philo, THINKING);
+	print_status(philo, THINKING);
 }
 
 bool	even_philo(t_philo *philo)
 {
-	if (left_fork(philo) && !to_finish(philo->table))
+	// if (check_if_starving(philo))
+	// 	return (false);
+	while (1)
 	{
-		if (right_fork(philo))
-		{
-			do_the_job(philo);
-			return (true);
-		}
-		else
-		{
-			pthread_mutex_unlock(philo->left_fork);
+		if (to_finish(philo->table))
 			return (false);
-		}
+		if (check_if_starving(philo))
+			return (false);
+		if (left_fork(philo))
+			break ;
+	}
+	// if (left_fork(philo))
+	// {
+	if (right_fork(philo))
+	{
+		do_the_job(philo);
+		return (true);
 	}
 	else
-		return (false);
+	// {
+		pthread_mutex_unlock(philo->left_fork);
+	// 	return (false);
+	// }
+	// }
+	// else
+	// {		
+	check_if_starving(philo);
+	return (false);
+	// }
 }
 
 bool	odd_philo(t_philo *philo)
 {
-	if (right_fork(philo) && !to_finish(philo->table))
+	ft_usleep(1);
+	// if (check_if_starving(philo))
+	// 	return (false);
+	while (1)
 	{
-		ft_usleep(1);
-		if (left_fork(philo))
-		{
-			do_the_job(philo);
-			return (true);
-		}
-		else
-		{
-			pthread_mutex_unlock(philo->right_fork);
+		if (to_finish(philo->table))
 			return (false);
-		}
+		if (check_if_starving(philo))
+			return (false);
+		if (right_fork(philo))
+			break ;
+	}
+	// if (right_fork(philo))
+	// {
+	if (left_fork(philo))
+	{
+		do_the_job(philo);
+		return (true);
 	}
 	else
-		return (false);
+	// {
+		pthread_mutex_unlock(philo->right_fork);
+	// 	return (false);
+	// }
+	// }
+	// else
+	// {		
+	check_if_starving(philo);
+	return (false);
+	// }
 }
 
 bool	eat_sleep_think(t_philo *philo)
 {
-	if (philo->index % 2 == 0 && !to_finish(philo->table))
+	if (philo->index % 2 == 0)
 	{
 		if (!even_philo(philo))
 			return (false);
 	}
-	else if (!to_finish(philo->table))
+	else
 	{
 		if (!odd_philo(philo))
 			return (false);
