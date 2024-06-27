@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/25 12:34:06 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:44:05 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_error(t_error code)
 	[ERROR_INPUT] = "Invalid Number",
 	[ERROR_MUTEX_INIT] = "Mutex Initialization Failure",
 	[ERROR_MUTEX_LOCK] = "Mutex Lock Failure",
+	[ERROR_MUTEX_UNLOCK] = "Mutex Unlock Failure",
+	[ERROR_USLEEP] = "usleep Failure",
 	[UNDEFINED_ERROR] = "Undefined Error"};
 
 	if (code < 0 || code >= UNDEFINED_ERROR)

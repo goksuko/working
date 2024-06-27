@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:42:15 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 14:11:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	one_philo(t_philo *philo)
 {
 	print_status(philo, FORK);
-	pthread_mutex_lock(philo->dead_lock);
+	mutex_treasure_lock(philo->dead_lock);
 	philo->table->dead_flag = philo->index + 1;
-	pthread_mutex_unlock(philo->dead_lock);
+	mutex_treasure_unlock(philo->dead_lock);
+	ft_usleep(philo->table->die_time);
+	print_dead(philo, DIED);
 	return ;
 }
 
@@ -29,7 +31,6 @@ void	*philos_thread(void *ptr)
 	if (philo->table->no_of_philos == 1)
 	{
 		one_philo(philo);
-		ft_usleep(philo->table->die_time);
 		return (NULL);
 	}
 	while (1)
@@ -52,7 +53,7 @@ void	threads_init(t_table *table, t_philo *philos)
 		if (pthread_create(&philos[i].thread, NULL, &philos_thread,
 				&table->philos[i]))
 			ft_exit_perror(ERROR_THREAD, "Philo threads creation");
-		ft_usleep(4);
+		ft_usleep(1);
 		i++;
 	}
 	return ;

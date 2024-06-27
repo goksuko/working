@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/26 21:01:33 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:39:01 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum e_error
 	ERROR_MUTEX_INIT,
 	ERROR_MUTEX_LOCK,
 	ERROR_MUTEX_UNLOCK,
-	ERROR_MUTEX_DESTROY,
 	ERROR_USLEEP,
 	UNDEFINED_ERROR,
 }					t_error;
@@ -159,4 +158,10 @@ int					ft_atoi(const char *nptr);
 // ft_calloc.c
 
 void				*ft_calloc(size_t nmemb, size_t size);
+
+// locks.c
+
+void				mutex_treasure_lock(pthread_mutex_t *mutex);
+void				mutex_treasure_unlock(pthread_mutex_t *mutex);
+
 #endif

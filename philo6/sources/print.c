@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:29:30 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 00:31:31 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:38:28 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_usleep(size_t milliseconds)
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
 	{
-		if (usleep(500))
+		if (usleep(251))
 			ft_exit_perror(ERROR_USLEEP, "in ft_usleep");
 	}
 	return (0);
@@ -65,24 +65,37 @@ int	ft_usleep(size_t milliseconds)
 
 void	print_status(t_philo *philo, t_action status)
 {
-	if (!to_finish(philo->table))
+	int	finish_flag;
+
+	mutex_treasure_lock(philo->dead_lock);
+	finish_flag = philo->table->finish_flag;
+	mutex_treasure_unlock(philo->dead_lock);
+	if (!finish_flag)
 	{
-		pthread_mutex_lock(philo->print_lock);
-		if (!philo->table->finish_flag)
-			printf("%lld %d %s\n", get_current_time(), philo->index + 1,
-				status_strs(status));
-		pthread_mutex_unlock(philo->print_lock);
+		mutex_treasure_lock(philo->print_lock);
+		printf("%lld %d %s\n", get_current_time(), philo->index + 1,
+			status_strs(status));
+		mutex_treasure_unlock(philo->print_lock);
 	}
 	return ;
 }
 
 void	print_dead(t_philo *philo, t_action status)
 {
-	pthread_mutex_lock(philo->print_lock);
-	if (!philo->table->finish_flag)
+	int	finish_flag;
+
+	mutex_treasure_lock(philo->dead_lock);
+	finish_flag = philo->table->finish_flag;
+	mutex_treasure_unlock(philo->dead_lock);
+	if (!finish_flag)
+	{
+		mutex_treasure_lock(philo->print_lock);
 		printf("%lld %d %s\n", get_current_time(), philo->index + 1,
 			status_strs(status));
-	philo->table->finish_flag = 1;
-	pthread_mutex_unlock(philo->print_lock);
+		mutex_treasure_unlock(philo->print_lock);
+		mutex_treasure_lock(philo->dead_lock);
+		philo->table->finish_flag = 1;
+		mutex_treasure_unlock(philo->dead_lock);
+	}
 	return ;
 }

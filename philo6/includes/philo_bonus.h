@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:48:32 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:47:30 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum e_error
 	ERROR_MUTEX_INIT,
 	ERROR_MUTEX_LOCK,
 	ERROR_MUTEX_UNLOCK,
-	ERROR_MUTEX_DESTROY,
 	ERROR_USLEEP,
 	UNDEFINED_ERROR,
 }					t_error;
@@ -81,6 +80,7 @@ typedef struct s_table
 	pthread_t		monitor_thread;
 	int				dead_flag;
 	int				full_flag;
+	int				finish_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	print_lock;
@@ -107,6 +107,7 @@ void				philos_init(t_table *table);
 int					check_if_died(t_table *table);
 int					check_if_full(t_table *table);
 int					to_finish(t_table *table);
+bool				check_if_starving(t_philo *philo);
 
 // clean_bonus.c
 
@@ -129,6 +130,7 @@ void				ft_exit_perror(t_error code, char *s);
 void				print_status(t_philo *philo, t_action status);
 int					ft_usleep(size_t milliseconds);
 long long			get_current_time(void);
+void				print_dead(t_philo *philo, t_action status);
 
 // threads_bonus.c
 
@@ -155,4 +157,10 @@ int					ft_atoi(const char *nptr);
 // ft_calloc_bonus.c
 
 void				*ft_calloc(size_t nmemb, size_t size);
+
+// locks_bonus.c
+
+void				mutex_treasure_lock(pthread_mutex_t *mutex);
+void				mutex_treasure_unlock(pthread_mutex_t *mutex);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/03 11:20:50 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/19 11:37:20 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:36:16 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,14 @@ void	forks_init(t_table *table, t_philo *philos)
 
 bool	left_fork(t_philo *philo)
 {
-	if (to_finish(philo->table))
-		return (false);
-	pthread_mutex_lock(philo->left_fork);
+	mutex_treasure_lock(philo->left_fork);
 	print_status(philo, FORK);
 	return (true);
 }
 
 bool	right_fork(t_philo *philo)
 {
-	if (to_finish(philo->table))
-		return (false);
-	pthread_mutex_lock(philo->right_fork);
+	mutex_treasure_lock(philo->right_fork);
 	print_status(philo, FORK);
 	return (true);
 }

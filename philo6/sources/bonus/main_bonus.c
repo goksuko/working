@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:44:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 19:47:22 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ void	join_threads(t_table *table)
 		ft_exit_perror(ERROR_JOIN, "Thread join");
 }
 
-void	finish_program(t_table *table)
-{
-	if (table->dead_flag > 0)
-	{
-		pthread_mutex_lock(&table->print_lock);
-		printf("%lld %d %s\n", get_current_time(), table->dead_flag,
-			"died");
-		pthread_mutex_unlock(&table->print_lock);
-	}
-	clean_all(table);
-	return ;
-}
-
 int	main(int argc, char *argv[])
 {
 	t_table	*table;
@@ -58,7 +45,7 @@ int	main(int argc, char *argv[])
 	join_threads(table);
 	if (to_finish(table))
 	{
-		finish_program(table);
+		clean_all(table);
 		return (0);
 	}
 	return (1);

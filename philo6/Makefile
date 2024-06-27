@@ -15,6 +15,7 @@ SRCS = \
 			forks.c \
 			ft_atoi.c \
 			ft_calloc.c \
+			locks.c \
 
 SRCS_DIR = sources
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -34,6 +35,7 @@ BONUS_SRCS = \
 			forks_bonus.c \
 			ft_atoi_bonus.c \
 			ft_calloc_bonus.c \
+			locks_bonus.c \
 
 BONUS_SRCS_DIR = sources/bonus
 BONUS_OBJS = $(BONUS_SRCS:%.c=$(BONUS_OBJS_DIR)/%.o)
@@ -43,7 +45,7 @@ CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CFLAGS += -g -pthread
 CFLAGS += -g
-CFLAGS += -g -pthread -fsanitize=thread 
+#CFLAGS += -g -pthread -fsanitize=thread 
 #CFLAGS += -g -pthread -fsanitize=address
 
 all: $(NAME)

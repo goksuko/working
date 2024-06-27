@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/10 12:42:46 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:43:02 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 19:50:56 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_if_full(t_table *table)
 	i = 0;
 	j = 0;
 	full_flag = 0;
-	pthread_mutex_lock(&table->meal_lock);
+	mutex_treasure_lock(&table->meal_lock);
 	while (i < table->no_of_philos)
 	{
 		if (table->philos[i].has_eaten >= table->no_of_eat)
@@ -33,7 +33,7 @@ int	check_if_full(t_table *table)
 		table->full_flag = 1;
 		full_flag = 1;
 	}
-	pthread_mutex_unlock(&table->meal_lock);
+	mutex_treasure_unlock(&table->meal_lock);
 	return (full_flag);
 }
 
@@ -45,23 +45,44 @@ int	check_if_died(t_table *table)
 	i = 0;
 	while (i < table->no_of_philos)
 	{
-		pthread_mutex_lock(&table->meal_lock);
+		mutex_treasure_lock(&table->meal_lock);
 		last_meal_time = table->philos[i].last_meal_time;
-		pthread_mutex_unlock(&table->meal_lock);
-		if (last_meal_time != table->start_time && get_current_time()
-			- last_meal_time > table->die_time)
+		mutex_treasure_unlock(&table->meal_lock);
+		if (get_current_time() - last_meal_time > table->die_time)
 		{
-			pthread_mutex_lock(&table->dead_lock);
+			mutex_treasure_lock(&table->dead_lock);
 			table->dead_flag = table->philos[i].index + 1;
-			pthread_mutex_unlock(&table->dead_lock);
+			mutex_treasure_unlock(&table->dead_lock);
+			print_dead(&table->philos[i], DIED);
 			return (1);
 		}
 		i++;
 	}
-	pthread_mutex_lock(&table->dead_lock);
+	mutex_treasure_lock(&table->dead_lock);
 	if (table->dead_flag)
-		return (pthread_mutex_unlock(&table->dead_lock), 1);
-	return (pthread_mutex_unlock(&table->dead_lock), 0);
+		return (mutex_treasure_unlock(&table->dead_lock), 1);
+	return (mutex_treasure_unlock(&table->dead_lock), 0);
+}
+
+bool	check_if_starving(t_philo *philo)
+{
+	long long	last_meal_time;
+	long long	current_time;
+
+	current_time = get_current_time();
+	ft_usleep(2);
+	mutex_treasure_lock(philo->meal_lock);
+	last_meal_time = philo->last_meal_time;
+	mutex_treasure_unlock(philo->meal_lock);
+	if (current_time - last_meal_time > philo->table->die_time)
+	{
+		mutex_treasure_lock(philo->dead_lock);
+		if (!philo->table->dead_flag)
+			philo->table->dead_flag = philo->index + 1;
+		mutex_treasure_unlock(philo->dead_lock);
+		return (true);
+	}
+	return (false);
 }
 
 int	to_finish(t_table *table)

@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 15:05:37 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/21 19:43:48 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 13:48:12 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ void	table_init(t_table *table, int argc, char **argv)
 {
 	table->dead_flag = 0;
 	table->full_flag = 0;
+	table->finish_flag = 0;
 	table->no_of_philos = ft_atoi(argv[1]);
 	table->die_time = ft_atoi(argv[2]);
 	table->eat_time = ft_atoi(argv[3]);
 	table->sleep_time = ft_atoi(argv[4]);
 	table->start_time = get_current_time();
+	ft_usleep(2);
 	if (argc == 6)
 		table->no_of_eat = ft_atoi(argv[5]);
 	else
