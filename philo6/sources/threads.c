@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 00:53:59 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/06/27 09:38:25 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	threads_init(t_table *table, t_philo *philos)
 		if (pthread_create(&philos[i].thread, NULL, &philos_thread,
 				&table->philos[i]))
 			ft_exit_perror(ERROR_THREAD, "Philo threads creation");
-		ft_usleep(2);
+		ft_usleep(4);
 		i++;
 	}
 	return ;
