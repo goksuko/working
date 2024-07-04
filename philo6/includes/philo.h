@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/18 00:32:32 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 13:39:01 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/04 16:49:33 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
 	int				status;
-	struct s_philo	*next;
 }					t_philo;
 
 typedef struct s_table
