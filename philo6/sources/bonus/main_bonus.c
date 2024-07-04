@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/03 12:19:43 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 19:47:22 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/04 15:32:35 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ int	main(int argc, char *argv[])
 		clean_all(table);
 		return (0);
 	}
-	return (1);
+	return (ft_print_error(UNDEFINED_ERROR));
 }

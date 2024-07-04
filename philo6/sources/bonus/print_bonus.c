@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:29:30 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 19:51:34 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/04 15:33:31 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_usleep(size_t milliseconds)
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
 	{
-		if (usleep(251) != 0)
+		if (usleep(50))
 			ft_exit_perror(ERROR_USLEEP, "in ft_usleep");
 	}
 	return (0);

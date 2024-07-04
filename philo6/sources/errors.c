@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/23 22:55:51 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 12:37:37 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/04 15:30:52 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	check_argument_problem(int argc, char **argv)
 		while (argv[i][j] != '\0')
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return (1);
+				return (true);
 			j++;
 		}
 		i++;
@@ -65,15 +65,15 @@ bool	check_argument_problem(int argc, char **argv)
 	if (ft_atoi(argv[1]) < 1 || ft_atoi(argv[1]) > 200 || ft_atoi(argv[2]) < 60
 		|| ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60
 		|| (argv[5] && ft_atoi(argv[5]) < 1))
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 bool	check_argument_count_problem(int argc)
 {
 	if (argc != 5 && argc != 6)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 void	ft_exit_perror(t_error code, char *s)

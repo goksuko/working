@@ -6,11 +6,19 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/10 12:42:46 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/06/27 13:38:47 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/04 15:32:09 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	hoist_flag(t_table *table)
+{
+	mutex_treasure_lock(&table->dead_lock);
+	table->finish_flag = 1;
+	mutex_treasure_unlock(&table->dead_lock);
+	return ;
+}
 
 int	check_if_full(t_table *table)
 {
@@ -34,6 +42,8 @@ int	check_if_full(t_table *table)
 		full_flag = 1;
 	}
 	mutex_treasure_unlock(&table->meal_lock);
+	if (full_flag)
+		hoist_flag(table);
 	return (full_flag);
 }
 
@@ -77,7 +87,9 @@ bool	check_if_starving(t_philo *philo)
 	if (current_time - last_meal_time > philo->table->die_time)
 	{
 		mutex_treasure_lock(philo->dead_lock);
-		philo->table->dead_flag = philo->index + 1;
+		if (!philo->table->dead_flag)
+			philo->table->dead_flag = philo->index + 1;
+		philo->table->finish_flag = 1;
 		mutex_treasure_unlock(philo->dead_lock);
 		print_dead(philo, DIED);
 		return (true);
@@ -88,8 +100,8 @@ bool	check_if_starving(t_philo *philo)
 int	to_finish(t_table *table)
 {
 	if (check_if_full(table))
-		return (1);
+		return (true);
 	if (check_if_died(table))
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
