@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:36:47 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/24 10:21:45 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/06 17:31:53 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	main(int argc, char *argv[], char **envp)
 		return (1);
 	}
 	path_no = check_path(envp);
+	printf("path_no: %d\n", path_no);
+	printf("envp: %s\n", envp[path_no]);
 	if (envp[path_no] == NULL)
 		return (ft_putstr_fd("zsh: path not found\n", STDERR_FILENO), 1);
 	if (path_no == 0)

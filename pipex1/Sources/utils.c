@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/16 13:34:42 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/24 10:24:45 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/06 17:57:51 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	start_exec(char *long_command, char **envp)
 		ft_exit_str_fd(127, "zsh: not a directory: \n", 2);
 	cmd = ft_split(long_command, ' ');
 	if (cmd[0])
+	{
 		path = find_path(cmd[0], envp);
+		printf("new path found from the cmd[0]: %s\n", path);
+	}
 	else
 	{
 		free_matrix(cmd);

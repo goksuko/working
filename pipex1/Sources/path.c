@@ -6,7 +6,7 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/18 23:18:03 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/05/24 10:23:16 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/07 14:06:46 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ char	*find_path(char *main_command, char **envp)
 	char	*tmp;
 
 	i = 0;
+	printf("main_command: %s\n", main_command);
 	if (access(main_command, F_OK | X_OK) == 0)
 		return (main_command);
+	printf("main_command was not accssible\n");
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	path_split = ft_split(envp[i] + 5, ':');
@@ -44,10 +46,13 @@ char	*find_path(char *main_command, char **envp)
 	i = 0;
 	while (path_split[i])
 	{
+		printf("path_split[%d]: %s\n", i, path_split[i]);
 		tmp = ft_strjoin(path_split[i], "/");
+		printf("tmp: %s\n", tmp);
 		if (errno == ENOMEM || tmp == NULL)
 			ft_exit_perror(1, "tmp in find_path");
 		path = ft_strjoin(tmp, main_command);
+		printf("path: %s\n", path);
 		if (errno == ENOMEM || path == NULL)
 			ft_exit_perror(1, "path in find_path");
 		free(tmp);
