@@ -1,6 +1,0 @@
-{
-    "lldb.displayFormat": "auto",
-    "lldb.dereferencePointers": true,
-    "lldb.consoleMode": "evaluate",
-    "lldb.showDisassembly": "auto"
-}
