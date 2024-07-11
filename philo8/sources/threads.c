@@ -6,11 +6,22 @@
 /*   By: akaya-oz <akaya-oz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/26 18:21:35 by akaya-oz      #+#    #+#                 */
-/*   Updated: 2024/07/11 10:18:53 by akaya-oz      ########   odam.nl         */
+/*   Updated: 2024/07/11 11:53:45 by akaya-oz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	one_philo(t_philo *philo)
+{
+	print_status(philo, FORK);
+	mutex_treasure_lock(philo->dead_lock);
+	philo->table->dead_flag = philo->index + 1;
+	mutex_treasure_unlock(philo->dead_lock);
+	ft_usleep(philo->table->die_time);
+	print_status(philo, DIED);
+	return ;
+}
 
 void	*philos_thread(void *ptr)
 {
@@ -19,10 +30,7 @@ void	*philos_thread(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->table->no_of_philos == 1)
 	{
-		left_fork(philo);
-		mutex_treasure_unlock(philo->left_fork);
-		ft_usleep(philo->table->die_time);
-		print_status(philo, DIED);
+		one_philo(philo);
 		return (NULL);
 	}
 	while (1)
